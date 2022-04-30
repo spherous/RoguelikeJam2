@@ -68,7 +68,15 @@ public class ProcGen : MonoBehaviour
 
     private void ExtendPath()
     {
-        // Path path = gridGenerator.GetPath(homeTile, spawnPoints[0]);
+        Path path = gridGenerator.GetPath(homeTile, spawnPoints[0]);
+
+        if(path == null)
+            return;
+        
+        for(int i = 1; i < path.path.Count - 1; i++) // skip 1st and last, changing those would block the path
+        {
+            // path.path[i]
+        }
     }
 
     private void DebugPath(Path p)
@@ -81,6 +89,9 @@ public class ProcGen : MonoBehaviour
 
     private void GenerateNavMesh()
     {
+        foreach(var g in pathfinder.data.graphs)
+            pathfinder.data.RemoveGraph(g);
+
         GridGraph graph = pathfinder.data.AddGraph(typeof(GridGraph)) as GridGraph;
         graph.is2D = true;
         graph.collision.use2D = true;
