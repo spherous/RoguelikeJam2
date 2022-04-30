@@ -27,14 +27,22 @@ public class ProcGen : MonoBehaviour
 
     private void PlaceSpawnPoints(int count)
     {
+        ClearSpawnPoints();
+        
         for(int i = 0; i < count; i++)
         {
             Tile maybeNewSpawnPoint;
             do maybeNewSpawnPoint = gridGenerator.GetRandomEdgeTile();
-            while(maybeNewSpawnPoint.type == TileType.Home);
+            while(maybeNewSpawnPoint.type != TileType.Path);
 
             maybeNewSpawnPoint.SetType(TileType.EnemySpawnPoint);
             spawnPoints.Add(maybeNewSpawnPoint);
         }
+    }
+    void ClearSpawnPoints()
+    {
+        foreach(Tile spawnPoint in spawnPoints)
+            spawnPoint.SetType(TileType.Path);
+        spawnPoints.Clear();
     }
 }
