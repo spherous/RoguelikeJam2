@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Pathfinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class GridGenerator : MonoBehaviour
 {
     [SerializeField] private Tile tilePrefab;
     [ShowInInspector, ReadOnly] public List<List<Tile>> grid = new List<List<Tile>>();
+    [SerializeField] private Seeker seeker;
 
     public int width => grid.Count;
     public int height => grid.Count > 0 ? grid[0].Count : 0;
@@ -38,6 +40,19 @@ public class GridGenerator : MonoBehaviour
                 grid[row].Add(tile);
             }
         }
+    }
+
+    public Path GetPath(Index start, Index end) => 
+        TryGetTile(start, out Tile startTile) && TryGetTile(end, out Tile endTile) ? GetPath(startTile, endTile) : null;
+
+    public Path GetPath(Tile start, Tile end)
+    {
+        if(start == null || end == null)
+            return null;
+        
+        Path path = seeker.StartPath(start.transform.position, end.transform.position);
+        AstarPath.BlockUntilCalculated(path);
+        return path;
     }
 
     public Index GetRandomIndex() => GetRandomTile().index;
