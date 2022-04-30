@@ -13,5 +13,6 @@ public class Tile : MonoBehaviour
     {
         this.type = type;
         spriteRenderer.color = type.GetColor();
+        gameObject.layer = type.GetLayer();
     }
 }

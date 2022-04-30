@@ -10,4 +10,9 @@ public static class TileTypeExtensios
         TileType.Buildable => Color.blue,
         _ => Color.white
     };
+
+    public static int GetLayer(this TileType type) => type switch {
+        TileType.Buildable => LayerMask.NameToLayer("Nonwalkable"),
+        _ => LayerMask.NameToLayer("Walkable")
+    };
 }
