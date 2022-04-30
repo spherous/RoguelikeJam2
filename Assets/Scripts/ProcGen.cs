@@ -68,7 +68,15 @@ public class ProcGen : MonoBehaviour
 
     private void ExtendPath()
     {
+        // Path path = gridGenerator.GetPath(homeTile, spawnPoints[0]);
+    }
 
+    private void DebugPath(Path p)
+    {
+        Debug.Log($"Path length: {p.path.Count}");
+        
+        foreach(GraphNode node in p.path)
+            Debug.Log((Vector3)node.position);
     }
 
     private void GenerateNavMesh()
@@ -82,7 +90,7 @@ public class ProcGen : MonoBehaviour
         graph.center = new Vector3(
             x: gridGenerator.width / 2 - (gridGenerator.height.IsEven() ? 0.5f : 0),
             y: gridGenerator.height / 2 - (gridGenerator.width.IsEven() ? 0.5f : 0),
-            z: -0.1f
+            z: 0
         );
 
         graph.collision.mask = LayerMask.GetMask("Nonwalkable");
