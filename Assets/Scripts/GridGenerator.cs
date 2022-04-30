@@ -9,6 +9,9 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] private Tile tilePrefab;
     [ShowInInspector, ReadOnly] public List<List<Tile>> grid = new List<List<Tile>>();
 
+    public int width => grid.Count;
+    public int height => grid.Count > 0 ? grid[0].Count : 0;
+
     [Button]
     public void Clear()
     {
@@ -39,14 +42,91 @@ public class GridGenerator : MonoBehaviour
 
     public Index GetRandomIndex() => GetRandomTile().index;
     public Tile GetRandomTile() => grid.ChooseRandom().ChooseRandom();
-    public Tile GetRandomEdgeTile()
+
+    public List<Tile> GetAllEdgeTiles()
     {
+        // Doesn't skip corners
+
         List<Tile> edgeTiles = new List<Tile>();
         foreach(List<Tile> row in grid)
         {
             foreach(Tile tile in row)
             {
                 if(tile.index.row == 0 || tile.index.row == grid.Count - 1 || tile.index.col == 0 || tile.index.col == grid[0].Count - 1)
+                    edgeTiles.Add(tile);
+            }
+        }
+        return edgeTiles;
+    }
+    
+    public Tile GetRandomEdgeTile()
+    {
+        List<Tile> edgeTiles = GetAllEdgeTiles();
+        return edgeTiles.ChooseRandom();
+    }
+
+    public Tile GetRandomLeftEdgeTile()
+    {
+        List<Tile> edgeTiles = new List<Tile>();
+        for (int i = 0; i < grid.Count; i++)
+        {
+            List<Tile> row = grid[i];
+            // Skip corners
+            if(i == 0 || i == grid.Count - 1)
+                continue;
+
+            foreach (Tile tile in row)
+            {
+                if(tile.index.col == 0)
+                    edgeTiles.Add(tile);
+            }
+        }
+        return edgeTiles.ChooseRandom();
+    }
+
+    public Tile GetRandomRightEdgeTile()
+    {
+        List<Tile> edgeTiles = new List<Tile>();
+        for (int i = 0; i < grid.Count; i++)
+        {
+            List<Tile> row = grid[i];
+            // Skip corners
+            if(i == 0 || i == grid.Count - 1)
+                continue;
+                
+            foreach(Tile tile in row)
+            {
+                if(tile.index.col == grid[0].Count - 1)
+                    edgeTiles.Add(tile);
+            }
+        }
+        return edgeTiles.ChooseRandom();
+    }
+
+    public Tile GetRandomTopEdgeTile()
+    {
+        List<Tile> edgeTiles = new List<Tile>();
+        foreach(List<Tile> row in grid)
+        {
+            foreach(Tile tile in row)
+            {
+                // skip corners
+                if(tile.index.row == 0 && (tile.index.col != 0 && tile.index.col != grid[0].Count - 1))
+                    edgeTiles.Add(tile);
+            }
+        }
+        return edgeTiles.ChooseRandom();
+    }
+
+    public Tile GetRandomBottomEdgeTile()
+    {
+        List<Tile> edgeTiles = new List<Tile>();
+        foreach(List<Tile> row in grid)
+        {
+            foreach(Tile tile in row)
+            {
+                // skip corners
+                if(tile.index.row == grid.Count - 1  && (tile.index.col != 0 && tile.index.col != grid[0].Count - 1)) 
                     edgeTiles.Add(tile);
             }
         }
