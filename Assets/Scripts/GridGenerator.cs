@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -34,6 +35,22 @@ public class GridGenerator : MonoBehaviour
                 grid[row].Add(tile);
             }
         }
+    }
+
+    public Index GetRandomIndex() => GetRandomTile().index;
+    public Tile GetRandomTile() => grid.ChooseRandom().ChooseRandom();
+    public Tile GetRandomEdgeTile()
+    {
+        List<Tile> edgeTiles = new List<Tile>();
+        foreach(List<Tile> row in grid)
+        {
+            foreach(Tile tile in row)
+            {
+                if(tile.index.row == 0 || tile.index.row == grid.Count - 1 || tile.index.col == 0 || tile.index.col == grid[0].Count - 1)
+                    edgeTiles.Add(tile);
+            }
+        }
+        return edgeTiles.ChooseRandom();
     }
 
     public bool TryGetTile(Index index, out Tile tile)
