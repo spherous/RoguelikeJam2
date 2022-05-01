@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Pathfinding;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -12,6 +13,12 @@ public class ProcGen : MonoBehaviour
     public Tile homeTile {get; private set;}
     public List<Tile> spawnPoints {get; private set;} = new List<Tile>();
     public int passes = 3;
+    
+    [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
+
+    private void Awake() {
+        Generate();
+    }
 
     [Button]
     public void Generate()
@@ -23,6 +30,16 @@ public class ProcGen : MonoBehaviour
         PlaceEdgeWalls();
         GenerateNavMesh();
         ExtendPath();
+        CachePath();
+    }
+
+    private void CachePath()
+    {
+        path = gridGenerator.GetPath(spawnPoints[0].index, homeTile.index).path.Select(node => {
+            Vector3 nodePos = (Vector3)node.position;
+            Index nodeIndex = new Index(nodePos.y.Floor(), nodePos.x.Floor());
+            return gridGenerator.TryGetTile(nodeIndex, out Tile tile) ? tile : null;
+        }).ToList();
     }
 
     private void PlaceHome()
@@ -69,13 +86,13 @@ public class ProcGen : MonoBehaviour
 
     private void ExtendPath()
     {
-        Path path = gridGenerator.GetPath(spawnPoints[0], homeTile);
+        Path currentPath = gridGenerator.GetPath(spawnPoints[0], homeTile);
 
-        if(path == null)
+        if(currentPath == null)
             return;
 
-        Vector3 firstPathTilePos = (Vector3)path.path[1].position;
-        Vector3 lastPathTilePos = (Vector3)path.path[path.path.Count - 1].position;
+        Vector3 firstPathTilePos = (Vector3)currentPath.path[1].position;
+        Vector3 lastPathTilePos = (Vector3)currentPath.path[currentPath.path.Count - 1].position;
         Index firstPathTileIndex = new Index(firstPathTilePos.y.Floor(), firstPathTilePos.x.Floor());
         Index lastPathTileIndex = new Index(lastPathTilePos.y.Floor(), lastPathTilePos.x.Floor());
 
@@ -86,13 +103,13 @@ public class ProcGen : MonoBehaviour
         if(firstTile == null || lastTile == null) // If these tiles are null, the path is invalid
             return;
 
-        int prevPathLength = path.path.Count;
+        int prevPathLength = currentPath.path.Count;
 
         for(int pass = 0; pass < passes; pass++)
         {
-            for(int i = 2; i < path.path.Count - 2; i++) // skip 1st 2 and last 2, changing those would invalidate the path
+            for(int i = 2; i < currentPath.path.Count - 2; i++) // skip 1st 2 and last 2, changing those would invalidate the path
             {
-                Vector3 nodePos = (Vector3)path.path[i].position;
+                Vector3 nodePos = (Vector3)currentPath.path[i].position;
                 Index nodeIndex = new Index(nodePos.y.Floor(), nodePos.x.Floor());
 
                 if(gridGenerator.TryGetTile(nodeIndex, out Tile tile))
@@ -101,20 +118,29 @@ public class ProcGen : MonoBehaviour
                     // if path is left at same length or longer, leave as buildable, move to next tile and try again.
                     TileType orgType = tile.type;
 
-                    path = UpdateTileAlongPath(tile, TileType.Buildable);
+                    currentPath = UpdateTileAlongPath(tile, TileType.Buildable);
 
                     // if the final tile in the new path is not the home tile, the path is not valid
-                    Vector3 finalTilePos = (Vector3)path.path[path.path.Count - 1].position;
+                    Vector3 finalTilePos = (Vector3)currentPath.path[currentPath.path.Count - 1].position;
                     Index finalTileIndex = new Index(finalTilePos.y.Floor(), finalTilePos.x.Floor());
 
-                    if(path.path.Count < prevPathLength || finalTileIndex != homeTile.index)
+                    if(currentPath.path.Count < prevPathLength || finalTileIndex != homeTile.index)
                     {
-                        path = UpdateTileAlongPath(tile, orgType);
+                        currentPath = UpdateTileAlongPath(tile, orgType);
                         continue;
+                    }
+                    else if(currentPath.path.Count == prevPathLength)
+                    {
+                        // Placing a buildable path here doesn't change the length of the path, so let's randomly choose if we revert or not for more interesting generation.
+                        if(UnityEngine.Random.Range(0, 2).IsEven())
+                        {
+                            currentPath = UpdateTileAlongPath(tile, orgType);
+                            continue;
+                        }                        
                     }
 
                     // If we don't shuffle, the path favors going down.
-                    List<Tile> neighbors = gridGenerator.GetNeighbors(tile).Shuffle();
+                    List<Tile> neighbors = gridGenerator.GetAdjacentTiles(tile).Shuffle();
                     // Try changing neighboring path tiles to buildable, if that makes path shorter or invalid: change back.
                     foreach(Tile neighbor in neighbors)
                     {
@@ -122,19 +148,28 @@ public class ProcGen : MonoBehaviour
                         if(neighbor.type != TileType.Path || neighbor == firstTile || neighbor == lastTile)
                             continue;
 
-                        path = UpdateTileAlongPath(neighbor, TileType.Buildable);
+                        currentPath = UpdateTileAlongPath(neighbor, TileType.Buildable);
 
-                        finalTilePos = (Vector3)path.path[path.path.Count - 1].position;
+                        finalTilePos = (Vector3)currentPath.path[currentPath.path.Count - 1].position;
                         finalTileIndex = new Index(finalTilePos.y.Floor(), finalTilePos.x.Floor());
 
-                        if(path.path.Count < prevPathLength || finalTileIndex != homeTile.index)
+                        if(currentPath.path.Count < prevPathLength || finalTileIndex != homeTile.index)
                         {
-                            path = UpdateTileAlongPath(neighbor, orgType);
+                            currentPath = UpdateTileAlongPath(neighbor, orgType);
                             continue;
+                        }
+                        else if(currentPath.path.Count == prevPathLength)
+                        {
+                            // Placing a buildable path here doesn't change the length of the path, so let's randomly choose if we revert or not for more interesting generation.
+                            if(UnityEngine.Random.Range(0, 2).IsEven())
+                            {
+                                currentPath = UpdateTileAlongPath(tile, orgType);
+                                continue;
+                            }                        
                         }
                     }
 
-                    prevPathLength = path.path.Count;
+                    prevPathLength = currentPath.path.Count;
                 }
             }
         }
@@ -167,6 +202,8 @@ public class ProcGen : MonoBehaviour
         graph.collision.use2D = true;
         graph.SetDimensions(gridGenerator.height, gridGenerator.width, 1);
         graph.collision.diameter = 0.1f;
+        graph.cutCorners = false;
+        graph.neighbours = NumNeighbours.Four;
 
         graph.center = new Vector3(
             x: gridGenerator.width / 2 - (gridGenerator.height.IsEven() ? 0.5f : 0),

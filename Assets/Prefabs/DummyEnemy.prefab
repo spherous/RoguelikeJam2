@@ -100,6 +100,7 @@ MonoBehaviour:
   speed: 1
   rb: {fileID: 7276265943621871833}
   deathRate: 5
+  <maxHP>k__BackingField: 1
 --- !u!50 &7276265943621871833
 Rigidbody2D:
   serializedVersion: 4

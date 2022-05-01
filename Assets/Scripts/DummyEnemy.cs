@@ -2,41 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyEnemy : MonoBehaviour
+public class DummyEnemy : MonoBehaviour, IHealth
 {
 
     public float speed;
 
     EnemyList enemyList;
+    ProcGen procGen;
+    GameManager gameManager;
     [SerializeField] Rigidbody2D rb;
 
     private float lifeTime;
     public float deathRate;
 
+    private int pathingToNode = 1;
+
+    public event OnHealthChanged onHealthChanged;
+
+    [field:SerializeField] public float maxHP {get; set;}
+    public float currentHP {get; set;}
+
     void Start()
     {
         lifeTime = Time.timeSinceLevelLoad + deathRate;
-        enemyList = GameObject.Find("GameManager").GetComponent<EnemyList>();
+        enemyList = GameObject.FindObjectOfType<EnemyList>();
+        procGen = GameObject.FindObjectOfType<ProcGen>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+
+        HealToFull();
     }
 
-    void Update()
-    {
-        if (Time.timeSinceLevelLoad >= lifeTime)
-        {
-            DestroyThis();
-        }
+    private void OnDestroy() {
+        enemyList.enemyList.Remove(gameObject);
     }
+
     void FixedUpdate()
     {
-        if (rb.velocity.x < speed)
+        Vector3 vec = (procGen.path[pathingToNode].transform.position - transform.position);
+        Vector3 dir = vec.normalized;
+        transform.up = dir;
+        rb.velocity = dir * speed;
+        
+        if(vec.magnitude < 0.01f)
+            pathingToNode++;
+
+        if(pathingToNode > procGen.path.Count - 1)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            gameManager.TakeDamage(1);
+            Destroy(gameObject);
         }
     }
 
-    void DestroyThis()
+    public void TakeDamage(float damage)
     {
-        enemyList.enemyList.Remove(gameObject);
+        float startHP = currentHP;
+        currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
+
+        if(currentHP != startHP)
+            onHealthChanged?.Invoke(currentHP / maxHP);
+        
+        if(currentHP == 0)
+            Die();
+    }
+
+    public void HealToFull()
+    {
+        currentHP = maxHP;
+        onHealthChanged?.Invoke(1);
+    }
+
+    public void Die()
+    {
+        gameManager.AddToScore(1);
         Destroy(gameObject);
     }
 }
