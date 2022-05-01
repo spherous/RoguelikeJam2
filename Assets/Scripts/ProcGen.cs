@@ -12,6 +12,9 @@ public class ProcGen : MonoBehaviour
     public Tile homeTile {get; private set;}
     public List<Tile> spawnPoints {get; private set;} = new List<Tile>();
 
+
+    public int passes = 3;
+
     [Button]
     public void Generate()
     {
@@ -68,15 +71,82 @@ public class ProcGen : MonoBehaviour
 
     private void ExtendPath()
     {
-        Path path = gridGenerator.GetPath(homeTile, spawnPoints[0]);
+        Path path = gridGenerator.GetPath(spawnPoints[0], homeTile);
 
         if(path == null)
             return;
+
+        Vector3 firstPathTilePos = (Vector3)path.path[1].position;
+        Vector3 lastPathTilePos = (Vector3)path.path[path.path.Count - 1].position;
+        Index firstPathTileIndex = new Index(firstPathTilePos.y.Floor(), firstPathTilePos.x.Floor());
+        Index lastPathTileIndex = new Index(lastPathTilePos.y.Floor(), lastPathTilePos.x.Floor());
+
+        // These two tiles should never be changed, it will always invalidate the path.
+        Tile firstTile = gridGenerator.TryGetTile(firstPathTileIndex, out Tile firstTileResult) ? firstTileResult : null;
+        Tile lastTile = gridGenerator.TryGetTile(lastPathTileIndex, out Tile lastTileResult) ? lastTileResult : null;
+
+        if(firstTile == null || lastTile == null) // If these tiles are null, the path is invalid
+            return;
+
+        int prevPathLength = path.path.Count;
         
-        for(int i = 1; i < path.path.Count - 1; i++) // skip 1st and last, changing those would block the path
+        for(int pass = 0; pass < passes; pass++)
         {
-            // path.path[i]
+            for(int i = 2; i < path.path.Count - 2; i++) // skip 1st 2 and last 2, changing those would invalidate the path
+            {
+                Vector3 nodePos = (Vector3)path.path[i].position;
+                Index nodeIndex = new Index(nodePos.y.Floor(), nodePos.x.Floor());
+
+                if(gridGenerator.TryGetTile(nodeIndex, out Tile tile))
+                {
+                    // try to change tile to buildable, if that makes path shorter: change back.
+                    // if path is left at same length or longer, leave as buildable, move to next tile and try again.
+                    TileType orgType = tile.type;
+
+                    path = UpdateTileAlongPath(tile, TileType.Buildable);
+
+                    // if the final tile in the new path is not the home tile, the path is not valid
+                    Vector3 finalTilePos = (Vector3)path.path[path.path.Count - 1].position;
+                    Index finalTileIndex = new Index(finalTilePos.y.Floor(), finalTilePos.x.Floor());
+
+                    if(path.path.Count < prevPathLength || finalTileIndex != homeTile.index)
+                    {
+                        path = UpdateTileAlongPath(tile, orgType);
+                        continue;
+                    }
+
+                    // Try changing neighboring path tiles to buildable, if that makes path shorter or invalid: change back.
+                    foreach(Tile neighbor in gridGenerator.GetNeighbors(tile))
+                    {
+                        // don't invalidate the path
+                        if(neighbor.type != TileType.Path || neighbor == firstTile || neighbor == lastTile)
+                            continue;
+
+                        path = UpdateTileAlongPath(neighbor, TileType.Buildable);
+
+                        finalTilePos = (Vector3)path.path[path.path.Count - 1].position;
+                        finalTileIndex = new Index(finalTilePos.y.Floor(), finalTilePos.x.Floor());
+
+                        if(path.path.Count < prevPathLength || finalTileIndex != homeTile.index)
+                        {
+                            path = UpdateTileAlongPath(neighbor, orgType);
+                            continue;
+                        }
+                    }
+
+                    prevPathLength = path.path.Count;
+                }
+            }
         }
+    }
+
+    private Path UpdateTileAlongPath(Tile tile, TileType type)
+    {
+        Path path;
+        tile.SetType(type);
+        pathfinder.Scan(); // rescan to update navmesh
+        path = gridGenerator.GetPath(spawnPoints[0], homeTile);
+        return path;
     }
 
     private void DebugPath(Path p)
