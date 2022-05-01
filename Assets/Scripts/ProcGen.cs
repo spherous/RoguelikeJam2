@@ -11,8 +11,6 @@ public class ProcGen : MonoBehaviour
     [SerializeField] private AstarPath pathfinder;
     public Tile homeTile {get; private set;}
     public List<Tile> spawnPoints {get; private set;} = new List<Tile>();
-
-
     public int passes = 3;
 
     [Button]
@@ -89,7 +87,7 @@ public class ProcGen : MonoBehaviour
             return;
 
         int prevPathLength = path.path.Count;
-        
+
         for(int pass = 0; pass < passes; pass++)
         {
             for(int i = 2; i < path.path.Count - 2; i++) // skip 1st 2 and last 2, changing those would invalidate the path
@@ -115,8 +113,10 @@ public class ProcGen : MonoBehaviour
                         continue;
                     }
 
+                    // If we don't shuffle, the path favors going down.
+                    List<Tile> neighbors = gridGenerator.GetNeighbors(tile).Shuffle();
                     // Try changing neighboring path tiles to buildable, if that makes path shorter or invalid: change back.
-                    foreach(Tile neighbor in gridGenerator.GetNeighbors(tile))
+                    foreach(Tile neighbor in neighbors)
                     {
                         // don't invalidate the path
                         if(neighbor.type != TileType.Path || neighbor == firstTile || neighbor == lastTile)

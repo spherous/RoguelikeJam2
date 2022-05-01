@@ -5,8 +5,21 @@ using UnityEngine;
 public static class Extensions
 {
     public static int Floor(this float f) => Mathf.FloorToInt(f);
-    public static T ChooseRandom<T>(this List<T> set) => set[UnityEngine.Random.Range(0, set.Count)];
-    public static T ChooseRandom<T>(this T[] set) => set[UnityEngine.Random.Range(0, set.Length)];
     public static bool IsEven(this int number) => number % 2 == 0;
     public static bool IsEven(this float number) => number % 2 == 0;
+    public static List<T> Shuffle<T>(this List<T> set)
+    {
+        int n = set.Count;
+        while(n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            T value = set[k];
+            set[k] = set[n];
+            set[n] = value;
+        }
+        return set;
+    }
+    public static T ChooseRandom<T>(this List<T> set) => set[UnityEngine.Random.Range(0, set.Count)];
+    public static T ChooseRandom<T>(this T[] set) => set[UnityEngine.Random.Range(0, set.Length)];
 }
