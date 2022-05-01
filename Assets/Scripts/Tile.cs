@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public bool isBuildable = false;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [ShowInInspector, ReadOnly] public Index index {get; private set;}
     [ShowInInspector, ReadOnly] public TileType type {get; private set;} = TileType.Path;
@@ -15,5 +16,6 @@ public class Tile : MonoBehaviour
         this.type = type;
         spriteRenderer.color = type.GetColor();
         gameObject.layer = type.GetLayer();
+        if (this.type == TileType.Buildable) isBuildable = true;
     }
 }
