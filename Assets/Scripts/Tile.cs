@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     public bool isBuildable = false;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    public Index index {get; private set;}
-    public TileType type {get; private set;} = TileType.Path;
+    [ShowInInspector, ReadOnly] public Index index {get; private set;}
+    [ShowInInspector, ReadOnly] public TileType type {get; private set;} = TileType.Path;
 
     public void SetIndex(Index index) => this.index = index;
     public void SetType(TileType type) 

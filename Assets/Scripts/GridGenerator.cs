@@ -161,4 +161,54 @@ public class GridGenerator : MonoBehaviour
         tile = row[index.col];
         return true;
     }
+
+    public List<Tile> GetAdjacentTiles(Tile source)
+    {
+        IEnumerable<Tile> Adjacent()
+        {
+            if(TryGetTile(source.index + new Index(0, 1), out Tile upTile))
+                yield return upTile;
+            if(TryGetTile(source.index + new Index(0, -1), out Tile downTile))
+                yield return downTile;
+            if(TryGetTile(source.index + new Index(-1, 0), out Tile leftTile))
+                yield return leftTile;
+            if(TryGetTile(source.index + new Index(1, 0), out Tile rightTile))
+                yield return rightTile;
+        }
+
+        return Adjacent().ToList();
+    }
+
+    public List<Tile> GetCornerTiles(Tile source)
+    {
+        IEnumerable<Tile> Corners()
+        {
+            if(TryGetTile(source.index + new Index(1, 1), out Tile upRightTile))
+                yield return upRightTile;
+            if(TryGetTile(source.index + new Index(-1, 1), out Tile upLeftTile))
+                yield return upLeftTile;
+            if(TryGetTile(source.index + new Index(1, -1), out Tile downRightTile))
+                yield return downRightTile;
+            if(TryGetTile(source.index + new Index(-1, -1), out Tile downLeftTile))
+                yield return downLeftTile;
+        }
+
+        return Corners().ToList();
+    }
+
+    public List<Tile> GetNeighbors(Tile source) => GetAdjacentTiles(source).Concat(GetCornerTiles(source)).ToList();
+
+    public List<Tile> GetAllPathTiles()
+    {
+        List<Tile> pathTiles = new List<Tile>();
+        foreach(List<Tile> row in grid)
+        {
+            foreach(Tile tile in row)
+            {
+                if(tile.type == TileType.Path)
+                    pathTiles.Add(tile);
+            }
+        }
+        return pathTiles;
+    }
 }

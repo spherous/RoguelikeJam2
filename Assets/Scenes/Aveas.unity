@@ -229,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridGenerator: {fileID: 1649001262}
   pathfinder: {fileID: 1672842123}
+  passes: 2
 --- !u!4 &1672842122
 Transform:
   m_ObjectHideFlags: 0
