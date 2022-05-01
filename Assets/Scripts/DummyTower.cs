@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class DummyTower : MonoBehaviour
 {
-    [SerializeField] EnemyList enemyList;
+    EnemyList enemyList;
     [SerializeField] FollowTargetRotate followTargetRotate;
     void Start()
     {
-        
+        enemyList = GameObject.Find("GameManager").GetComponent<EnemyList>();
     }
 
     // Update is called once per frame

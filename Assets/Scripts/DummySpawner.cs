@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DummySpawner : MonoBehaviour
 {
-    [SerializeField] EnemyList enemyList;
+    EnemyList enemyList;
     [SerializeField] GameObject enemy;
     private float spawnTime;
     public float spawnRate;
@@ -12,6 +12,7 @@ public class DummySpawner : MonoBehaviour
     void Start()
     {
         spawnTime = Time.timeSinceLevelLoad + spawnRate;
+        enemyList = GameObject.Find("GameManager").GetComponent<EnemyList>();
     }
 
     // Update is called once per frame

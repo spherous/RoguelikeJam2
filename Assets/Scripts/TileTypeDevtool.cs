@@ -40,13 +40,13 @@ public class TileTypeDevtool : MonoBehaviour
                        
             if (hit.collider != null)
             {
-                Debug.Log("Hit");
+                
                 if (DevtoolTileType == 4) return;
                 hit.collider.GetComponent<Tile>().SetType((TileType)DevtoolTileType);
             }
             if (hit.collider == null)
             {
-                Debug.Log("No hit");
+                
             }
         }
     }

@@ -13,19 +13,14 @@ public class DummyBuilder : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("Clicked");
             Ray ray = Camera.main.ScreenPointToRay (Mouse.current.position.ReadValue());
            
             hit = Physics2D.GetRayIntersection (ray, Mathf.Infinity);
             
-            if (hit.collider == null) 
-            {
-                selectedTile = null;
-            }
             if (hit.collider != null)
             {
                 selectedTile = hit.collider.GetComponent<Tile>();
-                Debug.Log(selectedTile);
+
                 if (selectedTile.type != TileType.Buildable) 
                 {
                     selectedTile = null;
@@ -37,6 +32,8 @@ public class DummyBuilder : MonoBehaviour
     public void BuildButton()
     {
         if (selectedTile == null) return;
+        Debug.Log("Build");
+        Debug.Log(selectedTile.isBuildable);
         if (selectedTile.isBuildable)
         {
             Instantiate(dummyTower, selectedTile.transform.position, Quaternion.identity);
@@ -49,6 +46,10 @@ public class DummyBuilder : MonoBehaviour
         {
             Debug.Log(selectedTile);
         }
+    }
+    public void Why()
+    {
+        Debug.Log("Why");
     }
     
     

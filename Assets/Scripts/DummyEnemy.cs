@@ -7,7 +7,7 @@ public class DummyEnemy : MonoBehaviour
 
     public float speed;
 
-    [SerializeField] EnemyList enemyList;
+    EnemyList enemyList;
     [SerializeField] Rigidbody2D rb;
 
     private float lifeTime;
@@ -16,6 +16,7 @@ public class DummyEnemy : MonoBehaviour
     void Start()
     {
         lifeTime = Time.timeSinceLevelLoad + deathRate;
+        enemyList = GameObject.Find("GameManager").GetComponent<EnemyList>();
     }
 
     void Update()
