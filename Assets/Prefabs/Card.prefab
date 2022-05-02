@@ -572,4 +572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764233ba3eba34947a61f38e6a9afdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 623662280543125430}
+  cardPosition: {fileID: 0}
   offset: 600

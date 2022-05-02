@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     private GameObject zoomedCard;
-    private GameObject parent;
+    [SerializeField] GameObject parent;
     private GameObject cardPosition;
     public float offset;
 
@@ -29,8 +29,6 @@ public class Card : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, I
 
     void Start() 
     {
-        //ugly hack to get the parent of the card
-        cardPosition = gameObject.transform.parent.gameObject.transform.parent.gameObject;
-        parent = gameObject.transform.parent.gameObject;
+        cardPosition = GameObject.Find("Card Position");    
     }
 }

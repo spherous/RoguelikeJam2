@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 101866629}
   - component: {fileID: 101866628}
   - component: {fileID: 101866625}
-  - component: {fileID: 101866630}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -261,18 +260,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dummyTower: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
---- !u!114 &101866630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101866624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cfe492e7ca043348bdc9cc98fb9a34d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &876903610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1094,7 +1081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1726199835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1197,6 +1184,7 @@ MonoBehaviour:
   gridGenerator: {fileID: 1125466002}
   pathfinder: {fileID: 1726199835}
   passes: 2
+  rands: 5
 --- !u!4 &1726199837
 Transform:
   m_ObjectHideFlags: 0
