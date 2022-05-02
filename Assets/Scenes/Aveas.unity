@@ -139,6 +139,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1672842121}
     - target: {fileID: 5416801865157651724, guid: d95407a55a125f44dabe1cddbf395eb3, type: 3}
+      propertyPath: spawnRate
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416801865157651724, guid: d95407a55a125f44dabe1cddbf395eb3, type: 3}
       propertyPath: spawnOverTime
       value: 1
       objectReference: {fileID: 0}
@@ -353,6 +357,7 @@ MonoBehaviour:
   gridGenerator: {fileID: 1649001262}
   pathfinder: {fileID: 1672842123}
   passes: 2
+  rands: 45
 --- !u!4 &1672842122
 Transform:
   m_ObjectHideFlags: 0
@@ -394,7 +399,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 0
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -445,7 +450,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:

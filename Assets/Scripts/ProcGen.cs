@@ -13,6 +13,7 @@ public class ProcGen : MonoBehaviour
     public Tile homeTile {get; private set;}
     public List<Tile> spawnPoints {get; private set;} = new List<Tile>();
     public int passes = 3;
+    public int rands = 5;
     
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
@@ -23,7 +24,7 @@ public class ProcGen : MonoBehaviour
     [Button]
     public void Generate()
     {
-        gridGenerator.GenerateGrid(11, 10);
+        gridGenerator.GenerateGrid(13, 22);
 
         PlaceHome();
         PlaceSpawnPoints(1);
@@ -33,14 +34,14 @@ public class ProcGen : MonoBehaviour
         CachePath();
     }
 
-    private void CachePath()
+    private void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoints[0].index, homeTile.index));
+
+    private List<Tile> SelectPath(Path p) => p.path.Select(node =>
     {
-        path = gridGenerator.GetPath(spawnPoints[0].index, homeTile.index).path.Select(node => {
-            Vector3 nodePos = (Vector3)node.position;
-            Index nodeIndex = new Index(nodePos.y.Floor(), nodePos.x.Floor());
-            return gridGenerator.TryGetTile(nodeIndex, out Tile tile) ? tile : null;
-        }).ToList();
-    }
+        Vector3 nodePos = (Vector3)node.position;
+        Index nodeIndex = new Index(nodePos.y.Floor(), nodePos.x.Floor());
+        return gridGenerator.TryGetTile(nodeIndex, out Tile tile) ? tile : null;
+    }).ToList();
 
     private void PlaceHome()
     {
@@ -104,6 +105,21 @@ public class ProcGen : MonoBehaviour
             return;
 
         int prevPathLength = currentPath.path.Count;
+        
+        List<Tile> currentTilePath = SelectPath(currentPath);
+        List<Tile> allPathTiles = gridGenerator.GetAllPathTiles();
+
+        List<Tile> allPathTilesWithoutCurrentPath = allPathTiles.Except(currentTilePath).ToList();
+        List<Tile> randomizedTiles = new List<Tile>();
+        for(int rand = 0; rand < rands; rand++)
+        {
+            Tile toRand;
+            do toRand = allPathTilesWithoutCurrentPath.ChooseRandom();
+            while(randomizedTiles.Contains(toRand));
+
+            // We are not changing a tile that could obstruct the valid path, so we don't care about the return value
+            UpdateTileAlongPath(toRand, TileType.Buildable);
+        }
 
         for(int pass = 0; pass < passes; pass++)
         {
@@ -206,8 +222,8 @@ public class ProcGen : MonoBehaviour
         graph.neighbours = NumNeighbours.Four;
 
         graph.center = new Vector3(
-            x: gridGenerator.width / 2 - (gridGenerator.height.IsEven() ? 0.5f : 0),
-            y: gridGenerator.height / 2 - (gridGenerator.width.IsEven() ? 0.5f : 0),
+            x: gridGenerator.height / 2 - (gridGenerator.height.IsEven() ? 0.5f : 0),
+            y: gridGenerator.width / 2 - (gridGenerator.width.IsEven() ? 0.5f : 0),
             z: 0
         );
 
