@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IHealth
 {
+    [SerializeField] private HealthBar healthBar;
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
     public int score {get; private set;}
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour, IHealth
     public OnScoreChanged onScoreChanged;
 
     private void Awake() {
+        healthBar.Track(this);
         HealToFull();
     }
 
