@@ -19,10 +19,11 @@ public class GameManager : MonoBehaviour, IHealth
     public delegate void OnScoreChanged(int newScore);
     public OnScoreChanged onScoreChanged;
 
-    private void Awake() {
+    private void Awake()
+    {
         threadPool = Instantiate(threadPoolPrefab, screen);
         threadPool.IncreaseThreadCount(3);
-        
+
         healthBar = Instantiate(healthBarPrefab, screen);
         healthBar.Track(this);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
-public class TowerCard : ScriptableObject
+public class TowerCard : ScriptableObject, CardSO
 {
     public new string name;
     public string description;
@@ -12,5 +12,15 @@ public class TowerCard : ScriptableObject
     
     public int threadCost;
 
+    public bool TryPlay()
+    {
+        ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
 
+        if(threadPool != null && threadPool.Request(threadCost))
+        {
+            return true;
+        }
+        
+        return false;
+    }
 }

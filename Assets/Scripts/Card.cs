@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    private ThreadPool threadPool;
+    public CardSO card;
     private GameObject gameManager;
     private GameObject zoomedCard;
     private CardSpawner cardSpawner;
@@ -24,32 +24,17 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     public void OnEndDrag(PointerEventData eventData)
     {
         dragging = false;
-        
 
-        if (threadCost > threadPool.availableThreads)
+        if(card != null && card.TryPlay())
         {
-            Debug.Log("Too expensive!");
-            cardSpawner.SortCards();
-        }
-        else
-        {
-            Debug.Log("card played!");
-            threadPool.Request(threadCost);
             cardSpawner.cardList.Remove(parent);
             cardSpawner.cardCount--;
-            //if (cardSpawner.cardList.Count > 0)
-            //{
-                cardSpawner.SortCards();
-            //}
-            
+            cardSpawner.SortCards();
             Destroy(parent);
+            return;
         }
 
-        
-
-        
-        
-
+        cardSpawner.SortCards();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -79,7 +64,7 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         cardPosition = GameObject.Find("Card Position");    
         gameManager = GameObject.Find("GameManager");
         threadCost = parent.GetComponent<CardDisplay>().card.threadCost;
-        threadPool = GameObject.FindObjectOfType<ThreadPool>();
+        // threadPool = GameObject.FindObjectOfType<ThreadPool>();
         cardSpawner = gameManager.GetComponent<CardSpawner>();;
     }
 
