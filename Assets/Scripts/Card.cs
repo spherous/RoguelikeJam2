@@ -5,30 +5,55 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    private ThreadPool threadPool;
     private GameObject gameManager;
     private GameObject zoomedCard;
+    private CardSpawner cardSpawner;
     [SerializeField] GameObject parent;
     private GameObject cardPosition;
     public float offset;
     public bool dragging;
+    public int threadCost;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("start dragging");
         dragging = true;
         Destroy(zoomedCard);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("end dragging");
         dragging = false;
-        gameManager.GetComponent<CardSpawner>().SortCards();
+        
+
+        if (threadCost > threadPool.availableThreads)
+        {
+            Debug.Log("Too expensive!");
+            cardSpawner.SortCards();
+        }
+        else
+        {
+            Debug.Log("card played!");
+            threadPool.Request(threadCost);
+            cardSpawner.cardList.Remove(parent);
+            cardSpawner.cardCount--;
+            //if (cardSpawner.cardList.Count > 0)
+            //{
+                cardSpawner.SortCards();
+            //}
+            
+            Destroy(parent);
+        }
+
+        
+
+        
+        
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("dragging");
         parent.transform.position = eventData.position;
         parent.transform.rotation = Quaternion.identity;
     }
@@ -53,6 +78,9 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
     {
         cardPosition = GameObject.Find("Card Position");    
         gameManager = GameObject.Find("GameManager");
+        threadCost = parent.GetComponent<CardDisplay>().card.threadCost;
+        threadPool = GameObject.FindObjectOfType<ThreadPool>();
+        cardSpawner = gameManager.GetComponent<CardSpawner>();;
     }
 
 

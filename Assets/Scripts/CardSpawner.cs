@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class CardSpawner : MonoBehaviour
 {
-    private int cardCount = 0;
+    public int cardCount = 0;
     public float arc;
     public GameObject cardPosition;
     public ScriptableObject[] cards;
     public GameObject cardPrefab;
     public float maxAngle;
-    private List<GameObject> cardList = new List<GameObject>();
+    public List<GameObject> cardList = new List<GameObject>();
     private float angle;
 
     public void SpawnCard()
