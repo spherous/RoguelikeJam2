@@ -4,13 +4,15 @@ using UnityEngine;
 using TMPro;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
-public class TowerCard : ScriptableObject, CardSO
+public class TowerCard : ScriptableObject, ICard
 {
     public new string name;
     public string description;
     public Sprite artwork;
     
     public int threadCost;
+
+
 
     public bool TryPlay()
     {
