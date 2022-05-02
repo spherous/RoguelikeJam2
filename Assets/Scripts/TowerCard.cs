@@ -9,6 +9,8 @@ public class TowerCard : ScriptableObject
     public new string name;
     public string description;
     public Sprite artwork;
+    
+    public int threadCost;
 
 
 }
