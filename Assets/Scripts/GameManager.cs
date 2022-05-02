@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IHealth
 {
-    [SerializeField] private ThreadPool threadPool;
-    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Transform screen;
+    [SerializeField] private ThreadPool threadPoolPrefab;
+    private ThreadPool threadPool;
+
+    [SerializeField] private HealthBar healthBarPrefab;
+    private HealthBar healthBar;
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
     public int score {get; private set;}
@@ -16,8 +20,12 @@ public class GameManager : MonoBehaviour, IHealth
     public OnScoreChanged onScoreChanged;
 
     private void Awake() {
+        threadPool = Instantiate(threadPoolPrefab, screen);
         threadPool.IncreaseThreadCount(3);
+        
+        healthBar = Instantiate(healthBarPrefab, screen);
         healthBar.Track(this);
+
         HealToFull();
     }
 
