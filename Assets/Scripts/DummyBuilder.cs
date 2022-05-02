@@ -41,16 +41,7 @@ public class DummyBuilder : MonoBehaviour
             selectedTile = null;
         }
     }
-    private void Update() {
-        if (selectedTile != null)
-        {
-            Debug.Log(selectedTile);
-        }
-    }
-    public void Why()
-    {
-        Debug.Log("Why");
-    }
+
     
     
 }
