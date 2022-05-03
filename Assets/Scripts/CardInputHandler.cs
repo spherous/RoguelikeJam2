@@ -11,6 +11,12 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public float offset;
     public bool dragging;
 
+    private void OnDestroy() {
+        if(zoomedCard != null) {
+            Destroy(zoomedCard.gameObject);
+        }
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragging = true;
