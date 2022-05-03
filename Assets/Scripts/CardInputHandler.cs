@@ -14,7 +14,8 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragging = true;
-        Destroy(zoomedCard.gameObject);
+        if(zoomedCard != null)
+            Destroy(zoomedCard.gameObject);
     }
 
     public void OnEndDrag(PointerEventData eventData)
