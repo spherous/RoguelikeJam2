@@ -10,6 +10,8 @@ public class TowerCard : ScriptableObject, ICard
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
 
+
+
     public bool TryPlay()
     {
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
