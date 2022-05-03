@@ -11,10 +11,10 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public float offset;
     public bool dragging;
 
-    private void OnDestroy() {
-        if(zoomedCard != null) {
+    private void OnDestroy()
+    {
+        if(zoomedCard != null)
             Destroy(zoomedCard.gameObject);
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -40,7 +40,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if(!dragging)
         {
-            zoomedCard = Instantiate(cardDisplay, Vector3.zero, Quaternion.identity, cardPosition.transform);
+            zoomedCard = Instantiate(cardDisplay, cardPosition.transform);
             zoomedCard.transform.localPosition = new Vector3(cardDisplay.transform.localPosition.x, zoomedCard.transform.localPosition.y+offset, cardDisplay.transform.localPosition.z);
         }
     }
