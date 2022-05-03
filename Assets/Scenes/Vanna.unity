@@ -156,13 +156,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cff75e65db1fa47b01ea1e543005e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardCount: 0
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
+    - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: cards
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   arc: 50
   cardPosition: {fileID: 1017211183}
-  cards:
-  - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
-  - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
-  cardPrefab: {fileID: 623662280543125430, guid: 89d01679aeaad784288304dab7ce5f9c, type: 3}
+  cardPrefab: {fileID: 623662280543125432, guid: 89d01679aeaad784288304dab7ce5f9c, type: 3}
   maxAngle: 8
   cardList: []
 --- !u!114 &101866626
@@ -1136,11 +1161,11 @@ RectTransform:
   m_Father: {fileID: 876903614}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 875, y: -483}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -10, y: 40}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1286025745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,11 +1621,11 @@ RectTransform:
   m_Father: {fileID: 876903614}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 875, y: -522}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -10, y: 10}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &1839533037
 MonoBehaviour:
   m_ObjectHideFlags: 0

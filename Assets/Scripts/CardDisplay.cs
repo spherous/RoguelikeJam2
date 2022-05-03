@@ -5,23 +5,35 @@ using UnityEngine.UI;
 using TMPro;
 public class CardDisplay : MonoBehaviour
 {
-    public TowerCard card;
-    public TMP_Text nameText;
-    public TMP_Text descriptionText;
-    public Image artworkImage;
-    public TMP_Text costText;
+    public ICard card {get; private set;}
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
+    [SerializeField] private TextMeshProUGUI costText;
+    [SerializeField] private Image artworkImage;
+    private CardSpawner cardSpawner;
+
     void Start()
     {
-        nameText = transform.GetChild(1).GetComponent<TMP_Text>();
-        descriptionText = transform.GetChild(2).GetComponent<TMP_Text>();
-        artworkImage = transform.GetChild(3).GetComponent<Image>();
-        costText = transform.GetChild(4).GetComponent<TMP_Text>();
-
-        costText.text = card.threadCost.ToString();
-        nameText.text = card.name;
-        descriptionText.text = card.description;
-        artworkImage.sprite = card.artwork;
-    
+        cardSpawner = GameObject.FindObjectOfType<CardSpawner>();
     }
 
+    public void SetCard(ICard newCard)
+    {
+        card = newCard;
+        nameText.text = card.name;
+        costText.text = $"{card.threadCost}";
+        descriptionText.text = card.description;
+        artworkImage.sprite = card.artwork;
+    }
+
+    public void PlayCard()
+    {
+        if(card != null && card.TryPlay())
+        {
+            cardSpawner.RemoveCard(this);
+            Destroy(gameObject);
+            return;
+        }
+        cardSpawner.FanCards();
+    }
 }

@@ -213,11 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebe03b5a42bd1149897965187508b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  card: {fileID: 0}
-  nameText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  artworkImage: {fileID: 0}
-  costText: {fileID: 0}
+  nameText: {fileID: 623662280950580515}
+  descriptionText: {fileID: 623662280729314701}
+  costText: {fileID: 7024745165481610437}
+  artworkImage: {fileID: 623662280012650708}
 --- !u!1 &623662280729314699
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,6 +709,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764233ba3eba34947a61f38e6a9afdfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 623662280543125430}
+  cardDisplay: {fileID: 623662280543125432}
   offset: 600
   dragging: 0

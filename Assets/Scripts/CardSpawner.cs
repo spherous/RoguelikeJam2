@@ -1,39 +1,82 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
-public class CardSpawner : MonoBehaviour
+public class CardSpawner : SerializedMonoBehaviour
 {
-    public int cardCount = 0;
+    [SerializeField] private WaveManager waveManager;
     public float arc;
     public GameObject cardPosition;
-    public ScriptableObject[] cards;
-    public GameObject cardPrefab;
+    [OdinSerialize] public List<ICard> cards = new List<ICard>();
+    public CardDisplay cardPrefab;
     public float maxAngle;
-    public List<GameObject> cardList = new List<GameObject>();
+    public List<CardDisplay> cardList = new List<CardDisplay>();
     private float angle;
 
-    public void SpawnCard()
-    {
-        angle = Mathf.Clamp(arc/(cardCount-1), 0, maxAngle);
-        int rand = Random.Range(0, cards.Length);
-        GameObject newCard = Instantiate(cardPrefab, cardPosition.transform.position, Quaternion.identity, cardPosition.transform);
-        cardCount++;
-        newCard.GetComponent<CardDisplay>().card = cards[rand] as TowerCard;
-        cardList.Add(newCard);
-        SortCards();
+    public int handCount;
+
+    private void Awake() {
+        waveManager.onWaveStart += OnWaveStart;
+        waveManager.onWaveComplete += OnWaveComplete;        
     }
-    public void SortCards()
+
+
+    private void Start() => SpawnCard(handCount);
+
+    private void OnDestroy()
     {
-        bool isEven = cardCount.IsEven();
-        for (int i = 0; i < cardCount; i++)
+        waveManager.onWaveStart -= OnWaveStart;
+        waveManager.onWaveComplete -= OnWaveComplete;            
+    }
+
+    private void OnWaveStart(Wave newWave)
+    {
+        foreach(CardDisplay card in cardList)
+            Destroy(card.gameObject);
+        cardList.Clear();
+    }
+
+    private void OnWaveComplete(Wave wave)
+    {
+        int numberToDraw = handCount - cardList.Count;
+        SpawnCard(numberToDraw);
+    }
+
+    public void SpawnCard(int amount = 1)
+    {
+        for(int i = 0; i < amount; i++)
         {
-                float theta = ((((((float)cardCount/2f).Floor() * angle)*-1)+i*angle)+90);
-                if(isEven) theta = theta + (angle/2f);
-                theta = theta * Mathf.Deg2Rad;
-                Vector2 potato = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
-                cardList[i].transform.localPosition = potato * 900;
-                cardList[i].transform.up = potato;
+            CardDisplay newCard = Instantiate(cardPrefab, cardPosition.transform.position, Quaternion.identity, cardPosition.transform);
+            newCard.SetCard(cards[UnityEngine.Random.Range(0, cards.Count)]);
+            cardList.Add(newCard);
+        }
+
+        FanCards();
+    }
+
+    public void RemoveCard(CardDisplay card)
+    {
+        cardList.Remove(card);
+        FanCards();
+    }
+
+    public void FanCards()
+    {
+        angle = Mathf.Clamp(arc/(cardList.Count - 1), 0, maxAngle);
+        bool isEven = cardList.Count.IsEven();
+        for(int i = 0; i < cardList.Count; i++)
+        {
+            float theta = ((((((float)cardList.Count/2f).Floor() * angle)*-1)+i*angle));
+            if(isEven) 
+                theta = theta + (angle/2f);
+
+            theta = (theta + 90) * Mathf.Deg2Rad;
+            Vector2 desiredVec = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
+            cardList[i].transform.localPosition = desiredVec * 900;
+            cardList[i].transform.up = desiredVec;
         }
     }
 }
