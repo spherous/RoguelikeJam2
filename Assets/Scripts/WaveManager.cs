@@ -46,6 +46,14 @@ public class WaveManager : MonoBehaviour
 
     private int EnemiesRemaining() => enemies.Where(enemy => enemy != null).Count();
 
+    public void StartEarly()
+    {
+        if(waitingForCompletion || spawning)
+            return;
+            
+        StartWave();
+    }
+
     private void StartWave()
     {
         timeForNextSpawn = Time.timeSinceLevelLoad + waves[currentWave].spawnInterval;
