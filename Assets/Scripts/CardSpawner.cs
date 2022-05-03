@@ -50,7 +50,7 @@ public class CardSpawner : SerializedMonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             CardDisplay newCard = Instantiate(cardPrefab, cardPosition.transform.position, Quaternion.identity, cardPosition.transform);
-            newCard.SetCard(cards[UnityEngine.Random.Range(0, cards.Count)]);
+            newCard.SetCard(cards.ChooseRandom());
             cardList.Add(newCard);
         }
 
