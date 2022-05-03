@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    public CardSO card;
+    public ICard card;
     private GameObject gameManager;
     private GameObject zoomedCard;
     private CardSpawner cardSpawner;
@@ -64,7 +64,6 @@ public class Card : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IB
         cardPosition = GameObject.Find("Card Position");    
         gameManager = GameObject.Find("GameManager");
         threadCost = parent.GetComponent<CardDisplay>().card.threadCost;
-        // threadPool = GameObject.FindObjectOfType<ThreadPool>();
         cardSpawner = gameManager.GetComponent<CardSpawner>();;
     }
 

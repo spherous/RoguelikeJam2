@@ -15,3 +15,4 @@ MonoBehaviour:
   name: Dummy 2
   description: Electric Boogaloo
   artwork: {fileID: 21300000, guid: 37d246492ed0e7648b4f6ba9a1764690, type: 3}
+  threadCost: 2
