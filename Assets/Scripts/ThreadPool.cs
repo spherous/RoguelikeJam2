@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +7,22 @@ using UnityEngine;
 
 public class ThreadPool : MonoBehaviour
 {
+    private WaveManager waveManager;
     [SerializeField] private Thread threadPrefab;
     public List<Thread> threads {get; private set;} = new List<Thread>();
     public int availableThreads => GetAvailableThreads().Count();
 
     private IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
+
+    private void Awake() {
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
+        waveManager.onWaveComplete += OnWaveComplete;
+    }
+
+    private void OnWaveComplete(Wave endingWave)
+    {
+        Refresh();
+    }
 
     public void IncreaseThreadCount(int amount)
     {
