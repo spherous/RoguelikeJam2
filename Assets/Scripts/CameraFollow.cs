@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.U2D;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -38,31 +39,5 @@ public class CameraFollow : MonoBehaviour
             pos = transform;
             cycleStartTime = Time.time;
         }
-    }
-    void Update() 
-    {
-        CameraZoom();
-    }
-
-    void CameraZoom()
-    {
-        Vector2 scroll = Mouse.current.scroll.ReadValue();
-        if (scroll.y < 0)
-        {
-            cam.orthographicSize += zoomSpeed;
-        }
-        else if (scroll.y > 0)
-        {
-            cam.orthographicSize -= zoomSpeed;
-        }
-        if (cam.orthographicSize > 13)
-        {
-            cam.orthographicSize = 13;
-        }
-        else if (cam.orthographicSize < 3)
-        {
-            cam.orthographicSize = 3;
-        }
-        
     }
 }
