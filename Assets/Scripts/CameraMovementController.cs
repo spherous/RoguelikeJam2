@@ -22,6 +22,10 @@ public class CameraMovementController : MonoBehaviour
 
     [SerializeField] PixelPerfectCamera pixelPerfectCamera;
     public float zoomLevel;
+
+    public float maxZoomIn;
+    public float maxZoomOut;
+    public float zoomSpeed;
     private int scrollWheelInput;
     
     private void Awake()
@@ -117,12 +121,9 @@ public class CameraMovementController : MonoBehaviour
 
 	    if (scrollWheelInput != 0) 
         {
-            // for some reason ref resolutions can only be lower or smaller by mutliples of 2 of 1920x1080, changing it to anything inbetween 1920x1080 and 960x540(or smaller /2 fractions) does not work
-            zoomLevel += scrollWheelInput;
-		    zoomLevel = Mathf.Clamp(zoomLevel, 1, 5);
-		    pixelPerfectCamera.refResolutionX = Mathf.FloorToInt(Screen.width / zoomLevel);
-		    pixelPerfectCamera.refResolutionY = Mathf.FloorToInt(Screen.height / zoomLevel);
-        }
-
+            zoomLevel = Mathf.Clamp((zoomLevel + zoomLevel/zoomSpeed * scrollWheelInput), maxZoomOut, maxZoomIn);
+		    pixelPerfectCamera.assetsPPU = Mathf.RoundToInt(zoomLevel);
+        }   
     }
+
 }

@@ -1455,7 +1455,9 @@ MonoBehaviour:
   maxSpeed: 5
   timeToMaxSpeed: 0.333
   pixelPerfectCamera: {fileID: 605179303}
-  zoomLevel: 1
+  zoomLevel: 35
+  maxZoomIn: 125
+  maxZoomOut: 35
 --- !u!114 &1973052690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,6 +1519,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0bdd3b04-4679-45b3-9dce-98eab4296732
     m_ActionName: New action map/Horizontal[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: af8294a8-9991-46fe-b99e-9a22ecc572d4
+    m_ActionName: New action map/MMB[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: New action map
