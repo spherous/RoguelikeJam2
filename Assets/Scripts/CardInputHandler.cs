@@ -8,8 +8,10 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private CardDisplay cardDisplay;
     private CardDisplay zoomedCard;
     private GameObject cardPosition;
+    private CardSpawner cardSpawner;
+    public bool isDragging;
     public float offset;
-    public bool dragging;
+
 
     private void OnDestroy()
     {
@@ -19,14 +21,24 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        dragging = true;
+        isDragging = true;
+        cardDisplay.isDragging = true;
+        cardDisplay.transform.SetSiblingIndex(cardPosition.transform.childCount-1);
         if(zoomedCard != null)
             Destroy(zoomedCard.gameObject);
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        dragging = false;
+        isDragging = false;
+        cardDisplay.isDragging = false;
+        if (Vector3.Distance(gameObject.transform.position, cardPosition.transform.position) < 1200)
+        {
+            cardDisplay.ReturnCard();
+            return;
+
+        }
         cardDisplay.PlayCard();
     }
 
@@ -38,10 +50,11 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(!dragging)
+        if(!isDragging)
         {
             zoomedCard = Instantiate(cardDisplay, cardPosition.transform);
             zoomedCard.transform.localPosition = new Vector3(cardDisplay.transform.localPosition.x, zoomedCard.transform.localPosition.y+offset, cardDisplay.transform.localPosition.z);
+            zoomedCard.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -54,5 +67,9 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void Start() 
     {
         cardPosition = GameObject.Find("Card Position");    
+        cardSpawner = GameObject.FindObjectOfType<CardSpawner>();
     }
+
+
+    
 }
