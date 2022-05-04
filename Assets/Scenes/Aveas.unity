@@ -411,9 +411,13 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0bdd3b04-4679-45b3-9dce-98eab4296732
     m_ActionName: New action map/Horizontal[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6e1ac944-13a4-480d-9406-ce8f148bd8d1
+    m_ActionName: Keyboard/mouse/MiddleClick[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: New action map
+  m_DefaultActionMap: Keyboard/mouse
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!61 &926305293
@@ -1066,13 +1070,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407737214}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1447,14 +1451,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
-      propertyPath: m_RefResolutionX
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
-      propertyPath: m_RefResolutionY
-      value: 1080
-      objectReference: {fileID: 0}
     - target: {fileID: 7721777624554948484, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
       propertyPath: m_Name
       value: CameraRig

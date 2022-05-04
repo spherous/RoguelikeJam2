@@ -17,13 +17,7 @@ public class CameraMovementController : MonoBehaviour
     private float velocityX;
     private float velocityY;
 
-<<<<<<< HEAD
-    [SerializeField] PixelPerfectCamera pixelPerfectCamera;
-    public float zoomLevel;
-    private int scrollWheelInput;
-=======
     private PixelPerfectCamera pixelPerfectCamera;
->>>>>>> main
     
     private void Awake()
     {
@@ -73,29 +67,6 @@ public class CameraMovementController : MonoBehaviour
     public void MoveVertical(CallbackContext context) => verticalInput = context.ReadValue<float>();
     public void SetVelocityToZero() => rb.velocity = Vector2.zero;
 
-<<<<<<< HEAD
-    void CameraZoom()
-    {
-        Vector2 scroll = Mouse.current.scroll.ReadValue();
-        if (scroll.y > 0)
-            scrollWheelInput = 1;
-        else if (scroll.y < 0)
-            scrollWheelInput = -1;
-        else
-            scrollWheelInput = 0;
-
-
-	    if (scrollWheelInput != 0) 
-        {
-            // for some reason ref resolutions can only be lower or smaller by mutliples of 2 of 1920x1080, changing it to anything inbetween 1920x1080 and 960x540(or smaller /2 fractions) does not work
-            zoomLevel += scrollWheelInput;
-		    zoomLevel = Mathf.Clamp(zoomLevel, 1, 5);
-		    pixelPerfectCamera.refResolutionX = Mathf.FloorToInt(Screen.width / zoomLevel);
-		    pixelPerfectCamera.refResolutionY = Mathf.FloorToInt(Screen.height / zoomLevel);
-        }
-
-=======
     void CameraZoom() => 
         pixelPerfectCamera.assetsPPU = Mathf.Clamp(pixelPerfectCamera.assetsPPU + (int)Mouse.current.scroll.ReadValue().y / 60, 32, 128);
->>>>>>> main
 }
