@@ -11,40 +11,39 @@ public class CameraMovementController : MonoBehaviour
     private GridGenerator gridGenerator;
     [SerializeField] Rigidbody2D rb;
     public float maxSpeed;
-    private float speedMax;
     [ShowInInspector, ReadOnly] private float horizontalInput;
     [ShowInInspector, ReadOnly] private float verticalInput;
     public float timeToMaxSpeed;
     private float velocityX;
     private float velocityY;
-    private int hInput;
-    private int vInput;
 
+<<<<<<< HEAD
     [SerializeField] PixelPerfectCamera pixelPerfectCamera;
     public float zoomLevel;
     private int scrollWheelInput;
+=======
+    private PixelPerfectCamera pixelPerfectCamera;
+>>>>>>> main
     
     private void Awake()
     {
-        speedMax = maxSpeed;
         gridGenerator = GameObject.FindObjectOfType<GridGenerator>();
-
+        pixelPerfectCamera = GameObject.FindObjectOfType<PixelPerfectCamera>();
     }
     private void Update()
     {
-
         float acceleration = maxSpeed / timeToMaxSpeed;
-        float h = acceleration * hInput;
-        float v = acceleration * vInput;
+        float h = acceleration * horizontalInput;
+        float v = acceleration * verticalInput;
 
         var boundingTiles = gridGenerator.GetBoundingBox();
 
-        if(hInput != 0) 
+        if(horizontalInput != 0) 
             velocityX += h * Time.deltaTime; 
         else
             velocityX -= Mathf.Clamp(-acceleration * Time.deltaTime, velocityX, 0);
 
-        if(vInput != 0) 
+        if(verticalInput != 0) 
             velocityY += v * Time.deltaTime;
         else 
             velocityY -= Mathf.Clamp(-acceleration * Time.deltaTime, velocityY, 0);
@@ -53,57 +52,28 @@ public class CameraMovementController : MonoBehaviour
         velocityX = Mathf.Clamp(velocityX, -maxSpeed, maxSpeed);
         rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x, -maxSpeed, maxSpeed), Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed));
 
-        Vector2 lowerBound = new Vector2(boundingTiles.bottomLeft.transform.position.x, boundingTiles.bottomLeft.transform.position.y);
-        Vector2 upperBound = new Vector2(boundingTiles.topRight.transform.position.x, boundingTiles.topRight.transform.position.y);
-        
-        if (transform.position.y > upperBound.y)
-        {
-            transform.position = new Vector3(transform.position.x, upperBound.y, transform.position.z);
-        }
-        else if (transform.position.y < lowerBound.y)
-        {
-            transform.position = new Vector3(transform.position.x, lowerBound.y, transform.position.z);
-        }
+        Vector2 lowerBound = boundingTiles.bottomLeft.transform.position;
+        Vector2 upperBound = boundingTiles.topRight.transform.position;
 
-        if (transform.position.x > upperBound.x)
-        {
+        if(transform.position.y > upperBound.y)
+            transform.position = new Vector3(transform.position.x, upperBound.y, transform.position.z);
+        else if(transform.position.y < lowerBound.y)
+            transform.position = new Vector3(transform.position.x, lowerBound.y, transform.position.z);
+
+        if(transform.position.x > upperBound.x)
             transform.position = new Vector3(upperBound.x, transform.position.y, transform.position.z);
-        }
-        else if (transform.position.x < lowerBound.x)
-        {
+        else if(transform.position.x < lowerBound.x)
             transform.position = new Vector3(lowerBound.x, transform.position.y, transform.position.z);
-        }
 
         CameraZoom();
-
-
     }
 
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(velocityX,velocityY);
-    }
-    public void MoveHorizontal(CallbackContext context) 
-    {
-
-        horizontalInput = context.ReadValue<float>();
-        if(horizontalInput > 0.5f) hInput=1;
-        else if(horizontalInput < -0.5) hInput=-1;
-        else hInput=0;
-    }
-    public void MoveVertical(CallbackContext context)
-    {
-
-        verticalInput = context.ReadValue<float>();
-        if(verticalInput > 0.5f)
-            vInput=1;
-        else if(verticalInput < -0.5) 
-            vInput=-1;
-        else 
-            vInput=0;
-    }
+    private void FixedUpdate() => rb.velocity = new Vector2(velocityX, velocityY);
+    public void MoveHorizontal(CallbackContext context) => horizontalInput = context.ReadValue<float>();
+    public void MoveVertical(CallbackContext context) => verticalInput = context.ReadValue<float>();
     public void SetVelocityToZero() => rb.velocity = Vector2.zero;
 
+<<<<<<< HEAD
     void CameraZoom()
     {
         Vector2 scroll = Mouse.current.scroll.ReadValue();
@@ -124,5 +94,8 @@ public class CameraMovementController : MonoBehaviour
 		    pixelPerfectCamera.refResolutionY = Mathf.FloorToInt(Screen.height / zoomLevel);
         }
 
-    }
+=======
+    void CameraZoom() => 
+        pixelPerfectCamera.assetsPPU = Mathf.Clamp(pixelPerfectCamera.assetsPPU + (int)Mouse.current.scroll.ReadValue().y / 60, 32, 128);
+>>>>>>> main
 }

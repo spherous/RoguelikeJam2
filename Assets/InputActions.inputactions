@@ -2,11 +2,15 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "New action map",
+            "name": "Keyboard/Mouse",
             "id": "507035d7-0acb-42fd-9b50-a6b57b6281a6",
             "actions": [
                 {
-                    "name": "New action",
+<<<<<<< HEAD
+                    "name": "LMB",
+=======
+                    "name": "LeftClick",
+>>>>>>> main
                     "type": "Button",
                     "id": "2af5d95a-00c0-4609-9f90-42a9a6e2e5a6",
                     "expectedControlType": "Button",
@@ -31,6 +35,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MiddleClick",
+                    "type": "Button",
+                    "id": "6e1ac944-13a4-480d-9406-ce8f148bd8d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -41,7 +54,11 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "New action",
+<<<<<<< HEAD
+                    "action": "LMB",
+=======
+                    "action": "LeftClick",
+>>>>>>> main
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,6 +127,92 @@
                     "action": "Horizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+<<<<<<< HEAD
+                    "name": "Arrow Keys",
+                    "id": "3e9cd286-c665-49cf-8f3c-0a94309fb91f",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "551ab9f9-8c9b-499e-b431-ce12a91f6da8",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cd9d4c24-6b3d-4e3f-915e-0a0ec5fb52e7",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arrow Keys",
+                    "id": "09fce50e-c994-4525-8760-26e11d283fd0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "be590ce9-b42a-4af0-a838-032517f5a826",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "14335aee-e223-47ab-922a-84b049a047fc",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "5c403fa5-0005-4560-ba86-5c22859f6a1b",
+=======
+                    "name": "",
+                    "id": "808bb018-1e5f-4350-81e3-68397a788850",
+>>>>>>> main
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+<<<<<<< HEAD
+                    "action": "MMB",
+=======
+                    "action": "MiddleClick",
+>>>>>>> main
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
