@@ -17,6 +17,22 @@ public class ScreenShake : MonoBehaviour
     Vector2 originalPos;
     Vector2 oldShakePos;
     private float cycleStartTime;
+    private void Awake() 
+    {
+        gameManager.onHealthChanged += OnHealthChanged;
+    }
+    private void OnDestroy() {
+        gameManager.onHealthChanged -= OnHealthChanged;
+    }
+
+    private void OnHealthChanged(float oldHP, float newHP, float percent)
+    {
+        if(newHP < oldHP)
+        {
+            Shake();
+        }
+    }
+    
 
     private void Start()
     {
