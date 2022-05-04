@@ -27,6 +27,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
         if(zoomedCard != null)
             Destroy(zoomedCard.gameObject);
         
+        cardDisplay.transform.SetSiblingIndex(cardPosition.transform.childCount - 1);
     }
 
     public void OnEndDrag(PointerEventData eventData)

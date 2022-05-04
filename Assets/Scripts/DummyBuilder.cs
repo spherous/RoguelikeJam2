@@ -15,7 +15,7 @@ public class DummyBuilder : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay (Mouse.current.position.ReadValue());
            
-            hit = Physics2D.GetRayIntersection (ray, Mathf.Infinity);
+            hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
             
             if (hit.collider != null)
             {
@@ -37,11 +37,7 @@ public class DummyBuilder : MonoBehaviour
         if (selectedTile.isBuildable)
         {
             Instantiate(dummyTower, selectedTile.transform.position, Quaternion.identity);
-            selectedTile.isBuildable = false;
             selectedTile = null;
         }
     }
-
-    
-    
 }

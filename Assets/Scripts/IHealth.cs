@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public delegate void OnHealthChanged(float percent);
+public delegate void OnHealthChanged(float oldHP, float newHP, float percent);
 
 public interface IHealth 
 {

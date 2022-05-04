@@ -8,15 +8,12 @@ public class DummyTower : MonoBehaviour
     [SerializeField] FollowTargetRotate followTargetRotate;
     void Start()
     {
-        enemyList = GameObject.Find("GameManager").GetComponent<EnemyList>();
+        enemyList = GameObject.FindObjectOfType<EnemyList>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (enemyList.enemyList.Count > 0)
-        {
+        if(enemyList.enemyList.Count > 0)
             followTargetRotate.targetTransform = enemyList.enemyList[0].transform;
-        }
     }
 }
