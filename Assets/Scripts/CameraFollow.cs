@@ -40,8 +40,12 @@ public class CameraFollow : MonoBehaviour
     }
     void Update() 
     {
+        CameraZoom();
+    }
+
+    void CameraZoom()
+    {
         Vector2 scroll = Mouse.current.scroll.ReadValue();
-        Debug.Log(scroll.y);
         if (scroll.y < 0)
         {
             cam.orthographicSize += zoomSpeed;
@@ -49,6 +53,14 @@ public class CameraFollow : MonoBehaviour
         else if (scroll.y > 0)
         {
             cam.orthographicSize -= zoomSpeed;
+        }
+        if (cam.orthographicSize > 13)
+        {
+            cam.orthographicSize = 13;
+        }
+        else if (cam.orthographicSize < 3)
+        {
+            cam.orthographicSize = 3;
         }
         
     }
