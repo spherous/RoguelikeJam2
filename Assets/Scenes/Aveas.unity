@@ -1447,6 +1447,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
+      propertyPath: m_RefResolutionX
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
+      propertyPath: m_RefResolutionY
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 7721777624554948484, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
       propertyPath: m_Name
       value: CameraRig

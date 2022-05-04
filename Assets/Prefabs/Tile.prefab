@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1125614527446722163
 Transform:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 728bba65c628e5d4e8bb052f3515886f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -212,7 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6900857139321227489}
-  rb: {fileID: 1594381437795593375}
+  pathSprite: {fileID: 21300000, guid: 728bba65c628e5d4e8bb052f3515886f, type: 3}
+  buildableSprite: {fileID: 21300000, guid: fa35a77503f6a45eea6c469775ee446e, type: 3}
 --- !u!50 &1594381437795593375
 Rigidbody2D:
   serializedVersion: 4
