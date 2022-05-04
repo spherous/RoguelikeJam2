@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
   m_Name: Dummy Tower
   m_EditorClassIdentifier: 
+  towerToSpawn: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
   <description>k__BackingField: Places a towr
   <artwork>k__BackingField: {fileID: 21300000, guid: 70a0c13ef6ceb664da00ffb1bb1e9a7d, type: 3}
   <threadCost>k__BackingField: 1
