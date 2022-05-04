@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyTower : MonoBehaviour
+public class DummyTower : MonoBehaviour, ITower
 {
     EnemyList enemyList;
     [SerializeField] FollowTargetRotate followTargetRotate;
