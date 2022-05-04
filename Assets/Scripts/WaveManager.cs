@@ -56,6 +56,9 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
+        if(currentWave >= waves.Count)
+            return;
+            
         timeForNextSpawn = Time.timeSinceLevelLoad + waves[currentWave].spawnInterval;
 
         if(currentWave >= waves.Count)

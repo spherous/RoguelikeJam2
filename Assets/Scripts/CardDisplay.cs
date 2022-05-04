@@ -44,7 +44,7 @@ public class CardDisplay : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        cardSpawner.FanCards();
+        ReturnCard();
     }
     public void ReturnCard()
     {
