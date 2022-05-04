@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 public class ScreenShake : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     private int shakeCount;
     public int shakeAmount;
     public float shakeMagnitude;
