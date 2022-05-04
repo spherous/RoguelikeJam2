@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] public Transform playerTransform;
+    public Transform cameraLeader;
+    public Camera cam;
+
+    public float zoomSpeed;
     private Transform pos;
     private Vector3 offset;
     public float followSpeed;
@@ -28,10 +32,24 @@ public class CameraFollow : MonoBehaviour
     void Follow()
     {
         elapsedTime = Time.time - cycleStartTime;
-        transform.position = Vector3.Lerp(pos.position + offset, playerTransform.position + offset, elapsedTime / followSpeed);
+        transform.position = Vector3.Lerp(pos.position + offset, cameraLeader.position + offset, elapsedTime / followSpeed);
         {
             pos = transform;
             cycleStartTime = Time.time;
         }
+    }
+    void Update() 
+    {
+        Vector2 scroll = Mouse.current.scroll.ReadValue();
+        Debug.Log(scroll.y);
+        if (scroll.y < 0)
+        {
+            cam.orthographicSize += zoomSpeed;
+        }
+        else if (scroll.y > 0)
+        {
+            cam.orthographicSize -= zoomSpeed;
+        }
+        
     }
 }
