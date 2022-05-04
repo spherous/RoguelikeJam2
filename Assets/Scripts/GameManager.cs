@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour, IHealth
 
     public void HealToFull()
     {
+        float oldHP = currentHP;
         currentHP = maxHP;
-        onHealthChanged?.Invoke(1);
+        onHealthChanged?.Invoke(oldHP, currentHP, 1);
     }
 
     public void TakeDamage(float damage)
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour, IHealth
         currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
 
         if(currentHP != startHP)
-            onHealthChanged?.Invoke(currentHP / maxHP);
+            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
         
         if(currentHP == 0)
             Die();

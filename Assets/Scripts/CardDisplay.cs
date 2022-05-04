@@ -16,9 +16,11 @@ public class CardDisplay : MonoBehaviour
     public bool isDragging;
     private GameObject cardPosition;
     private CardSpawner cardSpawner;
+    private MouseData mouseData;
 
     void Start()
     {
+        mouseData = GameObject.FindObjectOfType<MouseData>();
         cardSpawner = GameObject.FindObjectOfType<CardSpawner>();
         cardPosition = GameObject.Find("Card Position");
         outline.color = Color.clear;
@@ -36,7 +38,7 @@ public class CardDisplay : MonoBehaviour
 
     public void PlayCard()
     {
-        if(card != null && card.TryPlay())
+        if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
             cardSpawner.RemoveCard(this);
             Destroy(gameObject);
