@@ -2,11 +2,11 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "New action map",
+            "name": "Keyboard/Mouse",
             "id": "507035d7-0acb-42fd-9b50-a6b57b6281a6",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "LeftClick",
                     "type": "Button",
                     "id": "2af5d95a-00c0-4609-9f90-42a9a6e2e5a6",
                     "expectedControlType": "Button",
@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MiddleClick",
+                    "type": "Button",
+                    "id": "6e1ac944-13a4-480d-9406-ce8f148bd8d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -41,7 +50,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "New action",
+                    "action": "LeftClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -110,6 +119,17 @@
                     "action": "Horizontal",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "808bb018-1e5f-4350-81e3-68397a788850",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MiddleClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

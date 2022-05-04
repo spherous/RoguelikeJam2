@@ -23,9 +23,9 @@ public class FollowTargetRotate : MonoBehaviour
     {
         if(targetTransform != null)
         {
-        Vector2 directionFromSelfToTarget = (targetTransform.position - selfTransform.position).normalized;
-        transform.position = offset * (Vector3)directionFromSelfToTarget + selfTransform.position;
-        transform.rotation = Quaternion.Euler(Quaternion.LookRotation(transform.forward, directionFromSelfToTarget).eulerAngles);
+            Vector2 directionFromSelfToTarget = (targetTransform.position - selfTransform.position).normalized;
+            transform.position = offset * (Vector3)directionFromSelfToTarget + selfTransform.position;
+            transform.rotation = Quaternion.Euler(Quaternion.LookRotation(transform.forward, directionFromSelfToTarget).eulerAngles);
         }
 
     }

@@ -1,0 +1,78 @@
+TO DO
+
+Camera panning
+    x wasd
+    middle click + drag
+    arrow keys
+    mouse on edge of screen
+
+Place tower mode
+Tower range indicators
+
+Towers
+    web tower
+    chain tower
+    aoe burst
+    long range snipe (can't hit nearby)
+
+Web effects
+    slow while in it
+    stun when entering
+    burn dot lasts after exiting
+    thorns dot while in it
+    Wounding deals damage when entering
+    Damage amp while in it
+
+Card effects
+    Place web tower (instant)
+    Place chain tower (instant)
+    Place aoe burst tower (instant)
+    place long range snipe tower (instant)
+    draw 2 (instant)
+    discard hand and draw 3 (instant)
+    gain a thread (takes time to play, once per level per card)
+    Discard down to 2 cards instead of 5 cards after build phase, but only draw up to 4 cards at the start of each turn (once per level)
+    Slightly Increase all tower damage (sustained for a few waves)
+    Greatly increase 1 tower's damage (1 wave)
+    Slightly increase all web effects (sustained for a few waves)
+    Greatly increase 1 web's effects (1 wave)
+    Moderately increased effects of all webs attached to tower (sustained for a few waves)
+    Next wave moves slightly slower (1 wave)
+    Next wave moves moderately faster but has less hp (1 wave)
+    Next wave pauses between steps (1 wave)
+    Ignite next wave (1 wave)
+    Increase chain count (sustained for a few waves)
+    Reduce chain count but increase damage (sustained for a few waves)
+    Increase chain range (sustained for a few waves)
+    Reduce chain range but increase damage (sustained for a few waves)
+    Slightly increase tower attack speed (sustained for a few waves)
+    Greatly increase tower attack speed (1 wave)
+    Relocate a tower (instant)
+    Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
+    Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
+    Place a web-trap that greatly slows enemies (1 wave)
+    Place a burn-trap that greatly damages enemies (1 wave)
+    Heal (instant)
+    Regen (sustained for a few waves)
+    ------Should we do block? if so, these 2 cards are easy and fast------
+    Adds a small amount of block (sustained)
+    Adds a large amount of block (instant)
+    
+
+Audio
+    Music
+    Ambient
+    On player take damage
+    On enemy take damage
+        - different types (enter web, chain, burn, aoe, etc)
+    volume controls
+
+Main menu
+Loading scene
+Credits
+Font
+
+win/lose screen
+
+levels
+    pick a new card after each level

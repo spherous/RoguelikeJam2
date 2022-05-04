@@ -56,7 +56,7 @@ public class DummyEnemy : MonoBehaviour, IHealth
     public void TakeDamage(float damage)
     {
         float startHP = currentHP;
-        currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
+        currentHP = currentHP - damage >= 0 ? currentHP - damage : 0;
 
         if(currentHP != startHP)
             onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);

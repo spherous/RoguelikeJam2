@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1409404219263627825}
   - component: {fileID: 1409404219263627827}
   m_Layer: 0
-  m_Name: DummyTower
+  m_Name: ChainTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,6 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTargetRotate: {fileID: 1409404219842551721}
+  attackTime: 0.5
+  target: {fileID: 0}
+  damage: 1
+  chainCount: 3
+  projectilePrefab: {fileID: 3396218646815767703, guid: 0db379a51adea8c489c457c8cf8e4bab, type: 3}
 --- !u!1 &1409404219264943798
 GameObject:
   m_ObjectHideFlags: 0
