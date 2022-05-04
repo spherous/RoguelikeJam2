@@ -212,10 +212,10 @@ public class GridGenerator : MonoBehaviour
         return pathTiles;
     }
 
-    public (Tile topLeft, Tile bottomRight) GetBoundingBox()
+    public (Tile bottomLeft, Tile topRight) GetBoundingBox()
     {
-        if(grid != null && grid[0] != null && TryGetTile(new Index(0, 0), out Tile topLeft) && TryGetTile(new Index(grid.Count - 1, grid[0].Count - 1), out Tile bottomRight))
-            return (topLeft, bottomRight);
+        if(grid != null && grid[0] != null && TryGetTile(new Index(0, 0), out Tile bottomLeft) && TryGetTile(new Index(grid.Count - 1, grid[0].Count - 1), out Tile topRight))
+            return (bottomLeft, topRight);
         return (null, null);
     }
 }
