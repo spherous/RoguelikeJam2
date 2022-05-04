@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform cameraLeader;
+    private Transform cameraLeader;
     public Camera cam;
 
     public float zoomSpeed;
@@ -16,6 +16,7 @@ public class CameraFollow : MonoBehaviour
     private float cycleStartTime;
     private void Awake()
     {
+        cameraLeader = GameObject.FindObjectOfType<CameraMovementController>().transform;
         offset = new Vector3 (0,0,-10);
         pos = transform;
     }

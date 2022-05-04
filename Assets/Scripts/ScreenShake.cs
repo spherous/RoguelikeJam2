@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 public class ScreenShake : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    private GameManager gameManager;
     private int shakeCount;
     public int shakeAmount;
     public float shakeMagnitude;
@@ -19,6 +19,7 @@ public class ScreenShake : MonoBehaviour
     private float cycleStartTime;
     private void Awake() 
     {
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         gameManager.onHealthChanged += OnHealthChanged;
     }
     private void OnDestroy() {

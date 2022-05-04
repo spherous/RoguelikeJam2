@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEngine.InputSystem;
+using Sirenix.OdinInspector;
+
 public class CameraMovementController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     public float maxSpeed;
     private float speedMax;
-    public float horizontalInput;
-    public float verticalInput;
+    [ShowInInspector, ReadOnly] private float horizontalInput;
+    [ShowInInspector, ReadOnly] private float verticalInput;
     public float timeToMaxSpeed;
     private float velocityX;
     private float velocityY;
