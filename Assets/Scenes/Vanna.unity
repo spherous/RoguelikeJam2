@@ -724,6 +724,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
     - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
+    - {fileID: 11400000, guid: de2a576d7de2a8641bce3f4ce9579962, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -734,13 +735,16 @@ MonoBehaviour:
       Data: 0|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 10
       Data: 0
     - Name: 
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
     - Name: 
       Entry: 13
       Data: 
@@ -1441,8 +1445,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1973052687}
-  maxSpeed: 5
-  timeToMaxSpeed: 0.333
+  cam: {fileID: 0}
+  maxSpeed: 8
+  timeToMaxSpeed: 0.233
 --- !u!114 &1973052690
 MonoBehaviour:
   m_ObjectHideFlags: 0
