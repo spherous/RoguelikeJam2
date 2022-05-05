@@ -18,7 +18,10 @@ public class CameraMovementController : MonoBehaviour
     private float velocityY;
 
     private PixelPerfectCamera pixelPerfectCamera;
-    
+    private bool mmbHeld = false;
+    private Vector3 mouseOrigin;
+    private Vector3 transformOrigin;
+    private Vector3 destination;
     private void Awake()
     {
         gridGenerator = GameObject.FindObjectOfType<GridGenerator>();
@@ -60,6 +63,9 @@ public class CameraMovementController : MonoBehaviour
             transform.position = new Vector3(lowerBound.x, transform.position.y, transform.position.z);
 
         CameraZoom();
+
+        if (mmbHeld)
+            mmbMove();
     }
 
     private void FixedUpdate() => rb.velocity = new Vector2(velocityX, velocityY);
@@ -69,4 +75,25 @@ public class CameraMovementController : MonoBehaviour
 
     void CameraZoom() => 
         pixelPerfectCamera.assetsPPU = Mathf.Clamp(pixelPerfectCamera.assetsPPU + (int)Mouse.current.scroll.ReadValue().y / 60, 32, 128);
-}
+
+    
+    public void MMB(CallbackContext context)
+    { 
+        if (context.started)
+        {
+            mouseOrigin = Mouse.current.position.ReadValue();
+            transformOrigin = transform.position;
+            mmbHeld = true;
+        }
+        if (context.canceled)
+        {
+            mmbHeld = false;
+        }
+    }
+
+    void mmbMove()
+    {
+        destination = Mouse.current.position.ReadValue();
+        transform.position = transformOrigin + (mouseOrigin - destination) / pixelPerfectCamera.assetsPPU;
+    }
+}   
