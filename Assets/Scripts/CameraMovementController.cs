@@ -10,18 +10,22 @@ public class CameraMovementController : MonoBehaviour
 {
     private GridGenerator gridGenerator;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] Camera cam;
     public float maxSpeed;
     [ShowInInspector, ReadOnly] private float horizontalInput;
     [ShowInInspector, ReadOnly] private float verticalInput;
     public float timeToMaxSpeed;
     private float velocityX;
     private float velocityY;
+    private Vector2 mousePosition;
 
     private PixelPerfectCamera pixelPerfectCamera;
     private bool mmbHeld = false;
     private Vector3 mouseOrigin;
     private Vector3 transformOrigin;
     private Vector3 destination;
+    private bool movingVertical;
+    private bool movingHorizontal;
     private void Awake()
     {
         gridGenerator = GameObject.FindObjectOfType<GridGenerator>();
@@ -29,13 +33,17 @@ public class CameraMovementController : MonoBehaviour
     }
     private void Update()
     {
+        mousePosition = Mouse.current.position.ReadValue();
+        if(!movingHorizontal && !movingVertical)
+            mouseOnSideMove();
+
         float acceleration = maxSpeed / timeToMaxSpeed;
         float h = acceleration * horizontalInput;
         float v = acceleration * verticalInput;
 
         var boundingTiles = gridGenerator.GetBoundingBox();
 
-        if(horizontalInput != 0) 
+        if(horizontalInput != 0)
             velocityX += h * Time.deltaTime; 
         else
             velocityX -= Mathf.Clamp(-acceleration * Time.deltaTime, velocityX, 0);
@@ -69,8 +77,22 @@ public class CameraMovementController : MonoBehaviour
     }
 
     private void FixedUpdate() => rb.velocity = new Vector2(velocityX, velocityY);
-    public void MoveHorizontal(CallbackContext context) => horizontalInput = context.ReadValue<float>();
-    public void MoveVertical(CallbackContext context) => verticalInput = context.ReadValue<float>();
+    public void MoveHorizontal(CallbackContext context)
+    {
+        horizontalInput = context.ReadValue<float>();
+        if (context.started)
+            movingHorizontal = true;
+        else if (context.canceled)
+            movingHorizontal = false;
+    }
+    public void MoveVertical(CallbackContext context)
+    {
+        verticalInput = context.ReadValue<float>();
+        if (context.started)
+            movingVertical = true;
+        else if (context.canceled)
+            movingVertical = false;
+    }
     public void SetVelocityToZero() => rb.velocity = Vector2.zero;
 
     void CameraZoom() => 
@@ -81,7 +103,7 @@ public class CameraMovementController : MonoBehaviour
     { 
         if (context.started)
         {
-            mouseOrigin = Mouse.current.position.ReadValue();
+            mouseOrigin = mousePosition;
             transformOrigin = transform.position;
             mmbHeld = true;
         }
@@ -93,7 +115,25 @@ public class CameraMovementController : MonoBehaviour
 
     void mmbMove()
     {
-        destination = Mouse.current.position.ReadValue();
+        destination = mousePosition;
         transform.position = transformOrigin + (mouseOrigin - destination) / pixelPerfectCamera.assetsPPU;
+    }
+    
+    void mouseOnSideMove()
+    {
+        if (mousePosition.x > Screen.width-20)
+            horizontalInput = 1;
+        else if (mousePosition.x < 20)
+            horizontalInput = -1;
+        else
+            horizontalInput = 0;
+
+
+        if (mousePosition.y > Screen.height-20)
+            verticalInput = 1;
+        else if (mousePosition.y < 20)
+            verticalInput = -1;
+        else
+            verticalInput = 0;
     }
 }   

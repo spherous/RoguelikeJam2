@@ -666,17 +666,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476630967}
   m_CullTransparentMesh: 1
---- !u!114 &605179303 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
-  m_PrefabInstance: {fileID: 1576730733}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &697364066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,8 +1443,6 @@ MonoBehaviour:
   rb: {fileID: 1973052687}
   maxSpeed: 5
   timeToMaxSpeed: 0.333
-  pixelPerfectCamera: {fileID: 605179303}
-  zoomLevel: 1
 --- !u!114 &1973052690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,8 +1504,24 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0bdd3b04-4679-45b3-9dce-98eab4296732
     m_ActionName: New action map/Horizontal[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1973052689}
+        m_TargetAssemblyTypeName: CameraMovementController, Assembly-CSharp
+        m_MethodName: MMB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e1ac944-13a4-480d-9406-ce8f148bd8d1
+    m_ActionName: Keyboard/Mouse/MiddleClick[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: New action map
+  m_DefaultActionMap: Keyboard/Mouse
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
