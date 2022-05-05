@@ -24,6 +24,12 @@ public class Hand : SerializedMonoBehaviour
         waveManager.onWaveComplete += OnWaveComplete;        
     }
 
+    public void DiscardHand()
+    {
+        foreach(CardDisplay card in cardList)
+            Destroy(card.gameObject);
+        cardList.Clear();
+    }
 
     private void Start() => SpawnCard(handCount);
 

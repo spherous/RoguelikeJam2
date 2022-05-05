@@ -21,7 +21,6 @@ public class WaveManager : MonoBehaviour
     private int currentWave = 0;
     private bool waitingForCompletion = false;
 
-    // We need to maintain a separate counter, because the player may still be killing enemies from the previous wave when we stat spawning the next wave.
     private int spawnedCount = 0;
     private float timeForNextSpawn;
     private float timeForWaveStart;

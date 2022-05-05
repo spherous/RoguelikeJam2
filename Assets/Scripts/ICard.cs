@@ -8,5 +8,6 @@ public interface ICard
     string description {get; set;}
     Sprite artwork {get; set;}
     int threadCost {get; set;}
+    bool singleUse {get; set;}
     bool TryPlay(Tile tile);   
 }

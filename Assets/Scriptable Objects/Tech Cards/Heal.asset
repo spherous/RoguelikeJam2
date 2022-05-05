@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64b2972c5603fd04086574943c204869, type: 3}
-  m_Name: Draw 2
+  m_Name: Heal
   m_EditorClassIdentifier: 
-  techCardTypes: 00000000
-  <description>k__BackingField: Draw 2
-  <artwork>k__BackingField: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  techCardTypes: 06000000
+  <description>k__BackingField: Heal
+  <artwork>k__BackingField: {fileID: 21300000, guid: cce7aed0bebe98a479002f797429bd73, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
