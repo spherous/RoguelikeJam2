@@ -8,7 +8,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private CardDisplay cardDisplay;
     private CardDisplay zoomedCard;
     private GameObject cardPosition;
-    private CardSpawner cardSpawner;
+    private Hand cardSpawner;
     public bool isDragging;
     public float offset;
 
@@ -68,7 +68,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void Start() 
     {
         cardPosition = GameObject.Find("Card Position");    
-        cardSpawner = GameObject.FindObjectOfType<CardSpawner>();
+        cardSpawner = GameObject.FindObjectOfType<Hand>();
     }
 
 

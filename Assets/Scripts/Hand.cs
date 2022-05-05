@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-public class CardSpawner : SerializedMonoBehaviour
+public class Hand : SerializedMonoBehaviour
 {
     [SerializeField] private WaveManager waveManager;
     public float arc;
@@ -17,6 +17,7 @@ public class CardSpawner : SerializedMonoBehaviour
     private float angle;
 
     public int handCount;
+    public int holdCount;
 
     private void Awake() {
         waveManager.onWaveStart += OnWaveStart;
@@ -34,9 +35,11 @@ public class CardSpawner : SerializedMonoBehaviour
 
     private void OnWaveStart(Wave newWave)
     {
-        foreach(CardDisplay card in cardList)
-            Destroy(card.gameObject);
-        cardList.Clear();
+        for(int i = cardList.Count-1; i >= holdCount; i--)
+        {
+            Destroy(cardList[i].gameObject);
+            cardList.RemoveAt(i);
+        }
     }
 
     private void OnWaveComplete(Wave wave)
