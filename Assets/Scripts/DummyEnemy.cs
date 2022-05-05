@@ -65,6 +65,15 @@ public class DummyEnemy : MonoBehaviour, IHealth
             Die();
     }
 
+    public void Heal(float amount)
+    {
+        float startHP = currentHP;
+        currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
+
+        if(currentHP != startHP)
+            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
+    }
+
     public void HealToFull()
     {
         float oldHP = currentHP;

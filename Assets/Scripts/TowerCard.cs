@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 
 [CreateAssetMenu(fileName = "New Tower Card", menuName = "Tower Card")]
 public class TowerCard : ScriptableObject, ICard
@@ -12,6 +7,7 @@ public class TowerCard : ScriptableObject, ICard
     [field:SerializeField] public string description {get; set;}
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
+    [field:SerializeField] public bool singleUse {get; set;}
 
     public bool TryPlay(Tile tile)
     {
