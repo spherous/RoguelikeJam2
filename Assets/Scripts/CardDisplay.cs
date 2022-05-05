@@ -40,6 +40,12 @@ public class CardDisplay : MonoBehaviour
     {
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
+            if(card.singleUse == true)
+            {
+            cardSpawner.TrashCard(this);
+            Destroy(gameObject);
+            return;
+            }
             cardSpawner.RemoveCard(this);
             Destroy(gameObject);
             return;
