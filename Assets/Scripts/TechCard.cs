@@ -1,32 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
+using System;
 
-[CreateAssetMenu(fileName = "New Tower Card", menuName = "Tower Card")]
-public class TowerCard : ScriptableObject, ICard
+[CreateAssetMenu(fileName = "New Tech Card", menuName = "Tech Card")]
+
+public class TechCard : ScriptableObject, ICard
 {
-    [SerializeField] private GameObject towerToSpawn;
+    public List<TechCardType> techCardTypes = new List<TechCardType>();
     [field:SerializeField] public string description {get; set;}
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
 
+
+
     public bool TryPlay(Tile tile)
     {
-        if(tile == null || !tile.isBuildable || towerToSpawn == null)
-            return false;
-
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
 
         if(threadPool != null && threadPool.Request(threadCost))
         {
-            ITower tower = Instantiate(towerToSpawn, tile.transform.position, Quaternion.identity, tile.transform).GetComponent<ITower>();
-            tile.SetTower(tower);
+            foreach(TechCardType techCardType in techCardTypes)
+            {
+                techCardType.GetEffect()?.Invoke();
+            }
             return true;
         }
         
         return false;
     }
+
 }

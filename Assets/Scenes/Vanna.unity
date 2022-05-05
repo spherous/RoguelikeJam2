@@ -666,17 +666,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476630967}
   m_CullTransparentMesh: 1
---- !u!114 &605179303 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5612116092862534198, guid: 311bbc1a0384dd544af696ce2591422f, type: 3}
-  m_PrefabInstance: {fileID: 1576730733}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &697364066
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,6 +724,9 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
     - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
+    - {fileID: 11400000, guid: de2a576d7de2a8641bce3f4ce9579962, type: 2}
+    - {fileID: 11400000, guid: c1d34bc9f437459418920a8cec16d7cf, type: 2}
+    - {fileID: 11400000, guid: f471a87fc9bbfb54b87dce3d6beb6372, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -745,13 +737,22 @@ MonoBehaviour:
       Data: 0|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 5
     - Name: 
       Entry: 10
       Data: 0
     - Name: 
       Entry: 10
       Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -765,6 +766,7 @@ MonoBehaviour:
   maxAngle: 8
   cardList: []
   handCount: 5
+  holdCount: 0
 --- !u!114 &697364069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1452,10 +1454,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1973052687}
-  maxSpeed: 5
-  timeToMaxSpeed: 0.333
-  pixelPerfectCamera: {fileID: 605179303}
-  zoomLevel: 1
+  cam: {fileID: 0}
+  maxSpeed: 8
+  timeToMaxSpeed: 0.233
 --- !u!114 &1973052690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,8 +1518,24 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 0bdd3b04-4679-45b3-9dce-98eab4296732
     m_ActionName: New action map/Horizontal[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1973052689}
+        m_TargetAssemblyTypeName: CameraMovementController, Assembly-CSharp
+        m_MethodName: MMB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6e1ac944-13a4-480d-9406-ce8f148bd8d1
+    m_ActionName: Keyboard/Mouse/MiddleClick[/Mouse/middleButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: New action map
+  m_DefaultActionMap: Keyboard/Mouse
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

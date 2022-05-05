@@ -15,13 +15,13 @@ public class CardDisplay : MonoBehaviour
     
     public bool isDragging;
     private GameObject cardPosition;
-    private CardSpawner cardSpawner;
+    private Hand cardSpawner;
     private MouseData mouseData;
 
     void Start()
     {
         mouseData = GameObject.FindObjectOfType<MouseData>();
-        cardSpawner = GameObject.FindObjectOfType<CardSpawner>();
+        cardSpawner = GameObject.FindObjectOfType<Hand>();
         cardPosition = GameObject.Find("Card Position");
         outline.color = Color.clear;
         playDistance = playDistance*playDistance;
