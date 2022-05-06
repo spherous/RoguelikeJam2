@@ -15,13 +15,13 @@ public class CardDisplay : MonoBehaviour
     
     public bool isDragging;
     private GameObject cardPosition;
-    private Hand cardSpawner;
+    private Hand hand;
     private MouseData mouseData;
 
     void Start()
     {
         mouseData = GameObject.FindObjectOfType<MouseData>();
-        cardSpawner = GameObject.FindObjectOfType<Hand>();
+        hand = GameObject.FindObjectOfType<Hand>();
         cardPosition = GameObject.Find("Card Position");
         outline.color = Color.clear;
         playDistance = playDistance*playDistance;
@@ -38,15 +38,32 @@ public class CardDisplay : MonoBehaviour
 
     public void PlayCard()
     {
+        if (card.GetType() == typeof(TowerCard))
+        {
+            TowerCard towerCard = (TowerCard)card;
+            BuildMode buildMode = GameObject.FindObjectOfType<BuildMode>();
+            buildMode.buildModeOn = true;
+            buildMode.card = card;
+
+            if(card.singleUse == true)
+            {
+                hand.TrashCard(this);
+                Destroy(gameObject);
+                return;
+            }
+            hand.RemoveCard(this);
+            Destroy(gameObject);
+            return;
+        }
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
             if(card.singleUse == true)
             {
-            cardSpawner.TrashCard(this);
-            Destroy(gameObject);
-            return;
+                hand.TrashCard(this);
+                Destroy(gameObject);
+                return;
             }
-            cardSpawner.RemoveCard(this);
+            hand.RemoveCard(this);
             Destroy(gameObject);
             return;
         }
@@ -54,8 +71,8 @@ public class CardDisplay : MonoBehaviour
     }
     public void ReturnCard()
     {
-        transform.SetSiblingIndex(cardSpawner.cardList.IndexOf(this));
-        cardSpawner.FanCards();
+        transform.SetSiblingIndex(hand.cardList.IndexOf(this));
+        hand.FanCards();
     }
     public void Outline(int colorState)
     {

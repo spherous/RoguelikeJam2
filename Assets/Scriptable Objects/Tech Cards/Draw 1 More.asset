@@ -16,3 +16,4 @@ MonoBehaviour:
   <description>k__BackingField: draw 1 more every wave
   <artwork>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   <threadCost>k__BackingField: 1
+  <singleUse>k__BackingField: 1
