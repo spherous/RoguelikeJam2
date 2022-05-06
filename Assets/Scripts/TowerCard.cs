@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tower Card", menuName = "Tower Card")]
 public class TowerCard : ScriptableObject, ICard
 {
-    [SerializeField] private GameObject towerToSpawn;
+    [SerializeField] public GameObject towerToSpawn;
     [field:SerializeField] public string description {get; set;}
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
