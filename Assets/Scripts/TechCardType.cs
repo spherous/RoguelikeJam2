@@ -16,8 +16,8 @@ public static class TechCardTypeExtensions
 {
     public static Action GetEffect(this TechCardType techCardType) => techCardType switch
     {
-        TechCardType.Draw2 => () => GameObject.FindObjectOfType<Hand>()?.SpawnCountCheck(2),
-        TechCardType.Draw3 => () => GameObject.FindObjectOfType<Hand>()?.SpawnCountCheck(3),
+        TechCardType.Draw2 => () => GameObject.FindObjectOfType<Hand>()?.SpawnCard(2),
+        TechCardType.Draw3 => () => GameObject.FindObjectOfType<Hand>()?.SpawnCard(3),
         TechCardType.Keep2 => Keep2,
         TechCardType.Draw1Less => () => ModifyDrawCount(-1),
         TechCardType.Draw1More => () => ModifyDrawCount(1),
