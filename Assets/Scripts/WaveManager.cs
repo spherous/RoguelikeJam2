@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -12,27 +11,25 @@ public class WaveManager : MonoBehaviour
     public OnWaveChange onWaveEnd;
 
     [SerializeField] private EnemySpawner spawner;
-    public List<Wave> waves = new List<Wave>();
+    [SerializeField] private LevelManager levelManager;
+
     [ReadOnly] public List<GameObject> enemies = new List<GameObject>();
 
     public float waveDelay = 30f;
     bool spawning = false;
 
-    private int currentWave = 0;
+    public int currentWave {get; private set;} = 0;
     private bool waitingForCompletion = false;
 
     private int spawnedCount = 0;
     private float timeForNextSpawn;
     private float timeForWaveStart;
 
-    private void Start()
-    {
-        timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
-    }
+    [ShowInInspector] private Level? currentLevel = null;
 
     private void Update()
     {
-        if(currentWave >= waves.Count)
+        if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count)
             return;
 
         if(waitingForCompletion && EnemiesRemaining() == 0)
@@ -41,6 +38,12 @@ public class WaveManager : MonoBehaviour
             StartWave();
         else if(!waitingForCompletion && spawning && Time.timeSinceLevelLoad >= timeForNextSpawn)
             Spawn();
+    }
+
+    public void LoadWaves(Level level)
+    {
+        currentLevel = level;
+        timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
     }
 
     private int EnemiesRemaining() => enemies.Where(enemy => enemy != null).Count();
@@ -55,18 +58,21 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
-        if(currentWave >= waves.Count)
+        int waveCountInLevel = currentLevel.Value.waves.Count;
+        if(currentWave >= waveCountInLevel)
             return;
-            
-        timeForNextSpawn = Time.timeSinceLevelLoad + waves[currentWave].spawnInterval;
 
-        if(currentWave >= waves.Count)
+        Wave wave = currentLevel.Value.waves[currentWave];
+        timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
+
+        if(currentWave >= waveCountInLevel)
         {
             // level complete
+            levelManager.CompleteLevel(currentLevel.Value);
             return;
         }
 
-        onWaveStart?.Invoke(waves[currentWave]);
+        onWaveStart?.Invoke(wave);
         spawning = true;
     }
 
@@ -75,24 +81,25 @@ public class WaveManager : MonoBehaviour
         enemies.Clear();
         waitingForCompletion = false;
         timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
-        onWaveComplete?.Invoke(waves[currentWave]);
+        onWaveComplete?.Invoke(currentLevel.Value.waves[currentWave]);
         currentWave++;
     }
 
     private void EndWave()
     {   
         spawning = false;
-        onWaveEnd?.Invoke(waves[currentWave]);
+        onWaveEnd?.Invoke(currentLevel.Value.waves[currentWave]);
         waitingForCompletion = true;
         spawnedCount = 0;
     }
 
     private void Spawn()
     {
-        timeForNextSpawn = Time.timeSinceLevelLoad + waves[currentWave].spawnInterval;
+        Wave wave = currentLevel.Value.waves[currentWave];
+        timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
         spawnedCount++;
         enemies.Add(spawner.Spawn());
-        if(spawnedCount >= waves[currentWave].enemyCount)
+        if(spawnedCount >= wave.enemyCount)
             EndWave();
     }
 }

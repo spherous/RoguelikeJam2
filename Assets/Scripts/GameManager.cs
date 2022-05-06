@@ -60,7 +60,12 @@ public class GameManager : MonoBehaviour, IHealth
 
     public void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneTransition transition = FindObjectOfType<SceneTransition>();
+        if(transition)
+            transition.Transition(currentSceneName);
+        else
+            SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
     }
 
     public void AddToScore(int amount)
