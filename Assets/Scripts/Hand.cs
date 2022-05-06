@@ -1,27 +1,20 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using Sirenix.Serialization;
 using UnityEngine;
 
-public class Hand : SerializedMonoBehaviour
+public class Hand : MonoBehaviour
 {
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private Deck deck;
-    public float arc;
     public GameObject cardPosition;
-    [OdinSerialize] public List<ICard> cards = new List<ICard>();
     public List<CardDisplay> cardList = new List<CardDisplay>();
-    private List<ICard> cardsDrawn = new List<ICard>();
     public CardDisplay cardPrefab;
-    public float maxAngle;
     
+    public float arc;
+    public float maxAngle;
     private float angle;
 
     public int handCount;
     public int holdCount;
-    public int LeftToSpawn;
 
     private void Awake() {
         waveManager.onWaveStart += OnWaveStart;
@@ -30,9 +23,9 @@ public class Hand : SerializedMonoBehaviour
 
     public void DiscardHand()
     {
-        for (int i = 0 ; i < cardList.Count; i++)
+        for(int i = 0 ; i < cardList.Count; i++)
         {
-            deck.moveToDiscard(cardList[i]);
+            deck.AddToDiscard(cardList[i].card);
             Destroy(cardList[i].gameObject);
         }
         cardList.Clear();
@@ -50,59 +43,38 @@ public class Hand : SerializedMonoBehaviour
     {
         for(int i = cardList.Count-1; i >= holdCount; i--)
         {
-            deck.moveToDiscard(cardList[i]);
+            deck.AddToDiscard(cardList[i].card);
             Destroy(cardList[i].gameObject);
             cardList.RemoveAt(i);
         }
+        FanCards();
     }
 
-    private void OnWaveComplete(Wave wave)
-    {
-        int numberToDraw = handCount - cardList.Count;
-        SpawnCountCheck(numberToDraw);
-    }
+    private void OnWaveComplete(Wave wave) => SpawnCard(handCount - cardList.Count);
 
-    void SpawnCard(int amount = 1)
+    public void SpawnCard(int amount = 1)
     {
-        for(int i = 0; i < amount; i++)
+        List<ICard> drawnCards = deck.Draw(amount);
+        for(int i = 0; i < drawnCards.Count; i++)
         {
             CardDisplay newCard = Instantiate(cardPrefab, cardPosition.transform.position, Quaternion.identity, cardPosition.transform);
-            ICard cardToDraw = deck.cardsInDeck.ChooseRandom();
-            newCard.SetCard(cardToDraw);
-            cardsDrawn.Add(cardToDraw);
+            newCard.SetCard(drawnCards[i]);
             cardList.Add(newCard);
-            deck.moveToHand(newCard);
         }
 
         FanCards();
     }
-    public void SpawnCountCheck(int spawnCount)
-    {
-        if (spawnCount > deck.cardsInDeck.Count + deck.cardsInDiscard.Count)
-        {
-            spawnCount = deck.cardsInDeck.Count + deck.cardsInDiscard.Count;
-            Debug.Log("not enough cards to draw");
-        }
-        if(deck.cardsInDeck.Count < spawnCount)
-        {
-            LeftToSpawn = spawnCount - deck.cardsInDeck.Count;
-            SpawnCard(deck.cardsInDeck.Count);
-            deck.returnDiscard();
-            SpawnCard(LeftToSpawn);
-            return;
-        }
-        SpawnCard(spawnCount);
-    }
+
     public void TrashCard(CardDisplay card)
     {
-        deck.moveToTrash(card);
+        deck.AddToTrash(card.card);
         cardList.Remove(card);
         FanCards();
     }
 
     public void RemoveCard(CardDisplay card)
     {
-        deck.moveToDiscard(card);
+        deck.AddToDiscard(card.card);
         cardList.Remove(card);
         FanCards();
     }
@@ -123,6 +95,4 @@ public class Hand : SerializedMonoBehaviour
             cardList[i].transform.up = desiredVec;
         }
     }
-
-
 }
