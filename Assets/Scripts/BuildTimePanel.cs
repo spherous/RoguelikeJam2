@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BuildTimePanel : MonoBehaviour
 {
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GroupFader fader;
     [SerializeField] private TextMeshProUGUI timeText;
@@ -16,12 +17,12 @@ public class BuildTimePanel : MonoBehaviour
     {
         waveManager.onWaveComplete += OnWaveComplete;
         waveManager.onWaveStart += OnWaveStart;
+        levelManager.onLevelStart += OnLevelStart;
     }
 
     private void Start()
     {
-        timeRemaining = waveManager.waveDelay;
-        ticking = true;
+        
     }
 
     private void OnDestroy()
@@ -41,6 +42,14 @@ public class BuildTimePanel : MonoBehaviour
 
     public void OnClick() => waveManager.StartEarly();
 
+    private void OnLevelStart(Level level)
+    {
+        if(!fader.visible)
+            fader.FadeIn();
+        timeRemaining = waveManager.waveDelay;
+        ticking = true;
+    }
+
     private void OnWaveStart(Wave wave)
     {
         ticking = false;
@@ -50,6 +59,7 @@ public class BuildTimePanel : MonoBehaviour
     {
         timeRemaining = waveManager.waveDelay;
         ticking = true;
-        fader.FadeIn();
+        if(!fader.visible)
+            fader.FadeIn();
     } 
 }

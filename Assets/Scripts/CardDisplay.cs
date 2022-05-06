@@ -18,6 +18,8 @@ public class CardDisplay : MonoBehaviour
     private Hand hand;
     private MouseData mouseData;
 
+    public bool disableAutoOutline = false;
+
     void Start()
     {
         mouseData = GameObject.FindObjectOfType<MouseData>();
@@ -97,6 +99,9 @@ public class CardDisplay : MonoBehaviour
     {
         Vector3 offset = cardPosition.transform.position - transform.position;
         float sqrLen = offset.sqrMagnitude;
+
+        if(disableAutoOutline)
+            return;
 
         if (sqrLen > playDistance && isDragging)
         {

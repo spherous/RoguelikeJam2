@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IHealth
 {
+    [SerializeField] private SceneTransition sceneTransitionPrefab;
     [SerializeField] private Transform screen;
     [SerializeField] private ThreadPool threadPoolPrefab;
     private ThreadPool threadPool;
@@ -64,6 +65,11 @@ public class GameManager : MonoBehaviour, IHealth
         SceneTransition transition = FindObjectOfType<SceneTransition>();
         if(transition)
             transition.Transition(currentSceneName);
+        else if(sceneTransitionPrefab != null)
+        {
+            transition = Instantiate(sceneTransitionPrefab, screen);
+            transition.Transition(currentSceneName);
+        }
         else
             SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
     }

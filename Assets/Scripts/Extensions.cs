@@ -28,6 +28,7 @@ public static class Extensions
         : seconds < 3600
             ? @"%m\:%s\.f"
             : @"%h\:%m\:%s\.f";
+
     public static T ChooseRandom<T>(this List<T> set) => set[UnityEngine.Random.Range(0, set.Count)];
     public static T ChooseRandom<T>(this T[] set) => set[UnityEngine.Random.Range(0, set.Length)];
 }

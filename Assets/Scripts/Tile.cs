@@ -30,4 +30,13 @@ public class Tile : MonoBehaviour
         TileType.Buildable => buildableSprite,
         _ => buildableSprite
     };
+    public void DestroyTower()
+    {
+        if(tower == null || ((MonoBehaviour)tower).gameObject == null)
+            return;
+
+        Debug.Log("Todo: Destroy towers");
+        
+        // Destroy(((MonoBehaviour)tower).gameObject);
+    }
 }

@@ -29,7 +29,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count)
+        if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count || levelManager.awaitingPlayerChoice)
             return;
 
         if(waitingForCompletion && EnemiesRemaining() == 0)
@@ -42,6 +42,8 @@ public class WaveManager : MonoBehaviour
 
     public void LoadWaves(Level level)
     {
+        currentWave = 0;
+        spawnedCount = 0;
         currentLevel = level;
         timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
     }
@@ -65,13 +67,6 @@ public class WaveManager : MonoBehaviour
         Wave wave = currentLevel.Value.waves[currentWave];
         timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
 
-        if(currentWave >= waveCountInLevel)
-        {
-            // level complete
-            levelManager.CompleteLevel(currentLevel.Value);
-            return;
-        }
-
         onWaveStart?.Invoke(wave);
         spawning = true;
     }
@@ -81,6 +76,15 @@ public class WaveManager : MonoBehaviour
         enemies.Clear();
         waitingForCompletion = false;
         timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
+
+        int waveCountInLevel = currentLevel.Value.waves.Count;
+        if(currentWave == waveCountInLevel - 1)
+        {
+            // level complete
+            levelManager.CompleteLevel(currentLevel.Value);
+            return;
+        }
+
         onWaveComplete?.Invoke(currentLevel.Value.waves[currentWave]);
         currentWave++;
     }

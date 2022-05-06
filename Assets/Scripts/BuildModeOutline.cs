@@ -18,4 +18,3 @@ public class BuildModeOutline : MonoBehaviour
     }
     public void Remove() => exists = false;
 }
- 

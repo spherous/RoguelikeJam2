@@ -14,18 +14,16 @@ public class BuildMode : MonoBehaviour
     void Awake() 
     {
         mouseData = FindObjectOfType<MouseData>();
-        if (mouseData == null)
-        {
+        if(mouseData == null)
             Debug.LogError("No MouseData found in scene");
-        }
     }
     void Update()
     {
-        if (buildModeOn)
+        if(buildModeOn)
         {
-            if (mouseData.hoveredTile != null)
+            if(mouseData.hoveredTile != null)
             {
-                if (mouseData.hoveredTile.type != TileType.Buildable)
+                if(mouseData.hoveredTile.type != TileType.Buildable)
                 {
                     buildModeOutline.Remove();
                     canBuild = false;
@@ -43,7 +41,7 @@ public class BuildMode : MonoBehaviour
     }
     public void Click(CallbackContext context)
     {
-        if (context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
+        if(context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
         {
             card.TryPlay(mouseData.hoveredTile);
             buildModeOn = false;
@@ -56,6 +54,4 @@ public class BuildMode : MonoBehaviour
         buildModeOutline.Remove();
         buildModeOn = false;
     }
-
-
 }

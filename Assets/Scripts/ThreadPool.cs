@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class ThreadPool : MonoBehaviour
 {
+    private LevelManager levelManager;
     private WaveManager waveManager;
     [SerializeField] private Thread threadPrefab;
     public List<Thread> threads {get; private set;} = new List<Thread>();
@@ -14,15 +15,22 @@ public class ThreadPool : MonoBehaviour
 
     private IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
 
-    private void Awake() {
+    private void Awake()
+    {
         waveManager = GameObject.FindObjectOfType<WaveManager>();
         waveManager.onWaveComplete += OnWaveComplete;
+        levelManager = GameManager.FindObjectOfType<LevelManager>();
+        levelManager.onLevelStart += OnLevelStart;
     }
 
-    private void OnWaveComplete(Wave endingWave)
+    private void OnDestroy()
     {
-        Refresh();
+        waveManager.onWaveComplete -= OnWaveComplete;
+        levelManager.onLevelStart -= OnLevelStart;
     }
+
+    private void OnLevelStart(Level level) => Refresh();
+    private void OnWaveComplete(Wave endingWave) => Refresh();
 
     public void IncreaseThreadCount(int amount)
     {
