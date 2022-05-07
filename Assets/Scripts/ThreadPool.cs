@@ -37,7 +37,7 @@ public class ThreadPool : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             Thread thread = Instantiate(threadPrefab, transform);
-            thread.Toggle(true);
+            // thread.Toggle(true);
             threads.Add(thread);
         }
     }
@@ -46,7 +46,7 @@ public class ThreadPool : MonoBehaviour
     public void Refresh()
     {
         foreach(Thread thread in threads)
-            thread.Toggle(true);
+            thread.TryRefresh();
     }
 
     [Button]
@@ -56,8 +56,19 @@ public class ThreadPool : MonoBehaviour
             return false;
 
         foreach(Thread thread in GetAvailableThreads().Take(amount))
-            thread.Toggle(false);
+            thread.Spend();
 
+        return true;
+    }
+
+    public bool RequestReserve(int amount, int duration, Action onComplete)
+    {
+        if(amount > availableThreads)
+            return false;
+        
+        foreach(Thread thread in GetAvailableThreads().Take(amount))
+            thread.Reserve(duration, onComplete);
+        
         return true;
     }
 }
