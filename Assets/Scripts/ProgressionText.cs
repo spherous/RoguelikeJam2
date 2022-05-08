@@ -42,6 +42,20 @@ public class ProgressionText : MonoBehaviour
         }
     }
 
+    public void ForceShow(string textToDisplay)
+    {
+        if(!fader.visible)
+            fader.FadeIn();
+        
+        hideAtTime = null;
+        text.text = textToDisplay;
+    }
+    public void Hide()
+    {
+        if(fader.visible)
+            fader.FadeOut();
+    }
+
     private void OnWaveComplete(Wave wave)
     {
         TryShow();

@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64b2972c5603fd04086574943c204869, type: 3}
-  m_Name: Keep2Draw1Less
+  m_Name: Keep 2 Draw 1 Less
   m_EditorClassIdentifier: 
   techCardTypes: 0100000002000000
-  <description>k__BackingField: Keep 2 Draw 1 Less
+  <description>k__BackingField: Keep 2 cards between waves, but draw 1 less each
+    wave.
+  <type>k__BackingField: 1
   <artwork>k__BackingField: {fileID: 21300000, guid: 41c347312297e4b149a2c7d4a1038bee, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 1

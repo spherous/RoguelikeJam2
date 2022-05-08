@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Draw 2
   m_EditorClassIdentifier: 
   techCardTypes: 00000000
-  <description>k__BackingField: Draw 2
+  <description>k__BackingField: Draw 2 cards
+  <type>k__BackingField: 1
   <artwork>k__BackingField: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
+  <threadUseDuration>k__BackingField: 0

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Draw 1 More
   m_EditorClassIdentifier: 
   techCardTypes: 03000000
-  <description>k__BackingField: draw 1 more every wave
+  <description>k__BackingField: Draw 1 more card every wave
+  <type>k__BackingField: 1
   <artwork>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 1

@@ -23,7 +23,7 @@ public class BuildMode : MonoBehaviour
         {
             if(mouseData.hoveredTile != null)
             {
-                if(mouseData.hoveredTile.type != TileType.Buildable)
+                if(!mouseData.hoveredTile.isBuildable)
                 {
                     buildModeOutline.Remove();
                     canBuild = false;

@@ -7,6 +7,7 @@ public class TechCard : ScriptableObject, ICard
 {
     public List<TechCardType> techCardTypes = new List<TechCardType>();
     [field:SerializeField] public string description {get; set;}
+    [field:SerializeField] public CardType type {get; set;} = CardType.Tech;
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
     [field:SerializeField] public bool singleUse {get; set;}

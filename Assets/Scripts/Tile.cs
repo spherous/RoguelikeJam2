@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public bool isBuildable => this.type == TileType.Buildable && tower == null;
+    [ShowInInspector, ReadOnly] public bool isBuildable => this.type == TileType.Buildable && tower == null;
     public ITower tower {get; private set;} = null;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -35,8 +35,9 @@ public class Tile : MonoBehaviour
         if(tower == null || ((MonoBehaviour)tower).gameObject == null)
             return;
 
-        Debug.Log("Todo: Destroy towers");
+        // Debug.Log("Todo: Destroy towers");
         
-        // Destroy(((MonoBehaviour)tower).gameObject);
+        Destroy(((MonoBehaviour)tower).gameObject);
+        tower = null;
     }
 }

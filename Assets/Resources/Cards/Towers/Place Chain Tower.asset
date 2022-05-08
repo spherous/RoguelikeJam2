@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b2972c5603fd04086574943c204869, type: 3}
-  m_Name: Heal
+  m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
+  m_Name: Place Chain Tower
   m_EditorClassIdentifier: 
-  techCardTypes: 06000000
-  <description>k__BackingField: Heal (1)
-  <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 21300000, guid: cce7aed0bebe98a479002f797429bd73, type: 3}
+  towerToSpawn: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
+  <description>k__BackingField: Places a chain tower
+  <type>k__BackingField: 0
+  <artwork>k__BackingField: {fileID: 21300000, guid: 70a0c13ef6ceb664da00ffb1bb1e9a7d, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadUseDuration>k__BackingField: 0
