@@ -11,6 +11,8 @@ public class TechCard : ScriptableObject, ICard
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
     [field:SerializeField] public bool singleUse {get; set;}
+    [field:SerializeField] public ThreadReserveType threadReserveType {get; set;} = ThreadReserveType.None;
+    [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
     [field:SerializeField] public int threadUseDuration {get; set;}
 
     public bool TryPlay(Tile tile)
@@ -18,9 +20,15 @@ public class TechCard : ScriptableObject, ICard
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
         if(threadPool == null)
             return false;
-        else if(threadUseDuration > 0)
+        else if(threadUseDuration > 0 || threadReserveType != ThreadReserveType.None)
             return TryReserveThreads(threadPool);
         return TrySpendThreads(threadPool);
+    }
+
+    private void PlayAllEffects()
+    {
+        foreach(TechCardType techCardType in techCardTypes)
+            techCardType.GetEffect()?.Invoke();
     }
 
     private bool TrySpendThreads(ThreadPool threadPool)
@@ -34,12 +42,6 @@ public class TechCard : ScriptableObject, ICard
         return false;
     }
 
-    private void PlayAllEffects()
-    {
-        foreach(TechCardType techCardType in techCardTypes)
-            techCardType.GetEffect()?.Invoke();
-    }
-
     private bool TryReserveThreads(ThreadPool threadPool) => 
-        threadPool.RequestReserve(threadCost, threadUseDuration, PlayAllEffects);
+        threadPool.RequestReserve(threadCost, threadUseDuration, PlayAllEffects, threadReserveType, threadEffectTriggerCondition);
 }

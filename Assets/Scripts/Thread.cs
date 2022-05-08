@@ -17,7 +17,8 @@ public class Thread : MonoBehaviour
     public Color activeColor;
     public Color inactiveColor;
     public int remainingCooldown;
-    private Action onComplete = null;
+    private Action Performance = null;
+    private ThreadEffectTriggerCondition triggerCondition;
 
     private void Awake()
     {
@@ -32,7 +33,7 @@ public class Thread : MonoBehaviour
     private void OnLevelComplete(Level level)
     {
         remainingCooldown = 0;
-        onComplete = null;
+        Performance = null;
         TryRefresh();
     }
 
@@ -47,16 +48,18 @@ public class Thread : MonoBehaviour
         return true;
     }
 
-    public bool Reserve(int duration, Action onComplete)
+    public bool Reserve(int duration, Action performance, ThreadEffectTriggerCondition triggerCondition = ThreadEffectTriggerCondition.OnComplete)
     {
         if(!available)
             return false;
 
+        this.Performance = performance;
         remainingCooldown = duration;
         text.text = $"{remainingCooldown}";
         available = false;
         image.color = activeColor;
         image.sprite = reservedSprite;
+        this.triggerCondition = triggerCondition;
         return true;
     }
 
@@ -70,6 +73,9 @@ public class Thread : MonoBehaviour
             return true;
         }
 
+        if(triggerCondition == ThreadEffectTriggerCondition.EveryTurn && Performance != null)
+            Performance();
+        
         remainingCooldown--;
         text.text = $"{remainingCooldown}";
         return false;
@@ -82,10 +88,10 @@ public class Thread : MonoBehaviour
         image.color = activeColor;
         text.text = "";
         
-        if(onComplete != null)
+        if(Performance != null)
         {
-            onComplete();
-            onComplete = null;
+            Performance();
+            Performance = null;
         }
     }
 }

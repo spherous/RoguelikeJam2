@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyEnemy : MonoBehaviour, IHealth
+public class DummyEnemy : MonoBehaviour, IHealth, IEnemy
 {
-
-    public float speed;
+    [field:SerializeField] public float speed {get; set;}
 
     EnemyList enemyList;
     ProcGen procGen;
@@ -33,17 +32,17 @@ public class DummyEnemy : MonoBehaviour, IHealth
     }
 
     private void OnDestroy() {
-        enemyList.enemyList.Remove(gameObject);
+        enemyList.enemyList.Remove(this);
     }
 
     void FixedUpdate()
     {
-        Vector3 vec = (procGen.path[pathingToNode].transform.position - transform.position);
+        Vector3 vec = procGen.path[pathingToNode].transform.position - transform.position;
         Vector3 dir = vec.normalized;
         transform.up = dir;
         rb.velocity = dir * speed;
         
-        if(vec.magnitude < 0.01f)
+        if(vec.magnitude < 0.05f)
             pathingToNode++;
 
         if(pathingToNode > procGen.path.Count - 1)
@@ -59,7 +58,7 @@ public class DummyEnemy : MonoBehaviour, IHealth
         currentHP = currentHP - damage >= 0 ? currentHP - damage : 0;
 
         if(currentHP != startHP)
-            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
+            onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
         
         if(currentHP == 0)
             Die();
@@ -71,19 +70,27 @@ public class DummyEnemy : MonoBehaviour, IHealth
         currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
 
         if(currentHP != startHP)
-            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
+            onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
     }
 
     public void HealToFull()
     {
         float oldHP = currentHP;
         currentHP = maxHP;
-        onHealthChanged?.Invoke(oldHP, currentHP, 1);
+        onHealthChanged?.Invoke(this, oldHP, currentHP, 1);
     }
 
     public void Die()
     {
         gameManager.AddToScore(1);
         Destroy(gameObject);
+    }
+    public void AdjustSpeed(float amount) => speed = Mathf.Clamp(amount + speed, 0, speed + Mathf.Abs(amount));
+    public void AdjustHealth(float percent) 
+    {
+        float startHP = currentHP;
+        maxHP *= 1 - percent;
+        currentHP *= 1 - percent;
+        onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
     }
 }

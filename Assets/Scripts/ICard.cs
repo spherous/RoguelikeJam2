@@ -10,6 +10,8 @@ public interface ICard
     Sprite artwork {get; set;}
     int threadCost {get; set;}
     int threadUseDuration {get; set;}
+    ThreadReserveType threadReserveType {get; set;}
+    ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;}
     bool singleUse {get; set;}
     bool TryPlay(Tile tile);   
 }

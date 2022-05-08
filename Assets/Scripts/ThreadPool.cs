@@ -5,6 +5,8 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
+public enum ThreadReserveType {None = 0, Single = 1, All = 2}
+public enum ThreadEffectTriggerCondition {EveryTurn = 0, OnComplete = 1}
 public class ThreadPool : MonoBehaviour
 {
     private LevelManager levelManager;
@@ -61,13 +63,20 @@ public class ThreadPool : MonoBehaviour
         return true;
     }
 
-    public bool RequestReserve(int amount, int duration, Action onComplete)
+    public bool RequestReserve(int amount, int duration, Action onComplete, ThreadReserveType reserveType = ThreadReserveType.Single, ThreadEffectTriggerCondition triggerCondition = ThreadEffectTriggerCondition.OnComplete)
     {
         if(amount > availableThreads)
             return false;
+        else if(reserveType == ThreadReserveType.None)
+            return Request(amount);
         
-        foreach(Thread thread in GetAvailableThreads().Take(amount))
-            thread.Reserve(duration, onComplete);
+        IEnumerable<Thread> threadsToReserve = GetAvailableThreads().Take(amount);
+        for(int i = 0; i < amount; i++)
+        {
+            Thread thread = threadsToReserve.ElementAt(i);
+            Action onCompleteModified = (reserveType == ThreadReserveType.Single && i == 0) || reserveType == ThreadReserveType.All ? onComplete : null;
+            thread.Reserve(duration, onCompleteModified, triggerCondition);
+        }
         
         return true;
     }

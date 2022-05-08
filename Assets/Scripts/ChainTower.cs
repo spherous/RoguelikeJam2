@@ -41,7 +41,7 @@ public class ChainTower : MonoBehaviour, ITower
     {
         if(enemyList.enemyList.Count > 0)
         {
-            target = enemyList.enemyList[0].transform;
+            target = ((MonoBehaviour)enemyList.enemyList[0]).transform;
             followTargetRotate.targetTransform = target;
             return true;
         }

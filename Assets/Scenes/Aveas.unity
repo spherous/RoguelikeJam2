@@ -1549,7 +1549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae24fa22d052ce438eca9a8cbc34978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyList: []
 --- !u!4 &1304724711
 Transform:
   m_ObjectHideFlags: 0
@@ -1597,6 +1596,8 @@ MonoBehaviour:
   levelManager: {fileID: 1304724716}
   enemies: []
   waveDelay: 30
+  speedModifier: 0
+  healthModifier: 0
 --- !u!114 &1304724716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1800,7 +1801,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
-    - {fileID: 11400000, guid: c1d34bc9f437459418920a8cec16d7cf, type: 2}
+    - {fileID: 11400000, guid: ff43e23b8c8d41a45a1510574b4bae63, type: 2}
+    - {fileID: 11400000, guid: 25854bc92fc3e9941a95f6f9d416e201, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1853,10 +1855,10 @@ MonoBehaviour:
       Data: 0
     - Name: 
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: 
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 13
       Data: 

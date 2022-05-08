@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -24,6 +25,8 @@ public class WaveManager : MonoBehaviour
     private int spawnedCount = 0;
     private float timeForNextSpawn;
     private float timeForWaveStart;
+    public float speedModifier = 0f;
+    public float healthModifier = 0f;
 
     [ShowInInspector] private Level? currentLevel = null;
 
@@ -66,7 +69,6 @@ public class WaveManager : MonoBehaviour
 
         Wave wave = currentLevel.Value.waves[currentWave];
         timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
-
         onWaveStart?.Invoke(wave);
         spawning = true;
     }
@@ -76,6 +78,8 @@ public class WaveManager : MonoBehaviour
         enemies.Clear();
         waitingForCompletion = false;
         timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
+        speedModifier = 0f;
+        healthModifier = 0f;
 
         int waveCountInLevel = currentLevel.Value.waves.Count;
         if(currentWave == waveCountInLevel - 1)
@@ -102,8 +106,44 @@ public class WaveManager : MonoBehaviour
         Wave wave = currentLevel.Value.waves[currentWave];
         timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
         spawnedCount++;
-        enemies.Add(spawner.Spawn());
+        
+        IEnemy newEnemy = spawner.Spawn();
+        enemies.Add(((MonoBehaviour)newEnemy).gameObject);
+
+        newEnemy.AdjustSpeed(speedModifier);
+        newEnemy.AdjustHealth(healthModifier);
+        newEnemy.onHealthChanged += EnemyHealthChanged;
+        
         if(spawnedCount >= wave.enemyCount)
             EndWave();
+    }
+
+    private void EnemyHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
+    {
+        if(newHP <= 0)
+        {
+            enemies.Remove(((MonoBehaviour)changed).gameObject);
+            changed.onHealthChanged -= EnemyHealthChanged;
+        }
+    }
+
+    public void AdjustSpeed(float amount)
+    {
+        speedModifier += amount;
+        foreach(GameObject enemyGO in enemies)
+        {
+            if(enemyGO.TryGetComponent<IEnemy>(out IEnemy e))
+                e.AdjustSpeed(amount);
+        }
+    }
+
+    public void AdjustHealth(float percent)
+    {
+        healthModifier += percent;
+        foreach(GameObject enemyGO in enemies)
+        {
+            if(enemyGO.TryGetComponent<IEnemy>(out IEnemy e))
+                e.AdjustHealth(percent);
+        }
     }
 }
