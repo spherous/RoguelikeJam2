@@ -30,14 +30,14 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [Button]
-    public GameObject Spawn()
+    public IEnemy Spawn()
     {
         if(spawnOverTime)
             spawnTime = Time.timeSinceLevelLoad + spawnRate;
 
         lastUsedSpawnPoint = (lastUsedSpawnPoint + 1).Mod(procGen.spawnPoints.Count);
         Tile spawnPoint = procGen.spawnPoints[lastUsedSpawnPoint];
-        GameObject newSpawn = Instantiate(enemy, spawnPoint.transform.position, transform.rotation);
+        IEnemy newSpawn = Instantiate(enemy, spawnPoint.transform.position, transform.rotation).GetComponent<IEnemy>();
         enemyList.enemyList.Add(newSpawn);
         return newSpawn;
     }

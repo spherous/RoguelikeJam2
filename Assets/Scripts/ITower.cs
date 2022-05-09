@@ -4,5 +4,9 @@ using UnityEngine;
 
 public interface ITower
 {
-    
+    Index location {get; set;}
+    float range {get; set;}
+
+    void Disable();
+    void Enable();
 }

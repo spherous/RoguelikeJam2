@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private Deck deck;
     [SerializeField] private BuildMode buildMode;
@@ -16,10 +18,23 @@ public class Hand : MonoBehaviour
 
     public int handCount;
     public int holdCount;
+    private int defaultHandCount;
+    private int defaultHoldCount;
 
-    private void Awake() {
+    private void Awake()
+    {
+        defaultHandCount = handCount;
+        defaultHoldCount = holdCount;
         waveManager.onWaveStart += OnWaveStart;
-        waveManager.onWaveComplete += OnWaveComplete;    
+        waveManager.onWaveComplete += OnWaveComplete; 
+        levelManager.onLevelStart += OnLevelStart;   
+    }
+
+    private void OnLevelStart(Level level)
+    {
+        handCount = defaultHandCount;
+        holdCount = defaultHoldCount;
+        SpawnCard(handCount - cardList.Count);
     }
 
     public void DiscardHand()
@@ -32,12 +47,11 @@ public class Hand : MonoBehaviour
         cardList.Clear();
     }
 
-    private void Start() => SpawnCard(handCount);
-
     private void OnDestroy()
     {
         waveManager.onWaveStart -= OnWaveStart;
-        waveManager.onWaveComplete -= OnWaveComplete;            
+        waveManager.onWaveComplete -= OnWaveComplete;
+        levelManager.onLevelStart -= OnLevelStart;           
     }
 
     private void OnWaveStart(Wave newWave)

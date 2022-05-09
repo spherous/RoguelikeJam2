@@ -96,7 +96,7 @@ public class CameraMovementController : MonoBehaviour
     public void SetVelocityToZero() => rb.velocity = Vector2.zero;
 
     void CameraZoom() => 
-        pixelPerfectCamera.assetsPPU = Mathf.Clamp(pixelPerfectCamera.assetsPPU + (int)Mouse.current.scroll.ReadValue().y / 60, 32, 128);
+        pixelPerfectCamera.assetsPPU = Mathf.Clamp(pixelPerfectCamera.assetsPPU + (int)Mouse.current.scroll.ReadValue().y / 60, 32, 160);
 
     
     public void MMB(CallbackContext context)

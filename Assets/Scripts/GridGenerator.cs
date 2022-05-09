@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,17 @@ public class GridGenerator : MonoBehaviour
                 grid[row].Add(tile);
             }
         }
+    }
+
+    public List<Tile> TryGetTilesWithOffset(Index location, List<Index> rangeOffsets)
+    {
+        List<Tile> tiles = new List<Tile>();
+        foreach(Index offset in rangeOffsets)
+        {
+            TryGetTile(location + offset, out Tile tile); // We want to perserve order from the incoming offsets, so let's add the null to the list
+            tiles.Add(tile);
+        }
+        return tiles;
     }
 
     public Path GetPath(Index start, Index end) => 

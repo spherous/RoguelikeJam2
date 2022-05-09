@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IHealth
 {
+    [SerializeField] private SceneTransition sceneTransitionPrefab;
     [SerializeField] private Transform screen;
     [SerializeField] private ThreadPool threadPoolPrefab;
     private ThreadPool threadPool;
@@ -36,14 +37,14 @@ public class GameManager : MonoBehaviour, IHealth
         currentHP = Mathf.Clamp(currentHP + amount, 0, maxHP);
 
         if(currentHP != startHP)
-            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
+            onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
     }
 
     public void HealToFull()
     {
         float oldHP = currentHP;
         currentHP = maxHP;
-        onHealthChanged?.Invoke(oldHP, currentHP, 1);
+        onHealthChanged?.Invoke(this, oldHP, currentHP, 1);
     }
 
     public void TakeDamage(float damage)
@@ -52,15 +53,33 @@ public class GameManager : MonoBehaviour, IHealth
         currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
 
         if(currentHP != startHP)
-            onHealthChanged?.Invoke(startHP, currentHP, currentHP / maxHP);
+            onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
         
         if(currentHP == 0)
             Die();
     }
 
+    public void AdjustHealth(float percent) 
+    {
+        float startHP = currentHP;
+        maxHP *= 1 - percent;
+        currentHP *= 1 - percent;
+        onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
+    } 
+
     public void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneTransition transition = FindObjectOfType<SceneTransition>();
+        if(transition)
+            transition.Transition(currentSceneName);
+        else if(sceneTransitionPrefab != null)
+        {
+            transition = Instantiate(sceneTransitionPrefab, screen);
+            transition.Transition(currentSceneName);
+        }
+        else
+            SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
     }
 
     public void AddToScore(int amount)

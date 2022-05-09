@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,22 +7,41 @@ public class TechCard : ScriptableObject, ICard
 {
     public List<TechCardType> techCardTypes = new List<TechCardType>();
     [field:SerializeField] public string description {get; set;}
+    [field:SerializeField] public CardType type {get; set;} = CardType.Tech;
     [field:SerializeField] public Sprite artwork {get; set;}
     [field:SerializeField] public int threadCost {get; set;}
     [field:SerializeField] public bool singleUse {get; set;}
+    [field:SerializeField] public ThreadReserveType threadReserveType {get; set;} = ThreadReserveType.None;
+    [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
+    [field:SerializeField] public int threadUseDuration {get; set;}
 
     public bool TryPlay(Tile tile)
     {
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
+        if(threadPool == null)
+            return false;
+        else if(threadUseDuration > 0 || threadReserveType != ThreadReserveType.None)
+            return TryReserveThreads(threadPool);
+        return TrySpendThreads(threadPool);
+    }
 
-        if(threadPool != null && threadPool.Request(threadCost))
+    private void PlayAllEffects()
+    {
+        foreach(TechCardType techCardType in techCardTypes)
+            techCardType.GetEffect()?.Invoke();
+    }
+
+    private bool TrySpendThreads(ThreadPool threadPool)
+    {
+        if(threadPool.Request(threadCost))
         {
-            foreach(TechCardType techCardType in techCardTypes)
-                techCardType.GetEffect()?.Invoke();
-
+            PlayAllEffects();
             return true;
         }
-        
+
         return false;
     }
+
+    private bool TryReserveThreads(ThreadPool threadPool) => 
+        threadPool.RequestReserve(threadCost, threadUseDuration, PlayAllEffects, threadReserveType, threadEffectTriggerCondition);
 }

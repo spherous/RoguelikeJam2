@@ -2,7 +2,7 @@ TO DO
 
 Place tower mode
 Tower range indicators
-Deck & RecycleBin
+X Deck & RecycleBin
 
 Towers
     web tower
@@ -32,8 +32,9 @@ Card effects
     Slightly increase all web effects (sustained for a few waves)
     Greatly increase 1 web's effects (1 wave)
     Moderately increased effects of all webs attached to tower (sustained for a few waves)
-    Next wave moves slightly slower (1 wave)
-    Next wave moves moderately faster but has less hp (1 wave)
+    X Greatly slow next wave (1 wave)
+    X Slightly slow next 2 wave (sustained)
+    X Next wave moves moderately faster but has less hp (1 wave)
     Next wave pauses between steps (1 wave)
     Ignite next wave (1 wave)
     Increase chain count (sustained for a few waves)
@@ -70,9 +71,12 @@ Font
 win/lose screen
 
 levels
-    pick a new card after each level
+    X pick a new card after each level
     Refresh single use cards
 
+Bugs
+    Trying to build a tower on a tile that had a tower the previous level eats the card and doesn't spawn a tower.
+    If the player doesn't have enough threads to play a tower card, it shouldn't open build mode and eat the card.
 
 X Camera panning
     x wasd

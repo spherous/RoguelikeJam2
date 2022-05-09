@@ -26,7 +26,7 @@ public class ScreenShake : MonoBehaviour
         gameManager.onHealthChanged -= OnHealthChanged;
     }
 
-    private void OnHealthChanged(float oldHP, float newHP, float percent)
+    private void OnHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
     {
         if(newHP < oldHP)
         {
