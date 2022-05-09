@@ -1,3 +1,4 @@
+[System.Serializable]
 public struct Index
 {
     public int row;

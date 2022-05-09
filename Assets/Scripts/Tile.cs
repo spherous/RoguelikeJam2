@@ -15,7 +15,11 @@ public class Tile : MonoBehaviour
     [SerializeField] private Sprite pathSprite;
     [SerializeField] private Sprite buildableSprite;
 
-    public void SetTower(ITower toSet) => tower = toSet;
+    public void SetTower(ITower toSet)
+    {
+        toSet.location = index;
+        tower = toSet;
+    }
     public void SetIndex(Index index) => this.index = index;
     public void SetType(TileType type) 
     {

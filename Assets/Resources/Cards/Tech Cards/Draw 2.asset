@@ -15,7 +15,9 @@ MonoBehaviour:
   techCardTypes: 00000000
   <description>k__BackingField: Draw 2 cards
   <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 1b6e2b9352e26294caf9540047f29f26, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
+  <threadReserveType>k__BackingField: 0
+  <threadEffectTriggerCondition>k__BackingField: 1
   <threadUseDuration>k__BackingField: 0

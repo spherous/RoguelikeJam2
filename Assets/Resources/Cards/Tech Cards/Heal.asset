@@ -15,7 +15,9 @@ MonoBehaviour:
   techCardTypes: 06000000
   <description>k__BackingField: Heal (1)
   <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 21300000, guid: cce7aed0bebe98a479002f797429bd73, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 647071e0c4aaf8d429d6b443889fc7ac, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
+  <threadReserveType>k__BackingField: 0
+  <threadEffectTriggerCondition>k__BackingField: 1
   <threadUseDuration>k__BackingField: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   debuffTypes: 0200000003000000
   <description>k__BackingField: Reduce enemy health, but increase their speed
   <type>k__BackingField: 3
-  <artwork>k__BackingField: {fileID: 21300000, guid: cdbba932f26858e4ab6c6ac0520d41b9, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 442664f7ccc159943b5c19854aa009ad, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

@@ -1595,7 +1595,7 @@ MonoBehaviour:
   spawner: {fileID: 279969651}
   levelManager: {fileID: 1304724716}
   enemies: []
-  waveDelay: 30
+  waveDelay: 50
   speedModifier: 0
   healthModifier: 0
 --- !u!114 &1304724716
@@ -1800,9 +1800,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
-    - {fileID: 11400000, guid: ff43e23b8c8d41a45a1510574b4bae63, type: 2}
-    - {fileID: 11400000, guid: 25854bc92fc3e9941a95f6f9d416e201, type: 2}
+    - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1849,16 +1847,13 @@ MonoBehaviour:
       Data: 3|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 10
       Data: 0
     - Name: 
       Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
+      Data: 0
     - Name: 
       Entry: 13
       Data: 

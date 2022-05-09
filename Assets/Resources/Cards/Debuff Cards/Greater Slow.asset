@@ -15,7 +15,7 @@ MonoBehaviour:
   debuffTypes: 01000000010000000100000001000000
   <description>k__BackingField: Greatly Slows the next wave
   <type>k__BackingField: 3
-  <artwork>k__BackingField: {fileID: 21300000, guid: 5193e8fdb300fb34fac204c0f79f95fc, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 565dcfd5db5777b4faf02b2bc3d2fe4a, type: 3}
   <threadCost>k__BackingField: 2
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
