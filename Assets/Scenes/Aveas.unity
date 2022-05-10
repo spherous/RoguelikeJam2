@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1928439739}
     m_Modifications:
+    - target: {fileID: 557469571644081947, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003567142920034127, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595043306832852310, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4595043306962243520, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -222,6 +234,14 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4595043306962243535, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+    - target: {fileID: 4595043307016304124, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423946852919143902, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
 --- !u!224 &168610647 stripped
@@ -1807,6 +1827,10 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
+    - {fileID: 11400000, guid: 26d3793d392af6040a3e01f04163a337, type: 2}
+    - {fileID: 11400000, guid: 3b13e468f6b34f34d8ed5be9c4a36e24, type: 2}
+    - {fileID: 11400000, guid: 82e7c66105088994999a578df44ed58c, type: 2}
+    - {fileID: 11400000, guid: de2a576d7de2a8641bce3f4ce9579962, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1853,16 +1877,22 @@ MonoBehaviour:
       Data: 3|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
+      Data: 5
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 10
       Data: 3
     - Name: 
       Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 0
+      Data: 4
     - Name: 
       Entry: 13
       Data: 

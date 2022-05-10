@@ -19,7 +19,6 @@ Web effects
     Damage amp while in it
 
 Card effects
-    Place web tower (instant)
     X Place chain tower (instant)
     Place aoe burst tower (instant)
     place long range snipe tower (instant)
