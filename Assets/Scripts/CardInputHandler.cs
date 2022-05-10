@@ -8,6 +8,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] private CardDisplay cardDisplay;
     private CardDisplay zoomedCard;
     private GameObject cardPosition;
+    private BuildMode buildMode;
     private Hand cardSpawner;
     public bool isDragging;
     public float offset;
@@ -21,6 +22,8 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (buildMode.buildModeOn)
+            return;
         isDragging = true;
         cardDisplay.isDragging = true;
         cardDisplay.transform.SetSiblingIndex(cardPosition.transform.childCount-1);
@@ -45,6 +48,8 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (buildMode.buildModeOn)
+            return;
         cardDisplay.transform.position = eventData.position;
         cardDisplay.transform.rotation = Quaternion.identity;
     }
@@ -67,6 +72,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     void Start() 
     {
+        buildMode = GameObject.FindObjectOfType<BuildMode>();
         cardPosition = GameObject.Find("Card Position");    
         cardSpawner = GameObject.FindObjectOfType<Hand>();
     }

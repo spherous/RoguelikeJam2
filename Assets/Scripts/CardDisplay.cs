@@ -23,6 +23,7 @@ public class CardDisplay : SerializedMonoBehaviour
     [SerializeField] private Image frame;
     [SerializeField] private Image outline;
     [SerializeField] private float playDistance;
+    public Vector3 scale;
     
     public bool isDragging;
     private GameObject cardPosition;
@@ -38,6 +39,7 @@ public class CardDisplay : SerializedMonoBehaviour
         cardPosition = GameObject.Find("Card Position");
         outline.color = Color.clear;
         playDistance = playDistance*playDistance;
+        scale = transform.localScale;
     }
 
     public void SetCard(ICard newCard)
@@ -62,16 +64,16 @@ public class CardDisplay : SerializedMonoBehaviour
 
     public void PlayCard()
     {
-        if(card.GetType() == typeof(TowerCard))
+        BuildMode buildMode = GameObject.FindObjectOfType<BuildMode>();
+        if(card.GetType() == typeof(TowerCard) && !buildMode.buildModeOn)
         {
             TowerCard towerCard = (TowerCard)card;
-            BuildMode buildMode = GameObject.FindObjectOfType<BuildMode>();
             buildMode.buildModeOn = true;
             buildMode.card = card;
-            RemoveFromHand();
+            transform.localScale = Vector3.zero;
+            buildMode.cardDisplay = this;
             return;
         }
-
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
             RemoveFromHand();
@@ -80,7 +82,7 @@ public class CardDisplay : SerializedMonoBehaviour
         ReturnCard();
     }
 
-    private void RemoveFromHand()
+    public void RemoveFromHand()
     {
         if(card.singleUse == true)
         {
@@ -95,6 +97,7 @@ public class CardDisplay : SerializedMonoBehaviour
     public void ReturnCard()
     {
         transform.SetSiblingIndex(hand.cardList.IndexOf(this));
+        transform.localScale = scale;
         hand.FanCards();
     }
 
