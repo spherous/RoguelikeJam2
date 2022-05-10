@@ -14,8 +14,6 @@ public class Thread : MonoBehaviour
     public Sprite availabeSprite;
     public Sprite cooldownSprite;
     public Sprite reservedSprite;
-    public Color activeColor;
-    public Color inactiveColor;
     public int remainingCooldown;
     private Action Performance = null;
     private ThreadEffectTriggerCondition triggerCondition;
@@ -44,7 +42,6 @@ public class Thread : MonoBehaviour
 
         available = false;
         image.sprite = cooldownSprite;
-        image.color = inactiveColor;
         return true;
     }
 
@@ -57,7 +54,6 @@ public class Thread : MonoBehaviour
         remainingCooldown = duration;
         text.text = $"{remainingCooldown}";
         available = false;
-        image.color = activeColor;
         image.sprite = reservedSprite;
         this.triggerCondition = triggerCondition;
         return true;
@@ -85,7 +81,6 @@ public class Thread : MonoBehaviour
     {
         available = true;
         image.sprite = availabeSprite;
-        image.color = activeColor;
         text.text = "";
         
         if(Performance != null)

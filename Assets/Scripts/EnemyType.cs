@@ -1,0 +1,1 @@
+public enum EnemyType {BlackKnight = 0, DDoSBug = 1, TrojanHorse = 2, NetWorm = 3, Hijacker = 4}

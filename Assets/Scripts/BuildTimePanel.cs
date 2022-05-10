@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Playables;
+using UnityEngine.UI;
 
-public class BuildTimePanel : MonoBehaviour
+public class BuildTimePanel : MonoBehaviour, IPointerDownHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GroupFader fader;
     [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private PlayableDirector director;
+    [SerializeField] private Image buttonRenderer;
+    [SerializeField] private Sprite clickedSprite;
     bool ticking = false;
     float timeRemaining = 0;
 
@@ -18,11 +24,6 @@ public class BuildTimePanel : MonoBehaviour
         waveManager.onWaveComplete += OnWaveComplete;
         waveManager.onWaveStart += OnWaveStart;
         levelManager.onLevelStart += OnLevelStart;
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void OnDestroy()
@@ -40,18 +41,18 @@ public class BuildTimePanel : MonoBehaviour
         }    
     }
 
-    public void OnClick() => waveManager.StartEarly();
-
     private void OnLevelStart(Level level)
     {
         if(!fader.visible)
             fader.FadeIn();
+        director.Play();
         timeRemaining = waveManager.waveDelay;
         ticking = true;
     }
 
     private void OnWaveStart(Wave wave)
     {
+        director.Stop();
         ticking = false;
         fader.FadeOut();  
     } 
@@ -61,5 +62,22 @@ public class BuildTimePanel : MonoBehaviour
         ticking = true;
         if(!fader.visible)
             fader.FadeIn();
-    } 
+        director.Play();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        director.Stop();
+        buttonRenderer.sprite = clickedSprite;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        waveManager.StartEarly();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        director.Play();
+    }
 }

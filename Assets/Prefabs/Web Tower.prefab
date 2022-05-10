@@ -260,6 +260,7 @@ MonoBehaviour:
   circleRenderer: {fileID: 8701302064905155056}
   disabledCircle: {fileID: 2098047881311905184, guid: 7d1d6508df20b7d48ae47379b806dbf1, type: 3}
   enabledCircle: {fileID: 3745178207519648546, guid: 7d1d6508df20b7d48ae47379b806dbf1, type: 3}
+  <damage>k__BackingField: 10
 --- !u!1 &8001532138707484376
 GameObject:
   m_ObjectHideFlags: 0

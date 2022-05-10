@@ -6,15 +6,16 @@ using UnityEngine;
 
 public class ChainTower : MonoBehaviour, ITower
 {
-    EnemyList enemyList;
+    EnemySpawner enemySpawner;
     [SerializeField] FollowTargetRotate followTargetRotate;
     [SerializeField] Transform firePoint;
     [SerializeField] SpriteRenderer fisty;
+    WaveManager waveManager;
+    private float orgAttackTime;
     public float attackTime;
     private float nextAttackTime;
     private bool timeToAttack => Time.timeSinceLevelLoad >= nextAttackTime;
     public Transform target;
-    public float damage;
     public int chainCount;
 
     [SerializeField] SpriteRenderer baseRenderer;
@@ -37,12 +38,39 @@ public class ChainTower : MonoBehaviour, ITower
     float fistyReloadTime;
 
     [field:SerializeField] public float range {get; set;}
+    private float orgRange;
+
+    [field:SerializeField] public float damage {get; set;}
+    private float orgDamage;
     public Index location {get; set;}
+
+    private void Awake()
+    {
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
+        orgDamage = damage;
+        orgRange = range;
+        orgAttackTime = attackTime;
+    }
 
     void Start()
     {
         fisty.enabled = true;
-        enemyList = GameObject.FindObjectOfType<EnemyList>();
+        enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
+        if(waveManager != null)
+            waveManager.onWaveComplete += OnWaveComplete;
+    }
+
+    private void OnDestroy()
+    {
+        if(waveManager != null)
+            waveManager.onWaveComplete -= OnWaveComplete;    
+    }
+
+    private void OnWaveComplete(Wave wave)
+    {
+        damage = orgDamage;
+        range = orgRange;
+        attackTime = orgAttackTime;
     }
 
     void Update()
@@ -68,7 +96,7 @@ public class ChainTower : MonoBehaviour, ITower
 
     private bool TryAquireTarget()
     {
-        var validEnemies = enemyList.enemyList.Where(enemy => (((MonoBehaviour)enemy).transform.position - transform.position).sqrMagnitude <= range * range).ToList();
+        var validEnemies = enemySpawner.enemyList.Where(enemy => (((MonoBehaviour)enemy).transform.position - transform.position).sqrMagnitude <= range * range).ToList();
         if(validEnemies.Count > 0)
         {
             target = ((MonoBehaviour)validEnemies[0]).transform;
@@ -93,4 +121,7 @@ public class ChainTower : MonoBehaviour, ITower
         rotationPointRenderer.sprite = enabledRotatePoint;
     }
 
+    public void AdjustRange(float percent) => this.range = range * (1 + percent);
+    public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
+    public void AdjustAttackSpeed(float percent) => this.attackTime = attackTime * (1 - percent);
 }

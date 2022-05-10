@@ -94,8 +94,6 @@ MonoBehaviour:
   availabeSprite: {fileID: 21300000, guid: 5193e8fdb300fb34fac204c0f79f95fc, type: 3}
   cooldownSprite: {fileID: 21300000, guid: e31b36ad163d50547b18a7a13ace6e35, type: 3}
   reservedSprite: {fileID: 21300000, guid: cdbba932f26858e4ab6c6ac0520d41b9, type: 3}
-  activeColor: {r: 1, g: 1, b: 1, a: 1}
-  inactiveColor: {r: 0.5294118, g: 0.5294118, b: 0.5294118, a: 1}
   remainingCooldown: 0
 --- !u!1 &7961691705544236752
 GameObject:
@@ -164,8 +162,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '#'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 398ebcf344e2ac74b8d73486cb44e791, type: 2}
+  m_sharedMaterial: {fileID: 4301476029852633672, guid: 398ebcf344e2ac74b8d73486cb44e791, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -189,8 +187,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
-  m_Name: Place Web Tower
+  m_Name: Chain Tower
   m_EditorClassIdentifier: 
-  towerToSpawn: {fileID: 7311823248126921936, guid: 76b4b535dc8f0be4fb6aa538a75640f5, type: 3}
-  <description>k__BackingField: Places a web tower
+  towerToSpawn: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
+  <description>k__BackingField: Places a chain tower
   <type>k__BackingField: 0
-  <artwork>k__BackingField: {fileID: 21300000, guid: 37d246492ed0e7648b4f6ba9a1764690, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 7ac9515fdbfe99e44a8aebdc0b90a8a7, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
