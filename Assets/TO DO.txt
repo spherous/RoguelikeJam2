@@ -5,8 +5,8 @@ Tower range indicators
 X Deck & RecycleBin
 
 Towers
-    web tower
-    chain tower
+    X web tower
+    X chain tower
     aoe burst
     long range snipe (can't hit nearby)
 
@@ -72,7 +72,9 @@ win/lose screen
 
 levels
     X pick a new card after each level
-    Refresh single use cards
+    X Refresh single use cards
+    X Add a thread for the 1st 2 waves of a level
+    generate a new level
 
 Bugs
     Trying to build a tower on a tile that had a tower the previous level eats the card and doesn't spawn a tower.

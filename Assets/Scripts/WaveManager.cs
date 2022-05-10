@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private LevelManager levelManager;
+    private ThreadPool threadPool;
 
     [ReadOnly] public List<GameObject> enemies = new List<GameObject>();
 
@@ -29,6 +30,8 @@ public class WaveManager : MonoBehaviour
     public float healthModifier = 0f;
 
     [ShowInInspector] private Level? currentLevel = null;
+
+    private void Start() => threadPool = GameObject.FindObjectOfType<ThreadPool>();
 
     private void Update()
     {
@@ -89,6 +92,8 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+        if(currentLevel.Value.waves[currentWave].addsThread && threadPool != null)
+            threadPool.IncreaseThreadCount(1);
         onWaveComplete?.Invoke(currentLevel.Value.waves[currentWave]);
         currentWave++;
     }

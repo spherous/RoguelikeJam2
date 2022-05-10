@@ -8,4 +8,5 @@ public struct Wave
     // later needs to handle multiple types of enemies that could all spawn during a wave
     public int enemyCount;
     public float spawnInterval;
+    public bool addsThread;
 }

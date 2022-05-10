@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class WebTower : MonoBehaviour, ITower
 {
+    [SerializeField] private PlayableDirector director;
     [SerializeField] private Web webPrefab;
     GridGenerator gridGenerator;
     [field:SerializeField] public float range {get; set;}
@@ -65,7 +67,11 @@ public class WebTower : MonoBehaviour, ITower
         to.ReceiveConnection(web);
     }
 
-    public void ReceiveConnection(Web incomingConnection) => connectedWebs.Add(incomingConnection);
+    public void ReceiveConnection(Web incomingConnection)
+    {
+        director.Play();
+        connectedWebs.Add(incomingConnection);
+    }
 
     private List<WebTower> GetNearbyWebTowers()
     {
@@ -86,7 +92,7 @@ public class WebTower : MonoBehaviour, ITower
                     bool pathFound = false;
                     foreach(int index in passThrough)
                     {
-                        if(neighbors[index].type == TileType.Path)
+                        if(index < neighbors.Count && neighbors[index].type == TileType.Path)
                         {
                             pathFound = true;
                             break;
