@@ -44,11 +44,16 @@ public class BuildMode : MonoBehaviour
     {
         if(context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
         {
-            card.TryPlay(mouseData.hoveredTile);
-            buildModeOn = false;
-            canBuild = false;
-            buildModeOutline.Remove();
-            cardDisplay.RemoveFromHand();
+            if(card.TryPlay(mouseData.hoveredTile))
+            {
+                buildModeOn = false;
+                canBuild = false;
+                buildModeOutline.Remove();
+                cardDisplay.RemoveFromHand();
+                return;
+            }
+            Cancelled();
+
         }
     } 
     public void Cancelled()
