@@ -167,6 +167,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6e1ac944-13a4-480d-9406-ce8f148bd8d1
     m_ActionName: Keyboard/Mouse/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8522938417288517046}
+        m_TargetAssemblyTypeName: BuildMode, Assembly-CSharp
+        m_MethodName: Escape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 77858836-cdeb-4339-b485-464a7b3ac925
+    m_ActionName: Keyboard/Mouse/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Keyboard/Mouse

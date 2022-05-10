@@ -57,7 +57,10 @@ public class Hand : MonoBehaviour
     private void OnWaveStart(Wave newWave)
     {
         if (buildMode.buildModeOn)
+        {
+            cardPrefab.ReturnCard();
             buildMode.Cancelled();
+        }   
 
         for(int i = cardList.Count-1; i >= holdCount; i--)
         {

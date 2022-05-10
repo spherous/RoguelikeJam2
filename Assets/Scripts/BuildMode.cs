@@ -11,6 +11,7 @@ public class BuildMode : MonoBehaviour
     public bool canBuild;
     private MouseData mouseData;
     [SerializeField] BuildModeOutline buildModeOutline;
+    public CardDisplay cardDisplay;
     void Awake() 
     {
         mouseData = FindObjectOfType<MouseData>();
@@ -47,11 +48,20 @@ public class BuildMode : MonoBehaviour
             buildModeOn = false;
             canBuild = false;
             buildModeOutline.Remove();
+            cardDisplay.RemoveFromHand();
         }
     } 
     public void Cancelled()
     {
         buildModeOutline.Remove();
         buildModeOn = false;
+        canBuild = false;
+        cardDisplay.ReturnCard();
+        cardDisplay.transform.localScale =  cardDisplay.scale;
+    }
+    public void Escape(CallbackContext context)
+    {
+        if (context.started && buildModeOn)
+            Cancelled();
     }
 }

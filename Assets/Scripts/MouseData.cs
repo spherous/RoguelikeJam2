@@ -21,5 +21,9 @@ public class MouseData : MonoBehaviour
                 hoveredTile = tile;
             }
         }
+        else
+        {
+            hoveredTile = null;
+        }
     }
 }
