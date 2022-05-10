@@ -20,7 +20,7 @@ public class TowerCard : ScriptableObject, ICard
 
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
 
-        if(threadPool != null && threadPool.Request(threadCost))
+        if(threadPool != null && TrySpendThreads(threadPool))
         {
             ITower tower = Instantiate(towerToSpawn, tile.transform.position, Quaternion.identity, tile.transform).GetComponent<ITower>();
             tile.SetTower(tower);
@@ -29,4 +29,14 @@ public class TowerCard : ScriptableObject, ICard
         
         return false;
     }
+    public bool TrySpendThreads(ThreadPool threadPool)
+    {
+        if(threadPool.Request(threadCost))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
 }

@@ -65,15 +65,21 @@ public class CardDisplay : SerializedMonoBehaviour
     public void PlayCard()
     {
         BuildMode buildMode = GameObject.FindObjectOfType<BuildMode>();
-        if(card.GetType() == typeof(TowerCard) && !buildMode.buildModeOn)
+        ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
+        if(card.threadCost <= threadPool.availableThreads)
         {
-            TowerCard towerCard = (TowerCard)card;
-            buildMode.buildModeOn = true;
-            buildMode.card = card;
-            transform.localScale = Vector3.zero;
-            buildMode.cardDisplay = this;
-            return;
+            if(card.GetType() == typeof(TowerCard) && !buildMode.buildModeOn)
+            {
+
+                TowerCard towerCard = (TowerCard)card;
+                buildMode.buildModeOn = true;
+                buildMode.card = card;
+                transform.localScale = Vector3.zero;
+                buildMode.cardDisplay = this;
+                return;
+            }
         }
+        
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
             RemoveFromHand();
