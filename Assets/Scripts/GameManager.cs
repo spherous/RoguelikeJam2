@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour, IHealth
     [SerializeField] private SceneTransition sceneTransitionPrefab;
     [SerializeField] private Transform screen;
     [SerializeField] private ThreadPool threadPoolPrefab;
+    [SerializeField] private ProcGen procGen;
     private ThreadPool threadPool;
 
     [SerializeField] private HealthBar healthBarPrefab;
@@ -69,17 +70,18 @@ public class GameManager : MonoBehaviour, IHealth
 
     public void Die()
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneTransition transition = FindObjectOfType<SceneTransition>();
-        if(transition)
-            transition.Transition(currentSceneName);
-        else if(sceneTransitionPrefab != null)
-        {
-            transition = Instantiate(sceneTransitionPrefab, screen);
-            transition.Transition(currentSceneName);
-        }
-        else
-            SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
+        procGen.kingdom.GameOver();
+        // string currentSceneName = SceneManager.GetActiveScene().name;
+        // SceneTransition transition = FindObjectOfType<SceneTransition>();
+        // if(transition)
+        //     transition.Transition(currentSceneName);
+        // else if(sceneTransitionPrefab != null)
+        // {
+        //     transition = Instantiate(sceneTransitionPrefab, screen);
+        //     transition.Transition(currentSceneName);
+        // }
+        // else
+        //     SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
     }
 
     public void AddToScore(int amount)

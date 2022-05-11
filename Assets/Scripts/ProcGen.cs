@@ -8,12 +8,14 @@ using UnityEngine;
 
 public class ProcGen : MonoBehaviour
 {
+    [SerializeField] private Kingdom kingdomPrefab;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private AstarPath pathfinder;
     public Tile homeTile {get; private set;}
-    public List<Tile> spawnPoints {get; private set;} = new List<Tile>();
+    public Tile spawnPoint {get; private set;}
     public int passes = 3;
     public int rands = 5;
+    public Kingdom kingdom;
     
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
@@ -34,7 +36,7 @@ public class ProcGen : MonoBehaviour
         CachePath();
     }
 
-    private void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoints[0].index, homeTile.index));
+    private void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoint.index, homeTile.index));
 
     private List<Tile> SelectPath(Path p) => p.path.Select(node =>
     {
@@ -47,6 +49,7 @@ public class ProcGen : MonoBehaviour
     {
         homeTile = gridGenerator.GetRandomRightEdgeTile();
         homeTile.SetType(TileType.Home);
+        kingdom = Instantiate(kingdomPrefab, homeTile.transform.position + Vector3.right * 5.2f, Quaternion.identity);
     }
 
     private void PlaceSpawnPoints(int count)
@@ -63,16 +66,11 @@ public class ProcGen : MonoBehaviour
             while(maybeNewSpawnPoint.type != TileType.Path);
 
             maybeNewSpawnPoint.SetType(TileType.EnemySpawnPoint);
-            spawnPoints.Add(maybeNewSpawnPoint);
+            spawnPoint = maybeNewSpawnPoint;
         }
     }
 
-    void ClearSpawnPoints()
-    {
-        foreach(Tile spawnPoint in spawnPoints)
-            spawnPoint.SetType(TileType.Path);
-        spawnPoints.Clear();
-    }
+    void ClearSpawnPoints() => spawnPoint?.SetType(TileType.Path);
 
     private void PlaceEdgeWalls()
     {
@@ -87,7 +85,7 @@ public class ProcGen : MonoBehaviour
 
     private void ExtendPath()
     {
-        Path currentPath = gridGenerator.GetPath(spawnPoints[0], homeTile);
+        Path currentPath = gridGenerator.GetPath(spawnPoint, homeTile);
 
         if(currentPath == null)
             return;
@@ -196,7 +194,7 @@ public class ProcGen : MonoBehaviour
         Path path;
         tile.SetType(type);
         pathfinder.Scan(); // rescan to update navmesh
-        path = gridGenerator.GetPath(spawnPoints[0], homeTile);
+        path = gridGenerator.GetPath(spawnPoint, homeTile);
         return path;
     }
 

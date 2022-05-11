@@ -7,7 +7,7 @@ public class TrojanHorse : Enemy
 
     protected void Awake() => waveManager = FindObjectOfType<WaveManager>();
 
-    public new void Die()
+    public override void Die()
     {
         PayLoad();
         base.Die();
@@ -15,7 +15,12 @@ public class TrojanHorse : Enemy
 
     private void PayLoad()
     {
-        // waveManager
-        // Spawn multiple DDoS Bugs
+        for(int i = 0; i < payloadCount; i++)
+        {
+            Enemy newMinion = waveManager.SpawnEnemy(EnemyType.DDoSBug, currentTile);
+            newMinion.transform.position += (Vector3)UnityEngine.Random.insideUnitCircle;
+            newMinion.AdjustSpeed(UnityEngine.Random.Range(-0.1f, 0.1f));
+            newMinion.pathingToNode = pathingToNode;
+        }
     }
 }

@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7276265943621871833}
+  col: {fileID: 7276265943621871846}
   <speed>k__BackingField: 5
-  <maxHP>k__BackingField: 1
+  <maxHP>k__BackingField: 9
   scoreValue: 0
 --- !u!50 &7276265943621871833
 Rigidbody2D:
