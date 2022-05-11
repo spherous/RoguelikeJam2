@@ -19,6 +19,6 @@ MonoBehaviour:
   <artwork>k__BackingField: {fileID: 21300000, guid: cd651fb45cee5a74997394a7f76cafcd, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 1
-  <threadReserveType>k__BackingField: 0
+  <threadReserveType>k__BackingField: 1
   <threadEffectTriggerCondition>k__BackingField: 1
   <threadUseDuration>k__BackingField: 1
