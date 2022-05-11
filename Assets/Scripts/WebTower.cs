@@ -1,13 +1,14 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class WebTower : MonoBehaviour, ITower
 {
+    [SerializeField] private PlayableDirector director;
     [SerializeField] private Web webPrefab;
     GridGenerator gridGenerator;
+    WaveManager waveManager;
     [field:SerializeField] public float range {get; set;}
     public Index location {get; set;}
     public List<Index> rangeOffsets = new List<Index>();
@@ -22,25 +23,37 @@ public class WebTower : MonoBehaviour, ITower
     [SerializeField] private SpriteRenderer circleRenderer;
     public Sprite disabledCircle;
     public Sprite enabledCircle;
+
+    [field:SerializeField] public float damage {get; set;}
+    private float orgDamage;
     
     private void Awake()
     {
         gridGenerator = GameObject.FindObjectOfType<GridGenerator>();
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
+        orgDamage = damage;
     }
 
     private void Start()
     {
         ConnectToNearbyWebTowers();
+        if(waveManager != null)
+            waveManager.onWaveComplete += OnWaveComplete;
     }
 
     private void OnDestroy()
     {
+        if(waveManager != null)
+            waveManager.onWaveComplete -= OnWaveComplete; 
+
         foreach(Web web in connectedWebs)
         {
             if(web != null)
                 Destroy(web.gameObject);
         }
     }
+
+    private void OnWaveComplete(Wave wave) => damage = orgDamage;
 
     private void ConnectToNearbyWebTowers()
     {
@@ -61,11 +74,16 @@ public class WebTower : MonoBehaviour, ITower
         Web web = Instantiate(webPrefab, transform.position, Quaternion.identity);
 
         web.Connect(this, to, bestSelfPoint, bestOtherPoint);
+        web.damage = damage;
         connectedWebs.Add(web);
         to.ReceiveConnection(web);
     }
 
-    public void ReceiveConnection(Web incomingConnection) => connectedWebs.Add(incomingConnection);
+    public void ReceiveConnection(Web incomingConnection)
+    {
+        director.Play();
+        connectedWebs.Add(incomingConnection);
+    }
 
     private List<WebTower> GetNearbyWebTowers()
     {
@@ -86,7 +104,7 @@ public class WebTower : MonoBehaviour, ITower
                     bool pathFound = false;
                     foreach(int index in passThrough)
                     {
-                        if(neighbors[index].type == TileType.Path)
+                        if(index < neighbors.Count && neighbors[index].type == TileType.Path)
                         {
                             pathFound = true;
                             break;
@@ -132,4 +150,8 @@ public class WebTower : MonoBehaviour, ITower
         baseRenderer.sprite = disabledBase;
         circleRenderer.sprite = disabledCircle;
     }
+
+    public void AdjustRange(float percent){} // does nothing for range
+    public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
+    public void AdjustAttackSpeed(float percent){} // does nothing for attack speed
 }

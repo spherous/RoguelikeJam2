@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b2972c5603fd04086574943c204869, type: 3}
-  m_Name: Discard Hand Draw 3
+  m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
+  m_Name: Chain Tower
   m_EditorClassIdentifier: 
-  techCardTypes: 0500000004000000
-  <description>k__BackingField: Discard Hand, Draw 3
-  <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 21300000, guid: 538c8a9c723cbb24ca6ddb583dc1553b, type: 3}
-  <threadCost>k__BackingField: 2
+  towerToSpawn: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
+  <description>k__BackingField: Places a chain tower
+  <type>k__BackingField: 0
+  <artwork>k__BackingField: {fileID: 21300000, guid: 7ac9515fdbfe99e44a8aebdc0b90a8a7, type: 3}
+  <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
   <threadEffectTriggerCondition>k__BackingField: 1

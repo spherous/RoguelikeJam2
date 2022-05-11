@@ -31,7 +31,11 @@ public class ThreadPool : MonoBehaviour
         levelManager.onLevelStart -= OnLevelStart;
     }
 
-    private void OnLevelStart(Level level) => Refresh();
+    private void OnLevelStart(Level level)
+    {
+        Reset();
+        Refresh();
+    } 
     private void OnWaveComplete(Wave endingWave) => Refresh();
 
     public void IncreaseThreadCount(int amount)
@@ -39,7 +43,6 @@ public class ThreadPool : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             Thread thread = Instantiate(threadPrefab, transform);
-            // thread.Toggle(true);
             threads.Add(thread);
         }
     }
@@ -61,6 +64,18 @@ public class ThreadPool : MonoBehaviour
             thread.Spend();
 
         return true;
+    }
+
+    public void Reset()
+    {
+        if(threads.Count > 3)
+        {
+            for(int i = threads.Count - 1; i >= 3; i--)
+            {
+                Destroy(threads[i].gameObject);
+                threads.RemoveAt(i);
+            }
+        }
     }
 
     public bool RequestReserve(int amount, int duration, Action onComplete, ThreadReserveType reserveType = ThreadReserveType.Single, ThreadEffectTriggerCondition triggerCondition = ThreadEffectTriggerCondition.OnComplete)

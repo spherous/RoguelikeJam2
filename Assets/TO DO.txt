@@ -5,8 +5,8 @@ Tower range indicators
 X Deck & RecycleBin
 
 Towers
-    web tower
-    chain tower
+    X web tower
+    X chain tower
     aoe burst
     long range snipe (can't hit nearby)
 
@@ -19,7 +19,6 @@ Web effects
     Damage amp while in it
 
 Card effects
-    Place web tower (instant)
     X Place chain tower (instant)
     Place aoe burst tower (instant)
     place long range snipe tower (instant)
@@ -27,9 +26,11 @@ Card effects
     X discard hand and draw 3 (instant)
     gain a thread (takes time to play, once per level per card)
     X Discard down to 2 cards instead of 5 cards after build phase, but only draw up to 4 cards at the start of each turn (once per level)
-    Slightly Increase all tower damage (sustained for a few waves)
+    X Slightly Increase all tower damage (sustained for a few waves)
     Greatly increase 1 tower's damage (1 wave)
     Slightly increase all web effects (sustained for a few waves)
+    Greatly increase 1 tower's range (1 wave)
+    X Slightly increase all tower's range (sustained)
     Greatly increase 1 web's effects (1 wave)
     Moderately increased effects of all webs attached to tower (sustained for a few waves)
     X Greatly slow next wave (1 wave)
@@ -41,8 +42,8 @@ Card effects
     Reduce chain count but increase damage (sustained for a few waves)
     Increase chain range (sustained for a few waves)
     Reduce chain range but increase damage (sustained for a few waves)
-    Slightly increase tower attack speed (sustained for a few waves)
-    Greatly increase tower attack speed (1 wave)
+    X Slightly increase all tower attack speed (sustained for a few waves)
+    Greatly increase 1 tower attack speed (1 wave)
     Relocate a tower (instant)
     Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
     Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
@@ -72,7 +73,9 @@ win/lose screen
 
 levels
     X pick a new card after each level
-    Refresh single use cards
+    X Refresh single use cards
+    X Add a thread for the 1st 2 waves of a level
+    generate a new level
 
 Bugs
     Trying to build a tower on a tile that had a tower the previous level eats the card and doesn't spawn a tower.

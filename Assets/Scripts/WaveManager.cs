@@ -13,8 +13,9 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private LevelManager levelManager;
+    private ThreadPool threadPool;
 
-    [ReadOnly] public List<GameObject> enemies = new List<GameObject>();
+    [ReadOnly] public List<Enemy> enemies = new List<Enemy>();
 
     public float waveDelay = 30f;
     bool spawning = false;
@@ -30,6 +31,8 @@ public class WaveManager : MonoBehaviour
 
     [ShowInInspector] private Level? currentLevel = null;
 
+    private void Start() => threadPool = GameObject.FindObjectOfType<ThreadPool>();
+
     private void Update()
     {
         if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count || levelManager.awaitingPlayerChoice)
@@ -40,7 +43,7 @@ public class WaveManager : MonoBehaviour
         else if(!waitingForCompletion && !spawning && Time.timeSinceLevelLoad >= timeForWaveStart)
             StartWave();
         else if(!waitingForCompletion && spawning && Time.timeSinceLevelLoad >= timeForNextSpawn)
-            Spawn();
+            SpawnWave();
     }
 
     public void LoadWaves(Level level)
@@ -89,6 +92,8 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
+        if(currentLevel.Value.waves[currentWave].addsThread && threadPool != null)
+            threadPool.IncreaseThreadCount(1);
         onWaveComplete?.Invoke(currentLevel.Value.waves[currentWave]);
         currentWave++;
     }
@@ -101,28 +106,34 @@ public class WaveManager : MonoBehaviour
         spawnedCount = 0;
     }
 
-    private void Spawn()
+    private void SpawnWave()
     {
         Wave wave = currentLevel.Value.waves[currentWave];
         timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
         spawnedCount++;
         
-        IEnemy newEnemy = spawner.Spawn();
-        enemies.Add(((MonoBehaviour)newEnemy).gameObject);
+        SpawnEnemy(wave.enemyGroup.type);
+        
+        if(spawnedCount >= wave.enemyGroup.count)
+            EndWave();
+    }
+
+    public Enemy SpawnEnemy(EnemyType type)
+    {
+        Enemy newEnemy = spawner.Spawn(type);
+        enemies.Add(newEnemy);
 
         newEnemy.AdjustSpeed(speedModifier);
         newEnemy.AdjustHealth(healthModifier);
         newEnemy.onHealthChanged += EnemyHealthChanged;
-        
-        if(spawnedCount >= wave.enemyCount)
-            EndWave();
+        return newEnemy;
     }
 
     private void EnemyHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
     {
-        if(newHP <= 0)
+        if(newHP <= 0 && changed is Enemy enemy)
         {
-            enemies.Remove(((MonoBehaviour)changed).gameObject);
+            enemies.Remove(enemy);
             changed.onHealthChanged -= EnemyHealthChanged;
         }
     }
@@ -130,9 +141,9 @@ public class WaveManager : MonoBehaviour
     public void AdjustSpeed(float amount)
     {
         speedModifier += amount;
-        foreach(GameObject enemyGO in enemies)
+        foreach(Enemy enemy in enemies)
         {
-            if(enemyGO.TryGetComponent<IEnemy>(out IEnemy e))
+            if(enemy.TryGetComponent<Enemy>(out Enemy e))
                 e.AdjustSpeed(amount);
         }
     }
@@ -140,9 +151,9 @@ public class WaveManager : MonoBehaviour
     public void AdjustHealth(float percent)
     {
         healthModifier += percent;
-        foreach(GameObject enemyGO in enemies)
+        foreach(Enemy enemy in enemies)
         {
-            if(enemyGO.TryGetComponent<IEnemy>(out IEnemy e))
+            if(enemy.TryGetComponent<Enemy>(out Enemy e))
                 e.AdjustHealth(percent);
         }
     }

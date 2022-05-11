@@ -3,7 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Tower Card", menuName = "Tower Card")]
 public class TowerCard : ScriptableObject, ICard
 {
-    [SerializeField] public GameObject towerToSpawn;
+    // [SerializeField] public GameObject towerToSpawn;
+    public TowerType towerToSpawn;
     [field:SerializeField] public string description {get; set;}
     [field:SerializeField] public CardType type {get; set;} = CardType.Tower;
     [field:SerializeField] public Sprite artwork {get; set;}
@@ -15,28 +16,22 @@ public class TowerCard : ScriptableObject, ICard
 
     public bool TryPlay(Tile tile)
     {
-        if(tile == null || !tile.isBuildable || towerToSpawn == null)
+        if(tile == null || !tile.isBuildable)
             return false;
 
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
+        TowerManager towerManager = GameObject.FindObjectOfType<TowerManager>();
 
-        if(threadPool != null && TrySpendThreads(threadPool))
+        if(towerManager != null && threadPool != null && TrySpendThreads(threadPool))
         {
-            ITower tower = Instantiate(towerToSpawn, tile.transform.position, Quaternion.identity, tile.transform).GetComponent<ITower>();
+            ITower tower = towerManager.SpawnTower(towerToSpawn, tile);
+            // ITower tower = Instantiate(towerToSpawn, tile.transform.position, Quaternion.identity, tile.transform).GetComponent<ITower>();
             tile.SetTower(tower);
             return true;
         }
         
         return false;
     }
-    public bool TrySpendThreads(ThreadPool threadPool)
-    {
-        if(threadPool.Request(threadCost))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
+    
+    public bool TrySpendThreads(ThreadPool threadPool) => threadPool.Request(threadCost);
 }

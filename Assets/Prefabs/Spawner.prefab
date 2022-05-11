@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc4a684be24ec6449dff1fb9fb1fdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyList: {fileID: 0}
-  enemy: {fileID: 7276265943621871837, guid: 65c6800c2c5536e4484691aeeafbddbc, type: 3}
-  spawnRate: 1
+  DDoSBug: {fileID: 7276265943621871832, guid: 65c6800c2c5536e4484691aeeafbddbc, type: 3}
+  trojanHorse: {fileID: 559825583304817677, guid: 24c3a1a5cc957034e858d8af6c93dd5d, type: 3}
+  procGen: {fileID: 0}
+  enemyList: []

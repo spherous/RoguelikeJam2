@@ -101,7 +101,6 @@ MonoBehaviour:
   fisty: {fileID: 4151462883890082368}
   attackTime: 0.5
   target: {fileID: 0}
-  damage: 1
   chainCount: 3
   baseRenderer: {fileID: 1409404219263627825}
   disabledBase: {fileID: 9099345367590936022, guid: 4d14e4811673d2d4ba4d622d78721a54, type: 3}
@@ -117,6 +116,7 @@ MonoBehaviour:
   enabledRotatePoint: {fileID: 7733275491638833292, guid: 7c68b2efc1b4946449ee4ce10d3ccd12, type: 3}
   projectilePrefab: {fileID: 3396218646815767703, guid: 0db379a51adea8c489c457c8cf8e4bab, type: 3}
   <range>k__BackingField: 6
+  <damage>k__BackingField: 3
 --- !u!1 &1409404219264943798
 GameObject:
   m_ObjectHideFlags: 0

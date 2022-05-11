@@ -8,6 +8,7 @@ public class Web : MonoBehaviour
     [SerializeField] private LineRenderer line;
     [SerializeField] private BoxCollider2D boxCollider;
     public List<WebTower> connectedTowers = new List<WebTower>();
+    public float damage;
 
     public void Connect(WebTower a, WebTower b, Transform aPoint, Transform bPoint)
     {
@@ -26,9 +27,9 @@ public class Web : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.TryGetComponent<IEnemy>(out IEnemy enemy))
+        if(other.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            enemy.TakeDamage(100);
+            enemy.TakeDamage(damage);
         }
     }
 }

@@ -68,10 +68,8 @@ public class CardDisplay : SerializedMonoBehaviour
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();
         if(card.threadCost <= threadPool.availableThreads)
         {
-            if(card.GetType() == typeof(TowerCard) && !buildMode.buildModeOn)
+            if(card is TowerCard towerCard && !buildMode.buildModeOn)
             {
-
-                TowerCard towerCard = (TowerCard)card;
                 buildMode.buildModeOn = true;
                 buildMode.card = card;
                 transform.localScale = Vector3.zero;
