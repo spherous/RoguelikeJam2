@@ -2925,6 +2925,16 @@ MonoBehaviour:
         count: 1
       spawnInterval: 1
       addsThread: 1
+    - enemyGroup:
+        type: 1
+        count: 1
+      spawnInterval: 1
+      addsThread: 0
+    - enemyGroup:
+        type: 1
+        count: 1
+      spawnInterval: 1
+      addsThread: 0
 --- !u!1 &1332929663
 GameObject:
   m_ObjectHideFlags: 0
