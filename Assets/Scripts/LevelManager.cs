@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private PickNewCard pickNewCard;
     [SerializeField] private WinScreen winScreen;
+    [SerializeField] private GameManager gameManager;
     public List<Level> levels = new List<Level>();
     public int currentLevelIndex {get; private set;} = 0;
     public Level currentLevel {get; private set;}
@@ -43,7 +45,8 @@ public class LevelManager : MonoBehaviour
         int lastLevel = levels.IndexOf(level);
         if(lastLevel + 1 >= levels.Count)
         {
-            winScreen.Display();
+            if(gameManager.currentHP > 0)
+                Win();
             return;
         }
 
@@ -55,4 +58,6 @@ public class LevelManager : MonoBehaviour
             LoadLevel(currentLevelIndex);
         });
     }
+
+    private void Win() => winScreen.Display();
 }
