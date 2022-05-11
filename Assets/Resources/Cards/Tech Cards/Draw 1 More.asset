@@ -15,7 +15,9 @@ MonoBehaviour:
   techCardTypes: 03000000
   <description>k__BackingField: Draw 1 more card every wave
   <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  <artwork>k__BackingField: {fileID: 21300000, guid: ed232e51004433548b3b1d8e5401c1cb, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 1
+  <threadReserveType>k__BackingField: 0
+  <threadEffectTriggerCondition>k__BackingField: 1
   <threadUseDuration>k__BackingField: 1

@@ -1,6 +1,6 @@
 TO DO
 
-Place tower mode
+X Place tower mode
 Tower range indicators
 X Deck & RecycleBin
 
@@ -67,9 +67,10 @@ Audio
 Main menu
 Loading scene
 Credits
-Font
+X Font
 
-win/lose screen
+X win screen
+lose screen
 
 levels
     X pick a new card after each level
@@ -77,9 +78,16 @@ levels
     X Add a thread for the 1st 2 waves of a level
     generate a new level
 
+Enemies
+    X DDoS Bot (Fast, weak, small)
+    X Trojan Horse (big, slow, tanky, Drops DDoS bot on death)
+    Net-Worm (self-replicating 2 tiers of splits: example: 1 net-worm has 100hp, at 50hp it spawns another one at 50hp. When both of those reach 25 hp, they both spawn an additional (total 4) worms)
+    Hijacker (disables towers sometimes)
+    Black Knight
+    On Death
+
 Bugs
-    Trying to build a tower on a tile that had a tower the previous level eats the card and doesn't spawn a tower.
-    If the player doesn't have enough threads to play a tower card, it shouldn't open build mode and eat the card.
+    attack speed ???
 
 X Camera panning
     x wasd

@@ -118,9 +118,9 @@ public class WaveManager : MonoBehaviour
             EndWave();
     }
 
-    public Enemy SpawnEnemy(EnemyType type)
+    public Enemy SpawnEnemy(EnemyType type, Tile tile = null)
     {
-        Enemy newEnemy = spawner.Spawn(type);
+        Enemy newEnemy = tile == null ? spawner.Spawn(type) : spawner.SpawnAtTile(type, tile);
         enemies.Add(newEnemy);
 
         newEnemy.AdjustSpeed(speedModifier);

@@ -9,15 +9,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] TrojanHorse trojanHorse;
     [SerializeField] private ProcGen procGen;
 
-    private int lastUsedSpawnPoint = 0;
     public List<Enemy> enemyList = new List<Enemy>();
 
     [Button]
-    public Enemy Spawn(EnemyType type)
+    public Enemy Spawn(EnemyType type) => SpawnAtTile(type, procGen.spawnPoint);
+
+    public Enemy SpawnAtTile(EnemyType type, Tile spawnPoint)
     {
-        lastUsedSpawnPoint = (lastUsedSpawnPoint + 1).Mod(procGen.spawnPoints.Count);
-        Tile spawnPoint = procGen.spawnPoints[lastUsedSpawnPoint];
-        
         Enemy prefab = GetPrefab(type);
         if(prefab == null)
             return null;

@@ -8,13 +8,15 @@ public class Enemy : MonoBehaviour, IHealth
     ProcGen procGen;
     GameManager gameManager;
 
-    private int pathingToNode = 1;
+    public int pathingToNode = 1;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] Collider2D col;
     [field:SerializeField] public float speed {get; set;}
 
     public event OnHealthChanged onHealthChanged;
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
+    public Tile currentTile {get; private set;}
 
     public int scoreValue;
 
@@ -37,7 +39,16 @@ public class Enemy : MonoBehaviour, IHealth
         rb.velocity = dir * speed;
         
         if(vec.magnitude < 0.05f)
+        {
+            List<Collider2D> results = new List<Collider2D>();
+            int resultCount = col.OverlapCollider(
+                new ContactFilter2D{layerMask = LayerMask.GetMask("Walkable")},
+                results
+            );
+            if(results[0].TryGetComponent<Tile>(out Tile tile))
+                currentTile = tile;
             pathingToNode++;
+        }
 
         if(pathingToNode > procGen.path.Count - 1)
         {
@@ -54,7 +65,7 @@ public class Enemy : MonoBehaviour, IHealth
         if(currentHP != startHP)
             onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
         
-        if(currentHP == 0)
+        if(currentHP <= 0)
             Die();
     }
 
@@ -73,7 +84,7 @@ public class Enemy : MonoBehaviour, IHealth
         onHealthChanged?.Invoke(this, oldHP, currentHP, 1);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         gameManager.AddToScore(scoreValue);
         Destroy(gameObject);

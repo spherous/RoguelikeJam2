@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private PickNewCard pickNewCard;
+    [SerializeField] private WinScreen winScreen;
     public List<Level> levels = new List<Level>();
     public int currentLevelIndex {get; private set;} = 0;
     public Level currentLevel {get; private set;}
@@ -39,9 +40,16 @@ public class LevelManager : MonoBehaviour
 
     public void CompleteLevel(Level level)
     {
+        int lastLevel = levels.IndexOf(level);
+        if(lastLevel + 1 >= levels.Count)
+        {
+            winScreen.Display();
+            return;
+        }
+
         onLevelComplete?.Invoke(level);
-        currentLevelIndex = levels.IndexOf(level) + 1;
         awaitingPlayerChoice = true;
+        currentLevelIndex = lastLevel + 1;
         pickNewCard.OfferChoice(() => {
             awaitingPlayerChoice = false;
             LoadLevel(currentLevelIndex);
