@@ -70,10 +70,8 @@ public class CardDisplay : SerializedMonoBehaviour
         {
             if(card is TowerCard towerCard && !buildMode.buildModeOn)
             {
-                buildMode.buildModeOn = true;
-                buildMode.card = card;
                 transform.localScale = Vector3.zero;
-                buildMode.cardDisplay = this;
+                buildMode.Open(true, this);
                 return;
             }
         }

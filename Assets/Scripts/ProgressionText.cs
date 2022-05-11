@@ -8,7 +8,7 @@ public class ProgressionText : MonoBehaviour
     [SerializeField] private GroupFader fader;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private LevelManager levelManager;
-
+    [SerializeField] private BuildMode buildMode;
     public float displayTime;
     private float? hideAtTime;
 
@@ -18,6 +18,7 @@ public class ProgressionText : MonoBehaviour
         waveManager.onWaveComplete += OnWaveComplete;
         levelManager.onLevelStart += OnLevelStart;
         levelManager.onLevelComplete += OnLevelComplete;
+        buildMode.buildModeStateChange += BuildModeStateChange;
     }
 
     private void OnDestroy()
@@ -26,6 +27,7 @@ public class ProgressionText : MonoBehaviour
         waveManager.onWaveComplete -= OnWaveComplete;
         levelManager.onLevelStart -= OnLevelStart;
         levelManager.onLevelComplete -= OnLevelComplete;
+        buildMode.buildModeStateChange -= BuildModeStateChange;
     }
 
     private void Update()
@@ -87,5 +89,13 @@ public class ProgressionText : MonoBehaviour
     {
         TryShow();
         text.text = $"Wave {waveManager.currentWave + 1} Start";
+    }
+    private void BuildModeStateChange(bool buildModeOn)
+    {
+        if(buildModeOn)
+            ForceShow("Build Mode");
+        else
+            Hide();
+
     }
 }

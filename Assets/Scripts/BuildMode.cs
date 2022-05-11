@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class BuildMode : MonoBehaviour
 {
-    public ICard card {get; set;}
+    public delegate void BuildModeStateChange(bool enabled);
+    public BuildModeStateChange buildModeStateChange;
     public bool buildModeOn;
     public bool canBuild;
     private MouseData mouseData;
@@ -44,9 +45,10 @@ public class BuildMode : MonoBehaviour
     {
         if(context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
         {
-            if(card.TryPlay(mouseData.hoveredTile))
+            if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
             {
                 buildModeOn = false;
+                buildModeStateChange?.Invoke(buildModeOn);
                 canBuild = false;
                 buildModeOutline.Remove();
                 cardDisplay.RemoveFromHand();
@@ -60,6 +62,7 @@ public class BuildMode : MonoBehaviour
     {
         buildModeOutline.Remove();
         buildModeOn = false;
+        buildModeStateChange?.Invoke(buildModeOn);
         canBuild = false;
         cardDisplay.ReturnCard();
         cardDisplay.transform.localScale =  cardDisplay.scale;
@@ -68,5 +71,11 @@ public class BuildMode : MonoBehaviour
     {
         if (context.started && buildModeOn)
             Cancelled();
+    }
+    public void Open(bool on, CardDisplay cardDisplay)
+    {
+        buildModeOn = on;
+        this.cardDisplay = cardDisplay;
+        buildModeStateChange?.Invoke(buildModeOn);
     }
 }
