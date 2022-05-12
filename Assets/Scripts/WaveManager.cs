@@ -13,6 +13,7 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private GameManager gameManager;
     private ThreadPool threadPool;
 
     [ReadOnly] public List<Enemy> enemies = new List<Enemy>();
@@ -35,7 +36,7 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
-        if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count || levelManager.awaitingPlayerChoice)
+        if(!currentLevel.HasValue || currentWave >= currentLevel.Value.waves.Count || levelManager.awaitingPlayerChoice || gameManager.gameOver)
             return;
 
         if(waitingForCompletion && EnemiesRemaining() == 0)
@@ -66,6 +67,9 @@ public class WaveManager : MonoBehaviour
 
     private void StartWave()
     {
+        if(gameManager.gameOver)
+            return;
+
         int waveCountInLevel = currentLevel.Value.waves.Count;
         if(currentWave >= waveCountInLevel)
             return;

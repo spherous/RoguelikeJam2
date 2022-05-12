@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 6586100046594746025}
   - component: {fileID: 6586100046594746024}
   - component: {fileID: 6586100046594746039}
+  - component: {fileID: 8568900761295891896}
+  - component: {fileID: 2556376265164744636}
   m_Layer: 5
   m_Name: ThreadPool
   m_TagString: Untagged
@@ -116,3 +118,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   threadPrefab: {fileID: 2288293794623080781, guid: c5ef7189f39d6cb43a6ed35fc2819a52, type: 3}
+  fader: {fileID: 2556376265164744636}
+--- !u!225 &8568900761295891896
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586100046594746037}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2556376265164744636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586100046594746037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee681dfd5bbd5f147b281647138e3b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _group: {fileID: 8568900761295891896}
+  fadeDuration: 0.15
+  visibleOnStart: 1

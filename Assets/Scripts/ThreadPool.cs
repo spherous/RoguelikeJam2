@@ -11,7 +11,9 @@ public class ThreadPool : MonoBehaviour
 {
     private LevelManager levelManager;
     private WaveManager waveManager;
+    private GameManager gameManager;
     [SerializeField] private Thread threadPrefab;
+    [SerializeField] private GroupFader fader;
     public List<Thread> threads {get; private set;} = new List<Thread>();
     public int availableThreads => GetAvailableThreads().Count();
 
@@ -21,14 +23,17 @@ public class ThreadPool : MonoBehaviour
     {
         waveManager = GameObject.FindObjectOfType<WaveManager>();
         waveManager.onWaveComplete += OnWaveComplete;
-        levelManager = GameManager.FindObjectOfType<LevelManager>();
+        levelManager = GameObject.FindObjectOfType<LevelManager>();
         levelManager.onLevelStart += OnLevelStart;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
+        gameManager.onHealthChanged += OnHealthChanged;
     }
 
     private void OnDestroy()
     {
         waveManager.onWaveComplete -= OnWaveComplete;
         levelManager.onLevelStart -= OnLevelStart;
+        gameManager.onHealthChanged -= OnHealthChanged;
     }
 
     private void OnLevelStart(Level level)
@@ -94,5 +99,11 @@ public class ThreadPool : MonoBehaviour
         }
         
         return true;
+    }
+
+    private void OnHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
+    {
+        if(newHP == 0)
+            fader.FadeOut();
     }
 }
