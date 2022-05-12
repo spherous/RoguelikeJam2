@@ -16,8 +16,9 @@ public class ThreadPool : MonoBehaviour
     [SerializeField] private GroupFader fader;
     public List<Thread> threads {get; private set;} = new List<Thread>();
     public int availableThreads => GetAvailableThreads().Count();
-    private IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
-    private IEnumerable<Thread> GetUnavailableThreads() => threads.Where(t => !t.available);
+    public int unavailableThreds => GetUnavailableThreads().Count();
+    public IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
+    public IEnumerable<Thread> GetUnavailableThreads() => threads.Where(t => !t.available);
 
     private void Awake()
     {
@@ -69,6 +70,17 @@ public class ThreadPool : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void GainThreadAtEndOfFrame()
+    {
+        StartCoroutine(ThreadGainRoutine());
+    }
+
+    public IEnumerator ThreadGainRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        IncreaseThreadCount(1);
     }
 
     [Button]

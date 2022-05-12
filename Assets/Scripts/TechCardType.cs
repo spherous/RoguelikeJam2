@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 public enum TechCardType
 {
@@ -39,7 +40,7 @@ public static class TechCardTypeExtensions
     public static void GainThread()
     {
         ThreadPool pool = GameObject.FindObjectOfType<ThreadPool>();
-        pool.IncreaseThreadCount(1);
+        pool.GainThreadAtEndOfFrame();
     }
 
     public static void RefreshThread()
