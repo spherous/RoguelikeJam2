@@ -96,10 +96,10 @@ public class ChainTower : MonoBehaviour, ITower
 
     private bool TryAquireTarget()
     {
-        var validEnemies = enemySpawner.enemyList.Where(enemy => (((MonoBehaviour)enemy).transform.position - transform.position).sqrMagnitude <= range * range).ToList();
+        var validEnemies = enemySpawner.enemyList.Where(enemy => enemy != null && (enemy.transform.position - transform.position).sqrMagnitude <= range * range).ToList();
         if(validEnemies.Count > 0)
         {
-            target = ((MonoBehaviour)validEnemies[0]).transform;
+            target = validEnemies[0].transform;
             followTargetRotate.targetTransform = target;
             return true;
         }

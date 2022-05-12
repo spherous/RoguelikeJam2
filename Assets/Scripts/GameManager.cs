@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour, IHealth
     private ThreadPool threadPool;
 
     [SerializeField] private HealthBar healthBarPrefab;
-    private HealthBar healthBar;
+    public HealthBar healthBar {get; private set;}
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
     public int score {get; private set;}
@@ -21,15 +21,16 @@ public class GameManager : MonoBehaviour, IHealth
     public delegate void OnScoreChanged(int newScore);
     public OnScoreChanged onScoreChanged;
 
+    public bool gameOver {get; private set;} = false;
+
     private void Awake()
     {
         threadPool = Instantiate(threadPoolPrefab, screen);
         threadPool.IncreaseThreadCount(3);
 
         healthBar = Instantiate(healthBarPrefab, screen);
-        healthBar.Track(this);
-
         HealToFull();
+        healthBar.Track(this);
     }
 
     public void Heal(float amount)
@@ -70,7 +71,8 @@ public class GameManager : MonoBehaviour, IHealth
 
     public void Die()
     {
-        procGen.kingdom.GameOver();
+        gameOver = true;
+        // procGen.kingdom.GameOver();
         // string currentSceneName = SceneManager.GetActiveScene().name;
         // SceneTransition transition = FindObjectOfType<SceneTransition>();
         // if(transition)

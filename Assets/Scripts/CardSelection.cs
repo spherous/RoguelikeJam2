@@ -26,7 +26,6 @@ public class CardSelection : MonoBehaviour
                 toDiscard.Remove(card);
             confirmButton.SetActive(true);
         }
-        
     }
     public void DeselectCard(CardDisplay cardDisplay) => selectedToKeep.Remove(cardDisplay);
     public void StartSelecting()

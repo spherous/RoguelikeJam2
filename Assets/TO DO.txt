@@ -47,13 +47,14 @@ Card effects
     Relocate a tower (instant)
     Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
     Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
-    Place a web-trap that greatly slows enemies (1 wave)
-    Place a burn-trap that greatly damages enemies (1 wave)
     X Heal (instant)
     Regen (sustained for a few waves)
-    ------Should we do block? if so, these 2 cards are easy and fast------
-    Adds a small amount of block (sustained)
-    Adds a large amount of block (instant)
+    
+    Spare time:
+        Adds a small amount of block (sustained)
+        Adds a large amount of block (instant)
+        Place a web-trap that greatly slows enemies (1 wave)
+        Place a burn-trap that greatly damages enemies (1 wave)
     
 
 Audio

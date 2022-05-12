@@ -14,5 +14,10 @@ public class WinScreen : MonoBehaviour
             fader.FadeIn();
         
         director.Play();
+
+        ThreadPool tp = GameObject.FindObjectOfType<ThreadPool>();
+        tp?.Hide();
+        GameManager gm = GameObject.FindObjectOfType<GameManager>();
+        gm?.healthBar.Hide();
     }
 }

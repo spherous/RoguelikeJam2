@@ -18,9 +18,11 @@ public class Enemy : MonoBehaviour, IHealth
     public float currentHP {get; set;}
     public Tile currentTile {get; private set;}
 
+    public float damage;
+
     public int scoreValue;
 
-    protected void Start()
+    protected virtual void Start()
     {
         enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
         procGen = GameObject.FindObjectOfType<ProcGen>();
@@ -35,8 +37,12 @@ public class Enemy : MonoBehaviour, IHealth
     {
         Vector3 vec = procGen.path[pathingToNode].transform.position - transform.position;
         Vector3 dir = vec.normalized;
-        transform.up = dir;
-        rb.velocity = dir * speed;
+        
+        if(dir != Vector3.zero)
+        {
+            transform.up = dir;
+            rb.velocity = dir * speed;
+        }
         
         if(vec.magnitude < 0.05f)
         {
@@ -52,15 +58,15 @@ public class Enemy : MonoBehaviour, IHealth
 
         if(pathingToNode > procGen.path.Count - 1)
         {
-            gameManager.TakeDamage(1);
+            gameManager.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float amount)
     {
         float startHP = currentHP;
-        currentHP = currentHP - damage >= 0 ? currentHP - damage : 0;
+        currentHP = currentHP - amount >= 0 ? currentHP - amount : 0;
 
         if(currentHP != startHP)
             onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);

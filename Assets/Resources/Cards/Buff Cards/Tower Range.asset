@@ -15,7 +15,7 @@ MonoBehaviour:
   buffTypes: 01000000
   <description>k__BackingField: Slightly increases all tower range
   <type>k__BackingField: 2
-  <artwork>k__BackingField: {fileID: 21300000, guid: cce7aed0bebe98a479002f797429bd73, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: abd60a3b81b364242bae254618099589, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1

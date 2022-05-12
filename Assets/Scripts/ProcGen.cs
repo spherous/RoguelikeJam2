@@ -16,7 +16,7 @@ public class ProcGen : MonoBehaviour
     public int passes = 3;
     public int rands = 5;
     public Kingdom kingdom;
-    
+
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
     private void Awake() {
@@ -33,7 +33,22 @@ public class ProcGen : MonoBehaviour
         PlaceEdgeWalls();
         GenerateNavMesh();
         ExtendPath();
+        PlaceSprites();
         CachePath();
+    }
+
+    private void PlaceSprites()
+    {
+        foreach(var col in gridGenerator.grid)
+        {
+            foreach(Tile tile in col)
+            {
+                if(tile == null)
+                    continue;
+                else if(tile.type == TileType.Buildable)
+                    tile.UpdateSprite();
+            }
+        }
     }
 
     private void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoint.index, homeTile.index));
@@ -159,7 +174,7 @@ public class ProcGen : MonoBehaviour
                     foreach(Tile neighbor in neighbors)
                     {
                         // don't invalidate the path
-                        if(neighbor.type != TileType.Path || neighbor == firstTile || neighbor == lastTile)
+                        if(neighbor == null || neighbor.type != TileType.Path || neighbor == firstTile || neighbor == lastTile)
                             continue;
 
                         currentPath = UpdateTileAlongPath(neighbor, TileType.Buildable);

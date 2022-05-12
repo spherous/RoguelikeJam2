@@ -52,7 +52,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a8f908355d36ed4b877a474c8da24a8, type: 2}
+  - {fileID: 2100000, guid: 5bbb96884a95ffa4fb5859b1f4d0c25b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   line: {fileID: 4439281952379373013}
   boxCollider: {fileID: 1713814776713829589}
   connectedTowers: []
+  damage: 0
 --- !u!61 &1713814776713829589
 BoxCollider2D:
   m_ObjectHideFlags: 0

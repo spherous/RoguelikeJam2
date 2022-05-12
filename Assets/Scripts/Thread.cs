@@ -63,7 +63,11 @@ public class Thread : MonoBehaviour
     {
         if(available)
             return false;
-        else if(remainingCooldown == 0)
+        
+        if(remainingCooldown > 0)
+            remainingCooldown--;
+            
+        if(remainingCooldown == 0)
         {
             Refresh();
             return true;
@@ -72,7 +76,6 @@ public class Thread : MonoBehaviour
         if(triggerCondition == ThreadEffectTriggerCondition.EveryTurn && Performance != null)
             Performance();
         
-        remainingCooldown--;
         text.text = $"{remainingCooldown}";
         return false;
     }

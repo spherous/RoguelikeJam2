@@ -64,7 +64,7 @@ public class ProgressionText : MonoBehaviour
     private void OnWaveComplete(Wave wave)
     {
         TryShow();
-        text.text = $"Wave {waveManager.currentWave + 1} Complete";
+        text.text = $"Wave Complete";
     }
 
     private void OnLevelStart(Level level)
@@ -76,7 +76,7 @@ public class ProgressionText : MonoBehaviour
     private void OnLevelComplete(Level level)
     {
         TryShow();
-        text.text = $"Level {levelManager.currentLevelIndex + 1} Complete";
+        text.text = $"Level Complete";
     }
 
     private void TryShow()
@@ -91,7 +91,7 @@ public class ProgressionText : MonoBehaviour
     private void OnWaveStart(Wave wave)
     {
         TryShow();
-        text.text = $"Wave {waveManager.currentWave + 1} Start";
+        text.text = $"Wave Start";
     }
     private void BuildModeStateChange(bool buildModeOn)
     {
@@ -114,6 +114,9 @@ public class ProgressionText : MonoBehaviour
         if(selecting)
             ForceShow($"Select {holdCount} Cards To Keep");
         else
-            Hide();
+        {
+            text.text = ($"Wave Start");
+            hideAtTime = Time.timeSinceLevelLoad + displayTime;
+        }
     }
 }

@@ -178,14 +178,14 @@ public class GridGenerator : MonoBehaviour
     {
         IEnumerable<Tile> Adjacent()
         {
-            if(TryGetTile(source.index + new Index(0, 1), out Tile upTile))
-                yield return upTile;
-            if(TryGetTile(source.index + new Index(0, -1), out Tile downTile))
-                yield return downTile;
-            if(TryGetTile(source.index + new Index(-1, 0), out Tile leftTile))
-                yield return leftTile;
-            if(TryGetTile(source.index + new Index(1, 0), out Tile rightTile))
-                yield return rightTile;
+            TryGetTile(source.index + new Index(0, 1), out Tile upTile);
+            yield return upTile;
+            TryGetTile(source.index + new Index(0, -1), out Tile downTile);
+            yield return downTile;
+            TryGetTile(source.index + new Index(-1, 0), out Tile leftTile);
+            yield return leftTile;
+            TryGetTile(source.index + new Index(1, 0), out Tile rightTile);
+            yield return rightTile;
         }
 
         return Adjacent().ToList();

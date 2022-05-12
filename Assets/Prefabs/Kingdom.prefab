@@ -98,7 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219d1b98d1cc5894a8f333ad34a4410f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 8907640594407542059}
   director: {fileID: 5593834694016436595}
+  sprites:
+  - {fileID: -4000664227112358279, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 3957364019514458168, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 4732369065891522340, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -2902466712612022734, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -72339187683445151, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -8840884655337795148, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 554196115214630989, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 7851339185227158821, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 7600967106972619695, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 5113855068624502119, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 2139251882597538941, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: 1746962646857892853, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -8724007274711586303, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -8044529229803671639, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
+  - {fileID: -5993848385145967629, guid: 8d1bc434647730f4bab00e8e06d3fe16, type: 3}
   loopStartTime: 2.92
 --- !u!320 &5593834694016436595
 PlayableDirector:
