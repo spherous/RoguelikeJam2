@@ -16,11 +16,11 @@ public class CardChoiceInputHandler : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        cardDisplay.Outline(2);
+        cardDisplay.Outline(Color.white);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        cardDisplay.Outline(0);
+        cardDisplay.Outline(Color.clear);
     }
 }

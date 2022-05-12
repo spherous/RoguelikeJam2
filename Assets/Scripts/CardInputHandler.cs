@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerClickHandler
 {
     [SerializeField] private CardDisplay cardDisplay;
     private CardDisplay zoomedCard;
     private GameObject cardPosition;
     private BuildMode buildMode;
+    private CardSelection cardSelection;
     private Hand cardSpawner;
     public bool isDragging;
     public float offset;
+    public bool selected;
 
 
     private void OnDestroy()
@@ -22,7 +24,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (buildMode.buildModeOn)
+        if (buildMode.buildModeOn || cardSelection.selecting)
             return;
         isDragging = true;
         cardDisplay.isDragging = true;
@@ -35,6 +37,8 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (buildMode.buildModeOn || cardSelection.selecting)
+            return;
         isDragging = false;
         cardDisplay.isDragging = false;
         if (Vector3.Distance(gameObject.transform.position, cardPosition.transform.position) < 1200)
@@ -48,7 +52,7 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (buildMode.buildModeOn)
+        if (buildMode.buildModeOn || cardSelection.selecting)
             return;
         cardDisplay.transform.position = eventData.position;
         cardDisplay.transform.rotation = Quaternion.identity;
@@ -72,9 +76,35 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     void Start() 
     {
+        cardSelection = GameObject.FindObjectOfType<CardSelection>();
         buildMode = GameObject.FindObjectOfType<BuildMode>();
         cardPosition = GameObject.Find("Card Position");    
         cardSpawner = GameObject.FindObjectOfType<Hand>();
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if(!cardSelection.selecting)
+            return;
+        if(!selected)
+        {
+            selected = true;
+            cardSelection.SelectCard(cardDisplay);
+            cardDisplay.Outline(Color.blue);
+        }
+            
+        else
+        {
+            selected = false;
+            cardDisplay.Outline(Color.clear);
+            cardSelection.DeselectCard(cardDisplay);
+        }
+
+
+    }
+    private void Update()
+    {
+        if(!cardSelection.selecting)
+            selected = false;
     }
 
 
