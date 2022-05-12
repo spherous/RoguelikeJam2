@@ -3088,9 +3088,19 @@ MonoBehaviour:
   levels:
   - waves:
     - enemyGroup:
-        type: 0
+        type: 1
         count: 1
       spawnInterval: 1
+      addsThread: 0
+    - enemyGroup:
+        type: 1
+        count: 2
+      spawnInterval: 0.5
+      addsThread: 0
+    - enemyGroup:
+        type: 1
+        count: 3
+      spawnInterval: 0.33
       addsThread: 0
 --- !u!1 &1332929663
 GameObject:
@@ -3197,13 +3207,15 @@ PlayableDirector:
   m_GameObject: {fileID: 1332929663}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
+  m_PlayableAsset: {fileID: 11400000, guid: a96ed577bad5d2841bb84a6f549fe275, type: 2}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 0}
+    value: {fileID: 1332929667}
+  - key: {fileID: -3630810110942289429, guid: a96ed577bad5d2841bb84a6f549fe275, type: 2}
     value: {fileID: 1332929667}
   m_ExposedReferences:
     m_References: []
@@ -3576,7 +3588,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
-    - {fileID: 11400000, guid: 45a88893ea900ab4dac0d44c186f14ba, type: 2}
+    - {fileID: 11400000, guid: 6e968dc2a85bda7488378b9a56b06e05, type: 2}
+    - {fileID: 11400000, guid: 11f61204aa96cec49b29a87d03382134, type: 2}
     - {fileID: 11400000, guid: cc2300f67cd05f44e91fc2e20b878870, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -3636,10 +3649,10 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 13
       Data: 
