@@ -58,7 +58,11 @@ public class Hand : MonoBehaviour
     private void OnWaveStart(Wave newWave)
     {
         if (buildMode.buildModeOn)
+        {
             buildMode.Cancelled();
+            buildMode.MoveATowerCancelled();
+        }
+
 
         if (holdCount <= 0)
             OnWaveStartDiscard(cardList);

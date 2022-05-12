@@ -96,9 +96,17 @@ public class ProgressionText : MonoBehaviour
     private void BuildModeStateChange(bool buildModeOn)
     {
         if(buildModeOn)
-            ForceShow("Build Mode");
+        {
+            if (buildMode.movingTower)
+            {
+                ForceShow("Move A Tower");
+                return;
+            }
+        ForceShow("Build Mode");
+        }
         else
             Hide();
+        
 
     }
     private void CardSelectionStateChange(bool selecting, int holdCount)

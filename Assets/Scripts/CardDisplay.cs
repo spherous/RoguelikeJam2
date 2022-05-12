@@ -74,6 +74,12 @@ public class CardDisplay : SerializedMonoBehaviour
                 buildMode.Open(true, this);
                 return;
             }
+            if(card is TechCard techCard && card.name == ("Move A Tower"))
+            {
+                buildMode.MoveATowerOpen(true, this);
+                transform.localScale = Vector3.zero;
+                return;
+            }
         }
         
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
