@@ -114,6 +114,9 @@ MonoBehaviour:
   buildModeOn: 0
   canBuild: 0
   buildModeOutline: {fileID: -1692041898509714901}
+  cardDisplay: {fileID: 0}
+  movingTower: 0
+  movingOutlinePrefab: {fileID: 5324061386324009598, guid: 9d30d40776ef25046980bbaab9ce9e86, type: 3}
 --- !u!114 &2275929722004398861
 MonoBehaviour:
   m_ObjectHideFlags: 0

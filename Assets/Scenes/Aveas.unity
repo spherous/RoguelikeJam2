@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 58da56c7363803f4b97fe7f3ca0f5000, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -3537,7 +3537,7 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
     - {fileID: 11400000, guid: dc4af89e954993b4299ba71303e7c17d, type: 2}
-    - {fileID: 11400000, guid: ddb0e9d33e505424cae639fa701bccc6, type: 2}
+    - {fileID: 11400000, guid: d7aab40b9866a5240ababcef9e079648, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -3584,7 +3584,7 @@ MonoBehaviour:
       Data: 3|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 4
     - Name: 
       Entry: 10
       Data: 0
@@ -3594,9 +3594,6 @@ MonoBehaviour:
     - Name: 
       Entry: 10
       Data: 0
-    - Name: 
-      Entry: 10
-      Data: 2
     - Name: 
       Entry: 10
       Data: 2
@@ -3647,6 +3644,7 @@ MonoBehaviour:
   selecting: 0
   selectedToKeep: []
   toDiscard: []
+  confirmButton: {fileID: 0}
 --- !u!1 &1568399198
 GameObject:
   m_ObjectHideFlags: 0
