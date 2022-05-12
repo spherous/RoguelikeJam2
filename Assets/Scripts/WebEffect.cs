@@ -1,0 +1,1 @@
+public enum WebEffect {None = 0, Slow = 1, Stun = 2, Thorns = 3, Wounding = 4, DamageAmp = 5}

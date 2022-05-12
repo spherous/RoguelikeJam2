@@ -26,6 +26,8 @@ public class WebTower : MonoBehaviour, ITower
 
     [field:SerializeField] public float damage {get; set;}
     private float orgDamage;
+
+    public WebEffect webEffect = WebEffect.None;
     
     private void Awake()
     {
@@ -53,7 +55,11 @@ public class WebTower : MonoBehaviour, ITower
         }
     }
 
-    private void OnWaveComplete(Wave wave) => damage = orgDamage;
+    private void OnWaveComplete(Wave wave)
+    {
+        // webEffect = WebEffect.None;
+        damage = orgDamage;
+    }
 
     private void ConnectToNearbyWebTowers()
     {
@@ -72,10 +78,12 @@ public class WebTower : MonoBehaviour, ITower
         Vector3 halfWay = vec / 2;
 
         Web web = Instantiate(webPrefab, transform.position, Quaternion.identity);
-
-        web.Connect(this, to, bestSelfPoint, bestOtherPoint);
         web.damage = damage;
+        if(webEffect != WebEffect.None)
+            web.GainWebEffect(webEffect, this);
+        web.Connect(this, to, bestSelfPoint, bestOtherPoint);
         connectedWebs.Add(web);
+
         to.ReceiveConnection(web);
     }
 
@@ -83,6 +91,8 @@ public class WebTower : MonoBehaviour, ITower
     {
         director.Play();
         connectedWebs.Add(incomingConnection);
+        if(webEffect != WebEffect.None)
+            incomingConnection.GainWebEffect(webEffect, this);
     }
 
     private List<WebTower> GetNearbyWebTowers()
@@ -154,4 +164,13 @@ public class WebTower : MonoBehaviour, ITower
     public void AdjustRange(float percent){} // does nothing for range
     public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
     public void AdjustAttackSpeed(float percent){} // does nothing for attack speed
+    public void GainWebEffect(WebEffect gaining)
+    {
+        if(webEffect != WebEffect.None)
+            return;
+        
+        webEffect = gaining;
+        foreach(Web web in connectedWebs)
+            web.GainWebEffect(gaining, this);
+    }
 }

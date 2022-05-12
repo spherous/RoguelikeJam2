@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class Enemy : MonoBehaviour, IHealth
     [SerializeField] Collider2D col;
     [field:SerializeField] public float speed {get; set;}
 
+    private float? stunnedUntil = null;
+
     public event OnHealthChanged onHealthChanged;
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
@@ -21,6 +24,8 @@ public class Enemy : MonoBehaviour, IHealth
     public float damage;
 
     public int scoreValue;
+
+    float damageMod;
 
     protected virtual void Start()
     {
@@ -35,6 +40,15 @@ public class Enemy : MonoBehaviour, IHealth
 
     protected void FixedUpdate()
     {
+        if(stunnedUntil.HasValue)
+        {
+            if(Time.timeSinceLevelLoad < stunnedUntil.Value)
+                return;
+
+            stunnedUntil = null;
+        }
+
+
         Vector3 vec = procGen.path[pathingToNode].transform.position - transform.position;
         Vector3 dir = vec.normalized;
         
@@ -63,9 +77,23 @@ public class Enemy : MonoBehaviour, IHealth
         }
     }
 
+    
+
+    public void Stun(float duration)
+    {
+        rb.velocity = Vector3.zero;
+        stunnedUntil = Time.timeSinceLevelLoad + duration;
+    }
+
+    public void AdjustDamageTaken(float percent)
+    {
+        damageMod = percent;
+    }
+
     public void TakeDamage(float amount)
     {
         float startHP = currentHP;
+        amount *= 1 + damageMod;
         currentHP = currentHP - amount >= 0 ? currentHP - amount : 0;
 
         if(currentHP != startHP)
@@ -93,7 +121,8 @@ public class Enemy : MonoBehaviour, IHealth
     public virtual void Die()
     {
         gameManager.AddToScore(scoreValue);
-        Destroy(gameObject);
+        if(this != null && gameObject != null)
+            Destroy(gameObject);
     }
 
     public void AdjustSpeed(float amount) => speed = Mathf.Clamp(amount + speed, 0, speed + Mathf.Abs(amount));

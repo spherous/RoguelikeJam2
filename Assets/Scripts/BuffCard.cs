@@ -14,6 +14,7 @@ public class BuffCard : ScriptableObject, ICard
     [field:SerializeField] public ThreadReserveType threadReserveType {get; set;} = ThreadReserveType.None;
     [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
     [field:SerializeField] public int threadUseDuration {get; set;}
+    [field:SerializeField] public bool playOnTower {get; set;} = false;
 
     public bool TryPlay(Tile tile)
     {
@@ -22,7 +23,7 @@ public class BuffCard : ScriptableObject, ICard
             return false;
         else if(threadUseDuration > 0 || threadReserveType != ThreadReserveType.None)
             return TryReserveThreads(threadPool);
-        return TrySpendThreads(threadPool);
+        return TrySpendThreads(threadPool, tile);
     }
 
     private void PlayAllEffects()
@@ -31,11 +32,20 @@ public class BuffCard : ScriptableObject, ICard
             type.GetEffect()?.Invoke();
     }
 
-    private bool TrySpendThreads(ThreadPool threadPool)
+    private void PlayOnTower(ITower tower)
+    {
+        foreach(BuffType type in buffTypes)
+            type.PlayOnTower(tower)?.Invoke();
+    }
+
+    private bool TrySpendThreads(ThreadPool threadPool, Tile tile)
     {
         if(threadPool.Request(threadCost))
         {
-            PlayAllEffects();
+            if(playOnTower && tile != null && tile.tower != null)
+                PlayOnTower(tile.tower);
+            else
+                PlayAllEffects();
             return true;
         }
 

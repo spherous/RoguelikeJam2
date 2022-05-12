@@ -45,5 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DDoSBug: {fileID: 7276265943621871832, guid: 65c6800c2c5536e4484691aeeafbddbc, type: 3}
   trojanHorse: {fileID: 559825583304817677, guid: 24c3a1a5cc957034e858d8af6c93dd5d, type: 3}
+  netWorm: {fileID: 5291760645997015399, guid: 0dd44d897aef0eb4abef7f702743551b, type: 3}
+  blackKnight: {fileID: 2679275053008304423, guid: 95cb36dffc14f1c4f9dceac8e930f260, type: 3}
   procGen: {fileID: 0}
   enemyList: []

@@ -11,51 +11,50 @@ Towers
     long range snipe (can't hit nearby)
 
 Web effects
-    slow while in it
-    stun when entering
+    X slow while in it
+    X stun when entering
+    X thorns dot while in it
+    X Wounding deals damage when entering
+    X Damage amp while in it
     burn dot lasts after exiting
-    thorns dot while in it
-    Wounding deals damage when entering
-    Damage amp while in it
 
 Card effects
-    X Place chain tower (instant)
     Place aoe burst tower (instant)
     place long range snipe tower (instant)
+    X Place chain tower (instant)
     X draw 2 (instant)
     X discard hand and draw 3 (instant)
-    gain a thread (takes time to play, once per level per card)
     X Discard down to 2 cards instead of 5 cards after build phase, but only draw up to 4 cards at the start of each turn (once per level)
     X Slightly Increase all tower damage (sustained for a few waves)
-    Greatly increase 1 tower's damage (1 wave)
-    Slightly increase all web effects (sustained for a few waves)
-    Greatly increase 1 tower's range (1 wave)
+    X Greatly increase 1 tower's damage (1 wave)
+    X Greatly increase 1 tower's range (1 wave)
     X Slightly increase all tower's range (sustained)
-    Greatly increase 1 web's effects (1 wave)
-    Moderately increased effects of all webs attached to tower (sustained for a few waves)
     X Greatly slow next wave (1 wave)
     X Slightly slow next 2 wave (sustained)
     X Next wave moves moderately faster but has less hp (1 wave)
-    Next wave pauses between steps (1 wave)
-    Ignite next wave (1 wave)
+    X Slightly increase all tower attack speed (sustained for a few waves)
+    X Greatly increase 1 tower attack speed (1 wave)
+    X Relocate a tower (instant)
+    X Heal (instant)
+    gain a thread (takes time to play, once per level per card)
     Increase chain count (sustained for a few waves)
     Reduce chain count but increase damage (sustained for a few waves)
     Increase chain range (sustained for a few waves)
     Reduce chain range but increase damage (sustained for a few waves)
-    X Slightly increase all tower attack speed (sustained for a few waves)
-    Greatly increase 1 tower attack speed (1 wave)
-    Relocate a tower (instant)
     Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
     Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
-    X Heal (instant)
-    Regen (sustained for a few waves)
     
     Spare time:
+        Next wave pauses between steps (1 wave)
+        Ignite next wave (1 wave)
+        Slightly increase all web effects (sustained for a few waves)
+        Greatly increase 1 web's effects (1 wave)
+        Moderately increased effects of all webs attached to tower (sustained for a few waves)
+        Regen (sustained for a few waves)
         Adds a small amount of block (sustained)
         Adds a large amount of block (instant)
         Place a web-trap that greatly slows enemies (1 wave)
-        Place a burn-trap that greatly damages enemies (1 wave)
-    
+        Place a burn-trap that greatly damages enemies (1 wave) 
 
 Audio
     Music
@@ -71,7 +70,7 @@ Credits
 X Font
 
 X win screen
-lose screen
+X lose screen
 
 levels
     X pick a new card after each level
@@ -82,7 +81,7 @@ levels
 Enemies
     X DDoS Bot (Fast, weak, small)
     X Trojan Horse (big, slow, tanky, Drops DDoS bot on death)
-    Net-Worm (self-replicating 2 tiers of splits: example: 1 net-worm has 100hp, at 50hp it spawns another one at 50hp. When both of those reach 25 hp, they both spawn an additional (total 4) worms)
+    X Net-Worm (self-replicating 2 tiers of splits: example: 1 net-worm has 100hp, at 50hp it spawns another one at 50hp. When both of those reach 25 hp, they both spawn an additional (total 4) worms)
     Hijacker (disables towers sometimes)
     Black Knight
     On Death

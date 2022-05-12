@@ -93,22 +93,16 @@ public class ProgressionText : MonoBehaviour
         TryShow();
         text.text = $"Wave Start";
     }
-    private void BuildModeStateChange(bool buildModeOn)
+    private void BuildModeStateChange(BuildModeState state)
     {
-        if(buildModeOn)
+        if(state == BuildModeState.None)
         {
-            if (buildMode.movingTower)
-            {
-                ForceShow("Move A Tower");
-                return;
-            }
-        ForceShow("Build Mode");
-        }
-        else
             Hide();
-        
-
+            return;
+        }
+        ForceShow(state.GetMessage());
     }
+
     private void CardSelectionStateChange(bool selecting, int holdCount)
     {
         if(selecting)
