@@ -3103,6 +3103,8 @@ GameObject:
   - component: {fileID: 1332929664}
   - component: {fileID: 1332929666}
   - component: {fileID: 1332929665}
+  - component: {fileID: 1332929668}
+  - component: {fileID: 1332929667}
   m_Layer: 5
   m_Name: Knight
   m_TagString: Untagged
@@ -3149,7 +3151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bed382edf7c71ff4288ce9164b1abf44, type: 3}
+  m_Sprite: {fileID: 4161571781314418468, guid: d99d96cac692b12478fe549eabd244c7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3167,6 +3169,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332929663}
   m_CullTransparentMesh: 1
+--- !u!95 &1332929667
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332929663}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &1332929668
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332929663}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: e1cc4c2ac33040a48a443b533db9c7cb, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 2171430506174850390, guid: e1cc4c2ac33040a48a443b533db9c7cb, type: 2}
+    value: {fileID: 1332929667}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1407737214
 GameObject:
   m_ObjectHideFlags: 0
