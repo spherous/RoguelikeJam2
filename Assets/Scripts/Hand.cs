@@ -74,7 +74,6 @@ public class Hand : MonoBehaviour
             RemoveCard(toDiscard);
             Destroy(toDiscard.gameObject);
         }
-
     }
 
     private void OnWaveComplete(Wave wave) => SpawnCard(handCount - cardList.Count);

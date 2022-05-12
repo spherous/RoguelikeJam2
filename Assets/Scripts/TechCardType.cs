@@ -10,6 +10,11 @@ public enum TechCardType
     DiscardHand = 5,
     Heal = 6,
 
+    SlowMod = 8,
+    StunMod = 9,
+    ThornsMod = 10,
+    WoundingMod = 11,
+    DamageAmpMod = 12
 }
 
 public static class TechCardTypeExtensions
@@ -23,6 +28,11 @@ public static class TechCardTypeExtensions
         TechCardType.Draw1More => () => ModifyDrawCount(1),
         TechCardType.DiscardHand => () => GameObject.FindObjectOfType<Hand>()?.DiscardHand(),
         TechCardType.Heal => () => Heal(1),
+        TechCardType.SlowMod => () => {},
+        TechCardType.StunMod => () => {},
+        TechCardType.ThornsMod => () => {},
+        TechCardType.WoundingMod => () => {},
+        TechCardType.DamageAmpMod => () => {},
         _ => null
     };
 
