@@ -104,6 +104,7 @@ MonoBehaviour:
   col: {fileID: 7276265943621871846}
   <speed>k__BackingField: 1
   <maxHP>k__BackingField: 300
+  damage: 18
   scoreValue: 4
   payloadCount: 15
 --- !u!50 &7276265943621871833

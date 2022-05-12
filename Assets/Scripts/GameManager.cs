@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour, IHealth
     private ThreadPool threadPool;
 
     [SerializeField] private HealthBar healthBarPrefab;
-    private HealthBar healthBar;
+    public HealthBar healthBar {get; private set;}
     [field:SerializeField] public float maxHP {get; set;}
     public float currentHP {get; set;}
     public int score {get; private set;}

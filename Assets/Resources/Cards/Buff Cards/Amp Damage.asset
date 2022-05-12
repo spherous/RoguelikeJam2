@@ -15,7 +15,7 @@ MonoBehaviour:
   buffTypes: 02000000
   <description>k__BackingField: Slightly incrase all tower damage
   <type>k__BackingField: 2
-  <artwork>k__BackingField: {fileID: 7628434684146490500, guid: 7d1d6508df20b7d48ae47379b806dbf1, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 4de3bbac152bce34b84fa062ea414000, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1

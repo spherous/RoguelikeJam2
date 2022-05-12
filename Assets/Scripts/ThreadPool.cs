@@ -104,6 +104,8 @@ public class ThreadPool : MonoBehaviour
     private void OnHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
     {
         if(newHP == 0)
-            fader.FadeOut();
+            Hide();
     }
+
+    public void Hide() => fader.FadeOut();
 }

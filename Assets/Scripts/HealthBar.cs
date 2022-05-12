@@ -39,7 +39,7 @@ public class HealthBar : SerializedMonoBehaviour
                 if(childIndex > deathLoop.Count - 1)
                 {
                     inDeath = false;
-                    fader.FadeOut();
+                    Hide();
                     return;
                 }
                 bg.sprite = deathLoop[childIndex];
@@ -53,6 +53,8 @@ public class HealthBar : SerializedMonoBehaviour
         else
             passedFrames++;
     }
+
+    public void Hide() => fader.FadeOut();
 
     private void OnHealthChanged(IHealth changed, float oldHP, float newHP, float percent) 
     {

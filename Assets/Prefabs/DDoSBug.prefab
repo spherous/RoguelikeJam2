@@ -99,11 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cd9e6fd970e1c4182a7ecffd0ced04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathingToNode: 1
   rb: {fileID: 7276265943621871833}
   col: {fileID: 7276265943621871846}
   <speed>k__BackingField: 5
   <maxHP>k__BackingField: 9
-  scoreValue: 0
+  damage: 1
+  scoreValue: 1
 --- !u!50 &7276265943621871833
 Rigidbody2D:
   serializedVersion: 4

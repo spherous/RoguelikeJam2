@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] DDoSEnemy DDoSBug;
     [SerializeField] TrojanHorse trojanHorse;
+    [SerializeField] NetWorm netWorm;
     [SerializeField] private ProcGen procGen;
 
     public List<Enemy> enemyList = new List<Enemy>();
@@ -28,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     public Enemy GetPrefab(EnemyType type) => type switch {
         EnemyType.DDoSBug => DDoSBug,
         EnemyType.TrojanHorse => trojanHorse,
+        EnemyType.NetWorm => netWorm,
         _ => null
     };
 

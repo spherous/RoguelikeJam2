@@ -25,7 +25,6 @@ public class CardSelection : MonoBehaviour
                 toDiscard.Remove(card);
             FinishSelecting();
         }
-        
     }
     public void DeselectCard(CardDisplay cardDisplay) => selectedToKeep.Remove(cardDisplay);
     public void StartSelecting()
