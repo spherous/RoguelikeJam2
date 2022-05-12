@@ -10,7 +10,6 @@ public enum TechCardType
     DiscardHand = 5,
     Heal = 6,
     MoveATower = 7,
-
     SlowMod = 8,
     StunMod = 9,
     ThornsMod = 10,
@@ -60,9 +59,9 @@ public static class TechCardTypeExtensions
     }
     public static void MoveATower()
     {
-        BuildMode bm = GameObject.FindObjectOfType<BuildMode>();
-            if(bm == null)
-                Debug.LogError("No build mode found");
+        // BuildMode bm = GameObject.FindObjectOfType<BuildMode>();
+        // if(bm == null)
+        //     Debug.LogError("No build mode found");
                 
     }
 }

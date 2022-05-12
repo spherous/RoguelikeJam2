@@ -43,8 +43,6 @@ public class BuildMode : MonoBehaviour
                 buildModeOutline.Remove();
                 canBuild = false;
             }
-            
-
         }
     }
     private void SelectTower()
@@ -96,7 +94,6 @@ public class BuildMode : MonoBehaviour
         }
         if(context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
         {
-
             if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
             {
                 buildModeOn = false;

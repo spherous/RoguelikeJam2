@@ -71,7 +71,7 @@ Credits
 X Font
 
 X win screen
-lose screen
+X lose screen
 
 levels
     X pick a new card after each level
