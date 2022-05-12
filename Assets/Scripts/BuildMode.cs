@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEngine.InputSystem;
+using System;
+
+public enum BuildModeState {None = 0, Build = 1, Relocate = 2, PlayOnTower = 3};
+public static class BuildModeStateExtensions
+{
+    public static string GetMessage(this BuildModeState state) => state switch{
+        BuildModeState.Build => "Click to build a tower",
+        BuildModeState.Relocate => "Move a tower",
+        BuildModeState.PlayOnTower => "Click on a tower",
+        _ => "",
+    };
+}
 
 public class BuildMode : MonoBehaviour
 {
-    public delegate void BuildModeStateChange(bool enabled);
+    public delegate void BuildModeStateChange(BuildModeState state);
     public BuildModeStateChange buildModeStateChange;
-    public bool buildModeOn;
+    public BuildModeState state {get; private set;} = BuildModeState.None;
+    public bool buildModeOn => state != BuildModeState.None;
     public bool canBuild;
     private MouseData mouseData;
     [SerializeField] BuildModeOutline buildModeOutline;
     public CardDisplay cardDisplay;
     private GameObject towerToMove;
-    public bool movingTower;
     public GameObject movingOutlinePrefab;
     private GameObject movingOutline;
+    bool overTower = false;
     void Awake() 
     {
         mouseData = FindObjectOfType<MouseData>();
@@ -29,19 +42,32 @@ public class BuildMode : MonoBehaviour
         {
             if(mouseData.hoveredTile != null)
             {
-                if(!mouseData.hoveredTile.isBuildable && !movingTower || mouseData.hoveredTile.type != TileType.Buildable)
+                if(mouseData.hoveredTile.tower != null)
                 {
-                    buildModeOutline.Remove();
-                    canBuild = false;
+                    buildModeOutline.Move(mouseData.hoveredTile.transform);
+                    overTower = true;
                     return;
                 }
-                buildModeOutline.Move(mouseData.hoveredTile.transform);
-                canBuild = true;
+                else
+                {
+                    overTower = false;
+
+                    if(!mouseData.hoveredTile.isBuildable && state != BuildModeState.Relocate || mouseData.hoveredTile.type != TileType.Buildable)
+                    {
+                        buildModeOutline.Remove();
+                        canBuild = false;
+                        return;
+                    }
+                    buildModeOutline.Move(mouseData.hoveredTile.transform);
+                    canBuild = true;
+                }
+
             }
             else
             {
                 buildModeOutline.Remove();
                 canBuild = false;
+                overTower = false;
             }
         }
     }
@@ -54,100 +80,117 @@ public class BuildMode : MonoBehaviour
     }
     public void Click(CallbackContext context)
     {
-        if (context.started && buildModeOn && mouseData.hoveredTile != null && movingTower)
+        if(context.started && mouseData.hoveredTile != null)
+            GetExecution()?.Invoke();
+    }
+
+    private Action GetExecution() => state switch{
+        BuildModeState.Build => Build,
+        BuildModeState.Relocate => Relocate,
+        BuildModeState.PlayOnTower => PlayOnTower,
+        _ => null
+    };
+
+    void Build()
+    {
+        if(canBuild)
         {
-            if(towerToMove == null && mouseData.hoveredTile.tower != null)
+            if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
+            {
+                Complete();
+                return;
+            }
+            Cancelled();
+        }
+    }
+
+    void PlayOnTower()
+    {
+        if(overTower && mouseData?.hoveredTile?.tower != null)
+        {
+            if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
+            {
+                Complete();
+                return;
+            }
+            Cancelled();
+        }
+    }
+
+    void Relocate()
+    {
+        if(towerToMove == null && mouseData.hoveredTile.tower != null)
+        {
+            SelectTower();
+            return;
+        }
+        if(towerToMove != null)
+        {
+            if(mouseData.hoveredTile.transform.position == towerToMove.transform.position)
+            {
+                towerToMove = null;
+                Destroy(movingOutline);
+                return;
+            }
+            if(mouseData.hoveredTile.tower != null)
             {
                 SelectTower();
                 return;
             }
-            if (towerToMove != null)
-            {
-                if (mouseData.hoveredTile.transform.position == towerToMove.transform.position)
-                {
-                    towerToMove = null;
-                    Destroy(movingOutline);
-                    return;
-                }
-                if (mouseData.hoveredTile.tower != null)
-                {
-                    SelectTower();
-                    return;
-                }
-            }
-            if (mouseData.hoveredTile.tower != null || towerToMove != null && mouseData.hoveredTile.isBuildable)
-            {
-                if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
-                {
-                    towerToMove.transform.parent = mouseData.hoveredTile.transform;
-                    towerToMove.transform.localPosition = Vector3.zero;
-                    towerToMove = null;
-                    movingTower = false;
-                    buildModeOn = false;
-                    cardDisplay.RemoveFromHand();
-                    buildModeOutline.Remove();
-                    buildModeStateChange?.Invoke(buildModeOn);
-                    GameObject.Destroy(movingOutline);
-                }
-            }
-            return;
         }
-        if(context.started && canBuild && buildModeOn && mouseData.hoveredTile != null)
+        if(mouseData.hoveredTile.tower != null || towerToMove != null && mouseData.hoveredTile.isBuildable)
         {
             if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
             {
-                buildModeOn = false;
-                buildModeStateChange?.Invoke(buildModeOn);
-                canBuild = false;
-                buildModeOutline.Remove();
-                cardDisplay.RemoveFromHand();
-                return;
+                towerToMove.transform.parent = mouseData.hoveredTile.transform;
+                towerToMove.transform.localPosition = Vector3.zero;
+                towerToMove = null;
+                Destroy(movingOutline);
+                Complete();
             }
-            Cancelled();
-
+            else
+                MoveATowerCancelled();
         }
-    } 
+    }
+    public void Complete()
+    {
+        Close();
+        cardDisplay.RemoveFromHand();
+    }
     public void Cancelled()
     {
-        buildModeOutline.Remove();
-        buildModeOn = false;
-        buildModeStateChange?.Invoke(buildModeOn);
-        canBuild = false;
+        Close();
         cardDisplay.ReturnCard();
-        cardDisplay.transform.localScale =  cardDisplay.scale;
+        cardDisplay.transform.localScale = cardDisplay.scale;
     }
+
+    public void Open(CardDisplay cardDisplay, BuildModeState state)
+    {
+        this.cardDisplay = cardDisplay;
+        StateChange(state);
+    }
+    private void Close()
+    {
+        canBuild = false;
+        overTower = false;
+        buildModeOutline.Remove();
+        StateChange(BuildModeState.None);
+    }
+
     public void MoveATowerCancelled()
     {
-        buildModeOutline.Remove();
-        buildModeOn = false;
-        movingTower = false;
+        Cancelled();
         towerToMove = null;
-        buildModeStateChange?.Invoke(buildModeOn);
-        canBuild = false;
-        cardDisplay.ReturnCard();
-        cardDisplay.transform.localScale =  cardDisplay.scale;
         Destroy(movingOutline);
     }
     public void Escape(CallbackContext context)
     {
-        if (context.started && buildModeOn)
-        {
-            Cancelled();
+        if(context.started && state != BuildModeState.None)
             MoveATowerCancelled();
-        }
     }
-    public void Open(bool on, CardDisplay cardDisplay)
+    private void StateChange(BuildModeState state)
     {
-        buildModeOn = on;
-        this.cardDisplay = cardDisplay;
-        buildModeStateChange?.Invoke(buildModeOn);
+        this.state = state;
+        buildModeStateChange?.Invoke(state);
     }
-    public void MoveATowerOpen(bool on, CardDisplay cardDisplay)
-    {
-        this.cardDisplay = cardDisplay;
-        buildModeOn = true;
-        movingTower = true;
-        buildModeStateChange?.Invoke(buildModeOn);
-    }
-
 }
