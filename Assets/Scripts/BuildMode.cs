@@ -86,6 +86,7 @@ public class BuildMode : MonoBehaviour
                     towerToMove = null;
                     movingTower = false;
                     buildModeOn = false;
+                    cardDisplay.RemoveFromHand();
                     buildModeOutline.Remove();
                     buildModeStateChange?.Invoke(buildModeOn);
                     GameObject.Destroy(movingOutline);
