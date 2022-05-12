@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] DDoSEnemy DDoSBug;
     [SerializeField] TrojanHorse trojanHorse;
     [SerializeField] NetWorm netWorm;
+    [SerializeField] BlackKnight blackKnight;
     [SerializeField] private ProcGen procGen;
 
     public List<Enemy> enemyList = new List<Enemy>();
@@ -30,6 +31,7 @@ public class EnemySpawner : MonoBehaviour
         EnemyType.DDoSBug => DDoSBug,
         EnemyType.TrojanHorse => trojanHorse,
         EnemyType.NetWorm => netWorm,
+        EnemyType.BlackKnight => blackKnight,
         _ => null
     };
 

@@ -148,7 +148,7 @@ MonoBehaviour:
   connectedTowers: []
   damage: 0
   effects: 
-  thornsProcTime: 0.333
+  thornsProcTime: 0.15
 --- !u!61 &1713814776713829589
 BoxCollider2D:
   m_ObjectHideFlags: 0

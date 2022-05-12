@@ -3088,33 +3088,8 @@ MonoBehaviour:
   levels:
   - waves:
     - enemyGroup:
-        type: 1
-        count: 2
-      spawnInterval: 0.25
-      addsThread: 1
-    - enemyGroup:
-        type: 1
-        count: 2
-      spawnInterval: 0.25
-      addsThread: 1
-    - enemyGroup:
-        type: 1
-        count: 2
-      spawnInterval: 0.25
-      addsThread: 0
-    - enemyGroup:
-        type: 1
-        count: 2
-      spawnInterval: 0.25
-      addsThread: 0
-    - enemyGroup:
-        type: 1
-        count: 2
-      spawnInterval: 0.25
-      addsThread: 0
-    - enemyGroup:
-        type: 2
-        count: 3
+        type: 0
+        count: 1
       spawnInterval: 1
       addsThread: 0
 --- !u!1 &1332929663
@@ -3222,13 +3197,13 @@ PlayableDirector:
   m_GameObject: {fileID: 1332929663}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: e1cc4c2ac33040a48a443b533db9c7cb, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 1
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: 2171430506174850390, guid: e1cc4c2ac33040a48a443b533db9c7cb, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 1332929667}
   m_ExposedReferences:
     m_References: []
