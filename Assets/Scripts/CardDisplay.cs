@@ -103,15 +103,7 @@ public class CardDisplay : SerializedMonoBehaviour
         hand.FanCards();
     }
 
-    public void Outline(int colorState)
-    {
-        if(colorState == 0)
-            outline.color = Color.clear;
-        else if(colorState == 1)
-            outline.color = Color.white;
-        else if(colorState == 2)
-            outline.color = Color.green;
-    }
+    public void Outline(Color color) => outline.color = color;
 
     void Update() 
     {
@@ -120,12 +112,15 @@ public class CardDisplay : SerializedMonoBehaviour
 
         if(disableAutoOutline)
             return;
-
-        if(sqrLen > playDistance && isDragging)
-            Outline(2);
-        else if(sqrLen < playDistance && isDragging)
-            Outline(1);
-        else 
-            Outline(0);
+        if(isDragging)
+        {
+            if(sqrLen > playDistance && isDragging)
+                Outline(Color.green);
+            else if(sqrLen < playDistance && isDragging)
+                Outline(Color.white);
+            return;
+        }
+        if(!isDragging && !GameObject.FindObjectOfType<CardSelection>().selecting)
+            Outline(Color.clear);
     }
 }

@@ -8,6 +8,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private Deck deck;
     [SerializeField] private BuildMode buildMode;
+    [SerializeField] private CardSelection cardSelection;
     public GameObject cardPosition;
     public List<CardDisplay> cardList = new List<CardDisplay>();
     public CardDisplay cardPrefab;
@@ -59,13 +60,21 @@ public class Hand : MonoBehaviour
         if (buildMode.buildModeOn)
             buildMode.Cancelled();
 
-        for(int i = cardList.Count-1; i >= holdCount; i--)
+        if (holdCount <= 0)
+            OnWaveStartDiscard(cardList);
+        else
+            cardSelection.StartSelecting();
+        
+    }
+    public void OnWaveStartDiscard(List<CardDisplay> cardsToDiscard)
+    {
+        for (int i = cardsToDiscard.Count-1; i >= 0; i--)
         {
-            deck.AddToDiscard(cardList[i].card);
-            Destroy(cardList[i].gameObject);
-            cardList.RemoveAt(i);
+            CardDisplay toDiscard = cardsToDiscard[i];
+            RemoveCard(toDiscard);
+            Destroy(toDiscard.gameObject);
         }
-        FanCards();
+
     }
 
     private void OnWaveComplete(Wave wave) => SpawnCard(handCount - cardList.Count);
@@ -79,7 +88,6 @@ public class Hand : MonoBehaviour
             newCard.SetCard(drawnCards[i]);
             cardList.Add(newCard);
         }
-
         FanCards();
     }
 

@@ -9,6 +9,7 @@ public class ProgressionText : MonoBehaviour
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private BuildMode buildMode;
+    [SerializeField] private CardSelection cardSelection;
     public float displayTime;
     private float? hideAtTime;
 
@@ -19,6 +20,7 @@ public class ProgressionText : MonoBehaviour
         levelManager.onLevelStart += OnLevelStart;
         levelManager.onLevelComplete += OnLevelComplete;
         buildMode.buildModeStateChange += BuildModeStateChange;
+        cardSelection.cardSelectionStateChange += CardSelectionStateChange;
     }
 
     private void OnDestroy()
@@ -28,6 +30,7 @@ public class ProgressionText : MonoBehaviour
         levelManager.onLevelStart -= OnLevelStart;
         levelManager.onLevelComplete -= OnLevelComplete;
         buildMode.buildModeStateChange -= BuildModeStateChange;
+        cardSelection.cardSelectionStateChange -= CardSelectionStateChange;
     }
 
     private void Update()
@@ -97,5 +100,12 @@ public class ProgressionText : MonoBehaviour
         else
             Hide();
 
+    }
+    private void CardSelectionStateChange(bool selecting, int holdCount)
+    {
+        if(selecting)
+            ForceShow($"Select {holdCount} Cards To Keep");
+        else
+            Hide();
     }
 }
