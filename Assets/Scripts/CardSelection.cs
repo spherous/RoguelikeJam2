@@ -12,6 +12,7 @@ public class CardSelection : MonoBehaviour
     public List<CardDisplay> toDiscard = new List<CardDisplay>();
     public delegate void CardSelectionStateChange(bool enabled, int holdCount);
     public CardSelectionStateChange cardSelectionStateChange;
+    [SerializeField] GameObject confirmButton;
     
     public void SelectCard(CardDisplay cardDisplay)
     {
@@ -23,7 +24,7 @@ public class CardSelection : MonoBehaviour
             toDiscard = new List<CardDisplay>(hand.cardList);
             foreach (CardDisplay card in selectedToKeep)
                 toDiscard.Remove(card);
-            FinishSelecting();
+            confirmButton.SetActive(true);
         }
         
     }
@@ -32,18 +33,20 @@ public class CardSelection : MonoBehaviour
     {
         selecting = true;
         cardSelectionStateChange?.Invoke(selecting, hand.holdCount);
-    }
-    private void FinishSelecting()
-    {
-        foreach (CardDisplay card in selectedToKeep)
+        if(hand.holdCount >= hand.cardList.Count)
         {
-            card.Outline(Color.clear);
+            toDiscard.Clear();
+            FinishSelecting();
         }
+    }
+    public void FinishSelecting()
+    {
         selecting = false;
         cardSelectionStateChange?.Invoke(selecting, hand.holdCount);
         hand.OnWaveStartDiscard(toDiscard);
         selectedToKeep.Clear();
         toDiscard.Clear();
+        confirmButton.SetActive(false);
     }
 
 }
