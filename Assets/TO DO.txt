@@ -66,13 +66,13 @@ Audio
         - different types (enter web, chain, burn, aoe, etc)
     X volume controls
 
-Path generation
+X Path generation
 End gate
 beginning gate
 
-Main menu
-Loading scene
-Credits
+X Main menu
+X Loading scene
+X Credits
 
 X Font
 X win screen
@@ -89,7 +89,7 @@ Enemies
     X Trojan Horse (big, slow, tanky, Drops DDoS bot on death)
     X Net-Worm (self-replicating 2 tiers of splits: example: 1 net-worm has 100hp, at 50hp it spawns another one at 50hp. When both of those reach 25 hp, they both spawn an additional (total 4) worms)
     Hijacker (disables towers sometimes)
-    Black Knight
+    X Black Knight
     On Death
 
 Bugs

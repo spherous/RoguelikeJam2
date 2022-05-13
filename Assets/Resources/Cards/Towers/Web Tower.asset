@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: Places a web tower
   <type>k__BackingField: 0
   <artwork>k__BackingField: {fileID: 21300000, guid: 20faf5b50390f45468f3ef387ab0d504, type: 3}
-  <threadCost>k__BackingField: 1
+  <threadCost>k__BackingField: 2
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
   <threadEffectTriggerCondition>k__BackingField: 1

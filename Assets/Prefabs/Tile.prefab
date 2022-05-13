@@ -214,6 +214,12 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6900857139321227489}
   pathSprite: {fileID: 21300000, guid: 728bba65c628e5d4e8bb052f3515886f, type: 3}
   buildableSprite: {fileID: 21300000, guid: fa35a77503f6a45eea6c469775ee446e, type: 3}
+  pathPillarSprite: {fileID: -2331995634685884621, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
+  pathEndCapSprite: {fileID: -5945330990738873892, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
+  pathLengthSprite: {fileID: 5721039188763124998, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
+  pathCornerSprite: {fileID: -2417177850021740177, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
+  pathTJunctionSprite: {fileID: 3194059696814589070, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
+  pathCrossSprite: {fileID: -8165888427089230794, guid: 504aa88fb8b671e45be209c554c3e533, type: 3}
   pillars:
   - {fileID: 4840179253489137267, guid: 7aff92a8b6cfce943ad366473142d416, type: 3}
   - {fileID: 8164773606207274743, guid: 7aff92a8b6cfce943ad366473142d416, type: 3}
@@ -232,6 +238,8 @@ MonoBehaviour:
   - {fileID: 5069853682507963309, guid: 7aff92a8b6cfce943ad366473142d416, type: 3}
   tIntersection: {fileID: 4152252029600307318, guid: 7aff92a8b6cfce943ad366473142d416, type: 3}
   fourWayIntersection: {fileID: 6479250335352498560, guid: 7aff92a8b6cfce943ad366473142d416, type: 3}
+  spawnPointSprite: {fileID: -2392215225303222962, guid: 158e9d62f8f75c74dab1d91257f0ef9e, type: 3}
+  homeSprite: {fileID: -6936117566767578941, guid: f759b2f984d94ec4e9bb6bffc1c7d8f8, type: 3}
   rotations: 000000005a000000b40000000e010000
 --- !u!50 &1594381437795593375
 Rigidbody2D:

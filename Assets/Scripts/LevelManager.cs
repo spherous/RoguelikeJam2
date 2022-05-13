@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        gameManager.HealToFull();
         onLevelComplete?.Invoke(level);
         awaitingPlayerChoice = true;
         currentLevelIndex = lastLevel + 1;

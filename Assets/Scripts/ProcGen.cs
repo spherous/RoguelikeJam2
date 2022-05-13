@@ -46,7 +46,7 @@ public class ProcGen : MonoBehaviour
             {
                 if(tile == null)
                     continue;
-                else if(tile.type == TileType.Buildable)
+                else if(tile.type == TileType.Buildable || tile.type == TileType.Path)
                     tile.UpdateSprite();
             }
         }
@@ -248,7 +248,7 @@ public class ProcGen : MonoBehaviour
         tile.UpdateSprite();
         foreach(Tile t in gridGenerator.GetAdjacentTiles(tile))
         {
-            if(t.type == TileType.Buildable)
+            if(t.type == TileType.Buildable || t.type == TileType.Path)
                 t.UpdateSprite();
         }
     }
