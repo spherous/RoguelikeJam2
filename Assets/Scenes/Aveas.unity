@@ -2379,7 +2379,7 @@ GameObject:
   - component: {fileID: 975621166}
   - component: {fileID: 975621165}
   m_Layer: 0
-  m_Name: Square
+  m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3750,10 +3750,12 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: be2974875d85e364aa9468c3f0597529, type: 2}
-    - {fileID: 11400000, guid: f471a87fc9bbfb54b87dce3d6beb6372, type: 2}
-    - {fileID: 11400000, guid: 11f61204aa96cec49b29a87d03382134, type: 2}
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
+    - {fileID: 11400000, guid: 0af80ceb2d35a03419f383d4fe4c7673, type: 2}
+    - {fileID: 11400000, guid: 8ba5d94059fd75f42a5207ab41c26c1d, type: 2}
+    - {fileID: 11400000, guid: 917dd1f8ee183e94596b7d542df78de7, type: 2}
+    - {fileID: 11400000, guid: bbc0499851572224f8427b4790d2deeb, type: 2}
+    - {fileID: 11400000, guid: 4defa1898c568e849be19ce87464acc1, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -3800,7 +3802,7 @@ MonoBehaviour:
       Data: 3|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 8
     - Name: 
       Entry: 10
       Data: 0
@@ -3815,7 +3817,16 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
       Data: 3
+    - Name: 
+      Entry: 10
+      Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
     - Name: 
       Entry: 13
       Data: 

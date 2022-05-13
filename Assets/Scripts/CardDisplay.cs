@@ -96,15 +96,15 @@ public class CardDisplay : SerializedMonoBehaviour
                 buildMode.Open(this, BuildModeState.PlayOnTower);
                 return;
             }
-            else if(card is EnviornmentCard enviornmentCard)
+            else if(card is EnvironmentCard environmentCard)
             {
-                if(enviornmentCard.playOnTower)
+                if(environmentCard.playOnTower)
                 {
                     transform.localScale = Vector3.zero;
                     buildMode.Open(this, BuildModeState.PlayOnTower);
                     return;
                 }
-                else if(enviornmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile || type == EnvironmentType.RemoveBuildableTile))
+                else if(environmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile || type == EnvironmentType.RemoveBuildableTile))
                 {
                     transform.localScale = Vector3.zero;
                     buildMode.Open(this, BuildModeState.PlayOnTile);

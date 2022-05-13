@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b36c87affa854e42a8baffdb5cc02d7, type: 3}
-  m_Name: +Global Chain Count
+  m_Name: Chain Count
   m_EditorClassIdentifier: 
   buffTypes: 08000000
-  <description>k__BackingField: e
+  <description>k__BackingField: Slightly increases the number of times all projectiles
+    fired by Chain Towrs may chain
   <type>k__BackingField: 2
   <artwork>k__BackingField: {fileID: 21300000, guid: da0972754e6f04d419f1df217c7752e9, type: 3}
   <threadCost>k__BackingField: 1

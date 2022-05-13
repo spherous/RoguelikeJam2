@@ -58,7 +58,7 @@ public class BuildMode : MonoBehaviour
                 else
                 {
                     overTower = false;
-                    if(state == BuildModeState.PlayOnTile && cardDisplay.card is EnviornmentCard enviornmentCard)
+                    if(state == BuildModeState.PlayOnTile && cardDisplay.card is EnvironmentCard enviornmentCard)
                     {
                         // check if valid add/remove of buildable tile
                         if(enviornmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile) && procGen.ChangeToBuildableIsValid(mouseData.hoveredTile))
