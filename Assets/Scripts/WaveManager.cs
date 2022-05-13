@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using UnityEngine;
 
-public class WaveManager : MonoBehaviour
+public class WaveManager : SerializedMonoBehaviour
 {
     public delegate void OnWaveChange(Wave wave);
     public OnWaveChange onWaveStart;
@@ -25,7 +26,7 @@ public class WaveManager : MonoBehaviour
     public int currentWave {get; private set;} = 0;
     private bool waitingForCompletion = false;
 
-    private int spawnedCount = 0;
+    [OdinSerialize, ReadOnly] private List<(EnemyType, int)> spawnedCount = new List<(EnemyType, int)>();
     private float timeForNextSpawn;
     private float timeForWaveStart;
     public float speedModifier = 0f;
@@ -51,7 +52,7 @@ public class WaveManager : MonoBehaviour
     public void LoadWaves(Level level)
     {
         currentWave = 0;
-        spawnedCount = 0;
+        spawnedCount.Clear();
         currentLevel = level;
         timeForWaveStart = Time.timeSinceLevelLoad + waveDelay;
     }
@@ -108,18 +109,54 @@ public class WaveManager : MonoBehaviour
         spawning = false;
         onWaveEnd?.Invoke(currentLevel.Value.waves[currentWave]);
         waitingForCompletion = true;
-        spawnedCount = 0;
+        spawnedCount.Clear();
     }
 
     private void SpawnWave()
     {
         Wave wave = currentLevel.Value.waves[currentWave];
         timeForNextSpawn = Time.timeSinceLevelLoad + wave.spawnInterval;
-        spawnedCount++;
         
-        SpawnEnemy(wave.enemyGroup.type);
+        List<EnemyType> availableTypes = new List<EnemyType>();
+        foreach(Group group in wave.enemyGroups)
+        {
+            if(!spawnedCount.Any(c => c.Item1 == group.type))
+            {
+                spawnedCount.Add((group.type, 0));
+                availableTypes.Add(group.type);
+                continue;
+            }
+
+            foreach(var (type, count) in spawnedCount)
+            {
+                if(type == group.type && count < group.count && !availableTypes.Contains(type))
+                {
+                    availableTypes.Add(group.type);
+                    break;
+                }
+            }
+        }
+
+        EnemyType toSpawn = availableTypes.ChooseRandom();
+        SpawnEnemy(toSpawn);
+
+        for(int i = 0; i < spawnedCount.Count; i++)
+        {
+            (EnemyType type, int spawnCount) count = spawnedCount[i];
+            spawnedCount[i] = (count.type, count.spawnCount + 1);
+        }
+
+        bool waveFinishedSpawning = true;
+
+        for(int i = 0; i < wave.enemyGroups.Count; i++)
+        {
+            (EnemyType type, int spawnCount) count = spawnedCount.Find(c => c.Item1 == wave.enemyGroups[i].type);
+            waveFinishedSpawning = count.spawnCount >= wave.enemyGroups[i].count;
+            if(!waveFinishedSpawning)
+                return;
+        }
         
-        if(spawnedCount >= wave.enemyGroup.count)
+        if(waveFinishedSpawning)
             EndWave();
     }
 
@@ -163,3 +200,10 @@ public class WaveManager : MonoBehaviour
         }
     }
 }
+
+// public class EnemyTypeComparer : IEqualityComparer<(EnemyType, int)>
+// {
+//     public bool Equals(Group x, (EnemyType, int) y) => x.Item1 == y.Item1;
+
+//     public int GetHashCode((EnemyType, int) obj) => obj.Item1.GetHashCode();
+// }

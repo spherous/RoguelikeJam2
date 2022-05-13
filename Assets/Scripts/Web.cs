@@ -69,8 +69,7 @@ public class Web : MonoBehaviour
     {
         if(other.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            if(effects.Any(e => e == WebEffect.Wounding))
-                enemy.TakeDamage(damage * effects.Count(e => e == WebEffect.Wounding));
+            enemy.TakeDamage(damage * (1 + (effects.Count(e => e == WebEffect.Wounding) * 3f)));
             if(effects.Any(e => e == WebEffect.Stun))
                 enemy.Stun(damage / 5 * effects.Count(e => e == WebEffect.Stun));
             if(effects.Any(e => e == WebEffect.Slow))

@@ -11,6 +11,7 @@ public class ChainTower : MonoBehaviour, ITower
 
     EnemySpawner enemySpawner;
     WaveManager waveManager;
+    GameManager gameManager;
     [SerializeField] FollowTargetRotate followTargetRotate;
     [SerializeField] Transform firePoint;
     [SerializeField] SpriteRenderer fisty;
@@ -52,6 +53,7 @@ public class ChainTower : MonoBehaviour, ITower
     private void Awake()
     {
         waveManager = GameObject.FindObjectOfType<WaveManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         orgDamage = damage;
         orgRange = range;
         orgAttackTime = attackTime;
@@ -84,6 +86,9 @@ public class ChainTower : MonoBehaviour, ITower
 
     void Update()
     {
+        if(gameManager.gameOver)
+            return;
+            
         if(Time.timeSinceLevelLoad >= fistyReloadTime && !fisty.enabled)
             fisty.enabled = true;
 

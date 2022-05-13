@@ -12,6 +12,7 @@ public class AOETower : MonoBehaviour, ITower
     [SerializeField] private PlayableDirector director;
     EnemySpawner enemySpawner;
     WaveManager waveManager;
+    GameManager gameManager;
     public Index location {get; set;}
 
     private float orgAttackTime;
@@ -34,6 +35,7 @@ public class AOETower : MonoBehaviour, ITower
     private void Awake()
     {
         waveManager = GameObject.FindObjectOfType<WaveManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         orgDamage = damage;
         orgRange = range;
         orgAttackTime = attackTime;
@@ -61,6 +63,9 @@ public class AOETower : MonoBehaviour, ITower
 
     private void Update()
     {
+        if(gameManager.gameOver)
+            return;
+            
         if(Time.timeSinceLevelLoad >= nextAttackTime && !attacking && enemySpawner.CheckIfEnemiesWithinDistanceOfLocation(transform.position, range))
         {
             attacking = true;
