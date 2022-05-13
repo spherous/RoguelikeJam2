@@ -4145,6 +4145,212 @@ MonoBehaviour:
     rows: 9
     cols: 16
     chaos: 16
+  - waves:
+    - enemyGroups:
+      - type: 1
+        count: 18
+      spawnInterval: 0.1
+      addsThread: 0
+    - enemyGroups:
+      - type: 1
+        count: 32
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 1
+        count: 64
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 2
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 4
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 3
+        count: 10
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 12
+      - type: 2
+        count: 8
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 24
+      - type: 1
+        count: 100
+      spawnInterval: 0.1
+      addsThread: 0
+    rows: 9
+    cols: 19
+    chaos: 32
+  - waves:
+    - enemyGroups:
+      - type: 1
+        count: 20
+      spawnInterval: 0.1
+      addsThread: 0
+    - enemyGroups:
+      - type: 1
+        count: 40
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 1
+        count: 64
+      spawnInterval: 0.15
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 2
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 4
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 3
+        count: 6
+      - type: 2
+        count: 6
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 22
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 24
+      - type: 1
+        count: 100
+      spawnInterval: 0.1
+      addsThread: 0
+    - enemyGroups:
+      - type: 1
+        count: 200
+      - type: 3
+        count: 26
+      spawnInterval: 0.01
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 40
+      spawnInterval: 0.2
+      addsThread: 0
+    rows: 12
+    cols: 23
+    chaos: 64
+  - waves:
+    - enemyGroups:
+      - type: 1
+        count: 22
+      spawnInterval: 0.08
+      addsThread: 0
+    - enemyGroups:
+      - type: 1
+        count: 60
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 1
+        count: 80
+      spawnInterval: 0.15
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 2
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 4
+      spawnInterval: 0.22
+      addsThread: 1
+    - enemyGroups:
+      - type: 3
+        count: 6
+      - type: 2
+        count: 6
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 22
+      spawnInterval: 0.22
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 26
+      - type: 1
+        count: 120
+      spawnInterval: 0.1
+      addsThread: 1
+    - enemyGroups:
+      - type: 1
+        count: 200
+      - type: 2
+        count: 28
+      spawnInterval: 0.01
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 42
+      spawnInterval: 0.2
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 40
+      - type: 2
+        count: 30
+      spawnInterval: 0.3
+      addsThread: 1
+    - enemyGroups:
+      - type: 1
+        count: 400
+      spawnInterval: 0.066
+      addsThread: 0
+    - enemyGroups:
+      - type: 1
+        count: 250
+      - type: 3
+        count: 60
+      - type: 2
+        count: 40
+      spawnInterval: 0.066
+      addsThread: 0
+    - enemyGroups:
+      - type: 3
+        count: 90
+      spawnInterval: 0.333
+      addsThread: 0
+    - enemyGroups:
+      - type: 2
+        count: 90
+      - type: 3
+        count: 20
+      spawnInterval: 0.333
+      addsThread: 0
+    - enemyGroups:
+      - type: 0
+        count: 1
+      spawnInterval: 1
+      addsThread: 0
+    rows: 12
+    cols: 23
+    chaos: 128
 --- !u!1 &1332929663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,8 +4955,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: ff9e5b86e7f02f14c9d3c54779bad829, type: 2}
     - {fileID: 11400000, guid: 11f61204aa96cec49b29a87d03382134, type: 2}
-    - {fileID: 11400000, guid: be2974875d85e364aa9468c3f0597529, type: 2}
-    - {fileID: 11400000, guid: ff43e23b8c8d41a45a1510574b4bae63, type: 2}
     - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -4810,10 +5014,10 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 10
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 10
-      Data: 4
+      Data: 2
     - Name: 
       Entry: 13
       Data: 

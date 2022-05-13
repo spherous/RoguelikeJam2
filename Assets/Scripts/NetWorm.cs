@@ -17,11 +17,13 @@ public class NetWorm : Enemy
     int stepIndex = 0;
 
     public List<float> shrinkThresholds = new List<float>(){.5f, .25f};
-    public new int scoreValue => 4 * (stage + 1);
-    public new int damage => 4 * (stage + 1);
+    // public new int scoreValue => 4 * (stage + 1);
+    // public new int damage => 4 * (stage + 1);
 
     private void Awake()
     {
+        damage = 4 * (3 - stage);
+        scoreValue = 4 * (3 - stage);
         waveManager = GameObject.FindObjectOfType<WaveManager>();
     }
     protected override void Start()
@@ -63,6 +65,8 @@ public class NetWorm : Enemy
         stepIndex = 0;
         spriteRenderer.sprite = GetStageWalk(stage)[0];
         framesSinceStep = 0;
+        damage = 4 * (3 - stage);
+        scoreValue = 4 * (3 - stage);
     }
 
     private void CheckForShrink(IHealth changed, float oldHP, float newHP, float percent)

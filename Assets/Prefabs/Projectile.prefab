@@ -239,7 +239,7 @@ MonoBehaviour:
   rb: {fileID: 3396218646815767702}
   col: {fileID: 3396218646815767701}
   speed: 26
-  chainRadius: 1
+  chainRadius: 2
   hitCos: []
   enemyMask:
     serializedVersion: 2
