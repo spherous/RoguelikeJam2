@@ -14,6 +14,9 @@ public class Web : MonoBehaviour
     public List<WebTower> connectedTowers = new List<WebTower>();
     public float damage;
 
+    WebEffect parentAEffect = WebEffect.None;
+    WebEffect parentBEffect = WebEffect.None;
+
     public List<WebEffect> effects = new List<WebEffect>();
 
     public List<(Enemy, float)> thorns = new List<(Enemy, float)>();
@@ -104,11 +107,31 @@ public class Web : MonoBehaviour
 
     public void GainWebEffect(WebEffect gaining, WebTower source)
     {
+        if(source == parentA && parentAEffect != WebEffect.None)
+        {
+            effects.Remove(parentAEffect);
+            parentAEffect = WebEffect.None;
+            line.startColor = GetWebEffectColor(WebEffect.None);
+        }
+        else if(source == parentB && parentBEffect != WebEffect.None)
+        {
+            effects.Remove(parentBEffect);
+            parentBEffect = WebEffect.None;
+            line.endColor = GetWebEffectColor(WebEffect.None);
+        }
+
         effects.Add(gaining);
+
         if(source == parentA)
+        {
+            parentAEffect = gaining;
             line.startColor = GetWebEffectColor(gaining);
+        }
         else if(source == parentB)
+        {
+            parentBEffect = gaining;
             line.endColor = GetWebEffectColor(gaining);
+        }
     }
 
     public Color GetWebEffectColor(WebEffect effect) => effect switch{

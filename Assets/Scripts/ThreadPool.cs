@@ -16,8 +16,9 @@ public class ThreadPool : MonoBehaviour
     [SerializeField] private GroupFader fader;
     public List<Thread> threads {get; private set;} = new List<Thread>();
     public int availableThreads => GetAvailableThreads().Count();
-
-    private IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
+    public int unavailableThreds => GetUnavailableThreads().Count();
+    public IEnumerable<Thread> GetAvailableThreads() => threads.Where(t => t.available);
+    public IEnumerable<Thread> GetUnavailableThreads() => threads.Where(t => !t.available);
 
     private void Awake()
     {
@@ -59,6 +60,29 @@ public class ThreadPool : MonoBehaviour
             thread.TryRefresh();
     }
 
+    public void ManualRefresh()
+    {
+        foreach(Thread thread in GetUnavailableThreads())
+        {
+            if(thread.remainingCooldown == 0) // refresh the 1st thread that isn't reserved
+            {
+                thread.TryRefresh();
+                return;
+            }
+        }
+    }
+
+    public void GainThreadAtEndOfFrame()
+    {
+        StartCoroutine(ThreadGainRoutine());
+    }
+
+    public IEnumerator ThreadGainRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+        IncreaseThreadCount(1);
+    }
+
     [Button]
     public bool Request(int amount)
     {
@@ -90,7 +114,7 @@ public class ThreadPool : MonoBehaviour
         else if(reserveType == ThreadReserveType.None)
             return Request(amount);
         
-        IEnumerable<Thread> threadsToReserve = GetAvailableThreads().Take(amount);
+        List<Thread> threadsToReserve = GetAvailableThreads().Take(amount).ToList();
         for(int i = 0; i < amount; i++)
         {
             Thread thread = threadsToReserve.ElementAt(i);

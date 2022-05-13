@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Environment Card", menuName = "Environment Card")]
@@ -36,12 +37,20 @@ public class EnvironmentCard : ScriptableObject, ICard
         foreach(EnvironmentType type in enviroTypes)
             type.PlayOnTower(tower)?.Invoke();
     }
+    
+    private void PlayOnTile(Tile tile)
+    {
+        foreach(EnvironmentType type in enviroTypes)
+            type.PlayOnTile(tile)?.Invoke();
+    }
 
     private bool TrySpendThreads(ThreadPool threadPool, Tile tile)
     {
         if(threadPool.Request(threadCost))
         {
-            if(playOnTower && tile != null && tile.tower != null)
+            if(enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile || type == EnvironmentType.RemoveBuildableTile))
+                PlayOnTile(tile);
+            else if(playOnTower && tile != null && tile.tower != null)
                 PlayOnTower(tile.tower);
             else
                 PlayAllEffects();

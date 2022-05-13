@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Tech Card", menuName = "Tech Card")]
@@ -40,6 +41,13 @@ public class TechCard : ScriptableObject, ICard
 
     private bool TrySpendThreads(ThreadPool threadPool, Tile tile)
     {
+        if(techCardTypes.Any(type => type == TechCardType.RefreshThread))
+        {
+            int qualifyingThreads = threadPool.GetUnavailableThreads().Where(thread => thread.remainingCooldown == 0).Count();
+            if(qualifyingThreads == 0) // if the player doesn't have any threads on cd, they shouldn't be able to play a refresh thread card
+                return false;
+        }
+        
         if(threadPool.Request(threadCost))
         {
             if(playOnTower && tile != null && tile.tower != null)

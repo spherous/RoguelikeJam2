@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b36c87affa854e42a8baffdb5cc02d7, type: 3}
-  m_Name: -Global Chain Count +Global Chain Damage
+  m_Name: Focused Chain Count
   m_EditorClassIdentifier: 
-  buffTypes: 090000000e000000
-  <description>k__BackingField: e
+  buffTypes: 10000000
+  <description>k__BackingField: Greatly increases the number of times projectiles
+    fired from selected tower may chain
   <type>k__BackingField: 2
-  <artwork>k__BackingField: {fileID: 8195474581573900390, guid: adc011d75b49deb4f95a411e043697ac, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 70de4d95490a88744870047dc0b56f30, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1
   <threadEffectTriggerCondition>k__BackingField: 0
   <threadUseDuration>k__BackingField: 2
-  <playOnTower>k__BackingField: 0
+  <playOnTower>k__BackingField: 1

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 public enum TechCardType
 {
@@ -9,7 +10,9 @@ public enum TechCardType
     Draw3 = 4,
     DiscardHand = 5,
     Heal = 6,
-    MoveATower = 7
+    MoveATower = 7,
+    GainThread = 8,
+    RefreshThread = 9,
 }
 
 public static class TechCardTypeExtensions
@@ -24,6 +27,8 @@ public static class TechCardTypeExtensions
         TechCardType.DiscardHand => () => GameObject.FindObjectOfType<Hand>()?.DiscardHand(),
         TechCardType.Heal => () => Heal(1),
         TechCardType.MoveATower => MoveATower,
+        TechCardType.GainThread => GainThread,
+        TechCardType.RefreshThread => RefreshThread,
         _ => null
     };
 
@@ -31,6 +36,18 @@ public static class TechCardTypeExtensions
     {
         _ => null
     };
+
+    public static void GainThread()
+    {
+        ThreadPool pool = GameObject.FindObjectOfType<ThreadPool>();
+        pool.GainThreadAtEndOfFrame();
+    }
+
+    public static void RefreshThread()
+    {
+        ThreadPool pool = GameObject.FindObjectOfType<ThreadPool>();
+        pool.ManualRefresh();
+    }
 
     public static void Keep2()
     {

@@ -165,10 +165,7 @@ public class WebTower : MonoBehaviour, ITower
     public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
     public void AdjustAttackSpeed(float percent){} // does nothing for attack speed
     public void GainWebEffect(WebEffect gaining)
-    {
-        if(webEffect != WebEffect.None)
-            return;
-        
+    {        
         webEffect = gaining;
         foreach(Web web in connectedWebs)
             web.GainWebEffect(gaining, this);
