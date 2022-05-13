@@ -87,10 +87,16 @@ public class ChainTower : MonoBehaviour, ITower
         if(Time.timeSinceLevelLoad >= fistyReloadTime && !fisty.enabled)
             fisty.enabled = true;
 
+        if(target != null)
+        {
+            float sqrDistanceToTarget = (target.position - transform.position).sqrMagnitude;
+            if(sqrDistanceToTarget > range * range)
+                target = null;
+        }
+
         if(target == null && !TryAquireTarget())
             return;
-
-        if(timeToAttack)
+        else if(timeToAttack)
             Attack();
     }
 

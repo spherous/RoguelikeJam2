@@ -1,7 +1,7 @@
 TO DO
 
 X Place tower mode
-Tower range indicators
+X Tower range indicators
 X Deck & RecycleBin
 
 Towers
@@ -59,23 +59,22 @@ Card effects
         Place a burn-trap that greatly damages enemies (1 wave) 
 
 Audio
-    Music
-    Ambient
-    On player take damage
+    X Music
+    X Ambient
+    X On player take damage
     On enemy take damage
         - different types (enter web, chain, burn, aoe, etc)
-    volume controls
+    X volume controls
 
 Path generation
-End game
+End gate
 beginning gate
-Chain turrets need to forget targets out of their distance
 
 Main menu
 Loading scene
 Credits
-X Font
 
+X Font
 X win screen
 X lose screen
 
