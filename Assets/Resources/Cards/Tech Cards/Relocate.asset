@@ -21,3 +21,6 @@ MonoBehaviour:
   <threadReserveType>k__BackingField: 0
   <threadEffectTriggerCondition>k__BackingField: 1
   <threadUseDuration>k__BackingField: 0
+  <playOnTower>k__BackingField: 0
+  <audioClips>k__BackingField:
+  - {fileID: 8300000, guid: aeabf07a9d2e4c246b8875b26d05d7c6, type: 3}

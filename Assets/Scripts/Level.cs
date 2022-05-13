@@ -6,4 +6,6 @@ using UnityEngine;
 public struct Level
 {
     public List<Wave> waves;   
+    public int rows;
+    public int cols;
 }

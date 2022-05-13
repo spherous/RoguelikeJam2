@@ -7,6 +7,8 @@ public class LoseScreen : MonoBehaviour
 {
     [SerializeField] private GroupFader fader;
     [SerializeField] private PlayableDirector director;
+    public List<AudioClip> errorClips = new List<AudioClip>();
+    [SerializeField] private AudioSource audioSource;
 
     public void Display()
     {
@@ -14,5 +16,6 @@ public class LoseScreen : MonoBehaviour
             fader.FadeIn();
         
         director.Play();
+        audioSource.PlayOneShot(errorClips.ChooseRandom());
     }
 }

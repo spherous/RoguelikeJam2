@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Focused Chain Count
   m_EditorClassIdentifier: 
   buffTypes: 10000000
-  <description>k__BackingField: e
+  <description>k__BackingField: Greatly increase the number of times a projectile
+    may chain when fired from selected Chain Tower
   <type>k__BackingField: 2
   <artwork>k__BackingField: {fileID: 21300000, guid: 274488b5a64f41245ac31c1ca2433ed5, type: 3}
   <threadCost>k__BackingField: 1
@@ -22,3 +23,5 @@ MonoBehaviour:
   <threadEffectTriggerCondition>k__BackingField: 0
   <threadUseDuration>k__BackingField: 2
   <playOnTower>k__BackingField: 1
+  <audioClips>k__BackingField:
+  - {fileID: 8300000, guid: 8a9770a45cccfbc4494bd81e8132fccf, type: 3}

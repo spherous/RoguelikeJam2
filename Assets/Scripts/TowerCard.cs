@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Tower Card", menuName = "Tower Card")]
@@ -13,7 +14,8 @@ public class TowerCard : ScriptableObject, ICard
     [field:SerializeField] public ThreadReserveType threadReserveType {get; set;} = ThreadReserveType.None;
     [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
     [field:SerializeField] public int threadUseDuration {get; set;}
-
+    [field:SerializeField] public List<AudioClip> audioClips {get; set;}
+    
     public bool TryPlay(Tile tile)
     {
         if(tile == null || !tile.isBuildable)
@@ -25,7 +27,6 @@ public class TowerCard : ScriptableObject, ICard
         if(towerManager != null && threadPool != null && TrySpendThreads(threadPool))
         {
             ITower tower = towerManager.SpawnTower(towerToSpawn, tile);
-            // ITower tower = Instantiate(towerToSpawn, tile.transform.position, Quaternion.identity, tile.transform).GetComponent<ITower>();
             tile.SetTower(tower);
             return true;
         }

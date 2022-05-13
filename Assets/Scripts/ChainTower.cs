@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class ChainTower : MonoBehaviour, ITower
 {
+    [SerializeField] private AudioSource audioSource;
+    public List<AudioClip> attackClips = new List<AudioClip>();
+
     EnemySpawner enemySpawner;
     WaveManager waveManager;
     [SerializeField] FollowTargetRotate followTargetRotate;
@@ -84,10 +87,16 @@ public class ChainTower : MonoBehaviour, ITower
         if(Time.timeSinceLevelLoad >= fistyReloadTime && !fisty.enabled)
             fisty.enabled = true;
 
+        if(target != null)
+        {
+            float sqrDistanceToTarget = (target.position - transform.position).sqrMagnitude;
+            if(sqrDistanceToTarget > range * range)
+                target = null;
+        }
+
         if(target == null && !TryAquireTarget())
             return;
-
-        if(timeToAttack)
+        else if(timeToAttack)
             Attack();
     }
 
@@ -98,6 +107,7 @@ public class ChainTower : MonoBehaviour, ITower
         Projectile projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         projectile.chainRadius *= chainRangeModifier; 
         projectile.Fire(target, damage, chainCount);
+        audioSource.PlayOneShot(attackClips.ChooseRandom());
         fisty.enabled = false;
     }
 

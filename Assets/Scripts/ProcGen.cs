@@ -9,6 +9,7 @@ using UnityEngine;
 public class ProcGen : MonoBehaviour
 {
     [SerializeField] private Kingdom kingdomPrefab;
+    [SerializeField] private GameObject usbPrefab;
     [SerializeField] private GridGenerator gridGenerator;
     [SerializeField] private AstarPath pathfinder;
     public Tile homeTile {get; private set;}
@@ -20,13 +21,13 @@ public class ProcGen : MonoBehaviour
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
     private void Awake() {
-        Generate();
+        // Generate(13, 22);
     }
 
     [Button]
-    public void Generate()
+    public void Generate(int row, int col)
     {
-        gridGenerator.GenerateGrid(13, 22);
+        gridGenerator.GenerateGrid(row, col);
 
         PlaceHome();
         PlaceSpawnPoints(1);
@@ -45,7 +46,7 @@ public class ProcGen : MonoBehaviour
             {
                 if(tile == null)
                     continue;
-                else if(tile.type == TileType.Buildable)
+                else if(tile.type == TileType.Buildable || tile.type == TileType.Path)
                     tile.UpdateSprite();
             }
         }
@@ -71,18 +72,13 @@ public class ProcGen : MonoBehaviour
     {
         ClearSpawnPoints();
         
-        for(int i = 0; i < count; i++)
-        {
-            if(i >= gridGenerator.height - 2) // No more tiles available on edge, corners don't count, so -2
-                break;
+        Tile maybeNewSpawnPoint;
+        do maybeNewSpawnPoint = gridGenerator.GetRandomLeftEdgeTile();
+        while(maybeNewSpawnPoint.type != TileType.Path);
 
-            Tile maybeNewSpawnPoint;
-            do maybeNewSpawnPoint = gridGenerator.GetRandomLeftEdgeTile();
-            while(maybeNewSpawnPoint.type != TileType.Path);
-
-            maybeNewSpawnPoint.SetType(TileType.EnemySpawnPoint);
-            spawnPoint = maybeNewSpawnPoint;
-        }
+        maybeNewSpawnPoint.SetType(TileType.EnemySpawnPoint);
+        spawnPoint = maybeNewSpawnPoint;
+        Instantiate(usbPrefab, spawnPoint.transform.position + Vector3.left * 5f, Quaternion.identity);
     }
 
     void ClearSpawnPoints() => spawnPoint?.SetType(TileType.Path);
@@ -252,7 +248,7 @@ public class ProcGen : MonoBehaviour
         tile.UpdateSprite();
         foreach(Tile t in gridGenerator.GetAdjacentTiles(tile))
         {
-            if(t.type == TileType.Buildable)
+            if(t.type == TileType.Buildable || t.type == TileType.Path)
                 t.UpdateSprite();
         }
     }

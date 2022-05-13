@@ -97,9 +97,9 @@ public class ThreadPool : MonoBehaviour
 
     public void Reset()
     {
-        if(threads.Count > 3)
+        if(threads.Count > 4)
         {
-            for(int i = threads.Count - 1; i >= 3; i--)
+            for(int i = threads.Count - 1; i >= 4; i--)
             {
                 Destroy(threads[i].gameObject);
                 threads.RemoveAt(i);

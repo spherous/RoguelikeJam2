@@ -6,6 +6,9 @@ using UnityEngine.Playables;
 
 public class LongRangeCannonTower : MonoBehaviour, ITower
 {
+    [SerializeField] private AudioSource audioSource;
+    public List<AudioClip> attackClips = new List<AudioClip>();
+
     [SerializeField] private PlayableDirector director;
     [SerializeField] FollowTargetRotate followTargetRotate;
     [SerializeField] private Projectile projectilePrefab;
@@ -128,5 +131,6 @@ public class LongRangeCannonTower : MonoBehaviour, ITower
 
         Projectile projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         projectile.Fire(target, damage);
+        audioSource.PlayOneShot(attackClips.ChooseRandom());
     }
 }
