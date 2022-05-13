@@ -15,8 +15,9 @@ public class ProcGen : MonoBehaviour
     public Tile homeTile {get; private set;}
     public Tile spawnPoint {get; private set;}
     public int passes = 3;
-    public int rands = 5;
+    // public int rands = 5;
     public Kingdom kingdom;
+    public GameObject usb;
 
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
@@ -25,7 +26,7 @@ public class ProcGen : MonoBehaviour
     }
 
     [Button]
-    public void Generate(int row, int col)
+    public void Generate(int row, int col, int chaos = 1)
     {
         gridGenerator.GenerateGrid(row, col);
 
@@ -33,7 +34,7 @@ public class ProcGen : MonoBehaviour
         PlaceSpawnPoints(1);
         PlaceEdgeWalls();
         GenerateNavMesh();
-        ExtendPath();
+        ExtendPath(chaos);
         PlaceSprites();
         CachePath();
     }
@@ -65,7 +66,10 @@ public class ProcGen : MonoBehaviour
     {
         homeTile = gridGenerator.GetRandomRightEdgeTile();
         homeTile.SetType(TileType.Home);
-        kingdom = Instantiate(kingdomPrefab, homeTile.transform.position + Vector3.right * 5.2f, Quaternion.identity);
+        if(kingdom == null)
+            kingdom = Instantiate(kingdomPrefab, homeTile.transform.position + Vector3.right * 5.2f, Quaternion.identity);
+        else
+            kingdom.transform.position = homeTile.transform.position + Vector3.right * 5.2f;
     }
 
     private void PlaceSpawnPoints(int count)
@@ -78,7 +82,10 @@ public class ProcGen : MonoBehaviour
 
         maybeNewSpawnPoint.SetType(TileType.EnemySpawnPoint);
         spawnPoint = maybeNewSpawnPoint;
-        Instantiate(usbPrefab, spawnPoint.transform.position + Vector3.left * 5f, Quaternion.identity);
+        if(usb == null)
+            usb = Instantiate(usbPrefab, spawnPoint.transform.position + Vector3.left * 5f, Quaternion.identity);
+        else
+            usb.transform.position = spawnPoint.transform.position + Vector3.left * 5f;
     }
 
     void ClearSpawnPoints() => spawnPoint?.SetType(TileType.Path);
@@ -94,7 +101,7 @@ public class ProcGen : MonoBehaviour
         }
     }
 
-    private void ExtendPath()
+    private void ExtendPath(int chaos = 1)
     {
         Path currentPath = gridGenerator.GetPath(spawnPoint, homeTile);
 
@@ -120,7 +127,7 @@ public class ProcGen : MonoBehaviour
 
         List<Tile> allPathTilesWithoutCurrentPath = allPathTiles.Except(currentTilePath).ToList();
         List<Tile> randomizedTiles = new List<Tile>();
-        for(int rand = 0; rand < rands; rand++)
+        for(int rand = 0; rand < chaos; rand++)
         {
             Tile toRand;
             do toRand = allPathTilesWithoutCurrentPath.ChooseRandom();

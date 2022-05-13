@@ -15,6 +15,7 @@ public class LongRangeCannonTower : MonoBehaviour, ITower
     [SerializeField] Transform firePoint;
     EnemySpawner enemySpawner;
     WaveManager waveManager;
+    GameManager gameManager;
     public Index location {get; set;}
 
     private float orgAttackTime;
@@ -46,6 +47,7 @@ public class LongRangeCannonTower : MonoBehaviour, ITower
     private void Awake()
     {
         waveManager = GameObject.FindObjectOfType<WaveManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         orgDamage = damage;
         orgRange = range;
         orgAttackTime = attackTime;
@@ -75,6 +77,9 @@ public class LongRangeCannonTower : MonoBehaviour, ITower
 
     private void Update()
     {
+        if(gameManager.gameOver)
+            return;
+            
         if(target != null)
         {
             float sqrDistanceToTarget = (target.position - transform.position).sqrMagnitude;

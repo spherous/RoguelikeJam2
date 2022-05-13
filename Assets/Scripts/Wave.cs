@@ -6,7 +6,7 @@ using UnityEngine;
 public struct Wave 
 {
     // later needs to handle multiple types of enemies that could all spawn during a wave
-    public Group enemyGroup;
+    public List<Group> enemyGroups;
     public float spawnInterval;
     public bool addsThread;
 }

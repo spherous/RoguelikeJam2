@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex = levelIndex;
         currentLevel = levels[currentLevelIndex];
 
-        procGen.Generate(currentLevel.rows, currentLevel.cols);
+        procGen.Generate(currentLevel.rows, currentLevel.cols, currentLevel.chaos);
 
         waveManager.LoadWaves(currentLevel);
         onLevelStart?.Invoke(currentLevel);

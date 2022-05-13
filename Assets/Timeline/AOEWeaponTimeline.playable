@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c38f6fa1940124db1ab7f6fe7268d1, type: 3}
   m_Name: Strike
   m_EditorClassIdentifier: 
-  m_Time: 0.8032128514056225
+  m_Time: 0.5833333333333334
   m_Retroactive: 0
   m_EmitOnce: 0
   m_Asset: {fileID: 11400000, guid: 3ebd4aeed48aa6c4c8baff7a9c7b9e95, type: 2}
