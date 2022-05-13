@@ -31,6 +31,7 @@ public class CardDisplay : SerializedMonoBehaviour
     private Hand hand;
     private MouseData mouseData;
 
+
     public bool disableAutoOutline = false;
 
     void Start()

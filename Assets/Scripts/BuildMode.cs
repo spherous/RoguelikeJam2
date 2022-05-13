@@ -35,8 +35,11 @@ public class BuildMode : MonoBehaviour
     private GameObject movingOutline;
     bool overTower = false;
     bool modificationValidOverTile = false;
+    private RangeIndicator rangeIndicator;
+
     void Awake() 
     {
+        rangeIndicator = FindObjectOfType<RangeIndicator>();
         mouseData = FindObjectOfType<MouseData>();
         if(mouseData == null)
             Debug.LogError("No MouseData found in scene");
