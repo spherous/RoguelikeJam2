@@ -71,9 +71,8 @@ public static class TechCardTypeExtensions
     }
     public static void MoveATower()
     {
-        // BuildMode bm = GameObject.FindObjectOfType<BuildMode>();
-        // if(bm == null)
-        //     Debug.LogError("No build mode found");
-                
+        BuildMode bm = GameObject.FindObjectOfType<BuildMode>();
+        if(bm == null)
+            Debug.LogError("No build mode found");          
     }
 }

@@ -17,6 +17,7 @@ public class ChainTower : MonoBehaviour, ITower
     private bool timeToAttack => Time.timeSinceLevelLoad >= nextAttackTime;
     public Transform target;
     public int chainCount;
+    private int chainCountOrg;
 
     [SerializeField] SpriteRenderer baseRenderer;
     public Sprite disabledBase;
@@ -43,6 +44,7 @@ public class ChainTower : MonoBehaviour, ITower
     [field:SerializeField] public float damage {get; set;}
     private float orgDamage;
     public Index location {get; set;}
+    private float chainRangeModifier;
 
     private void Awake()
     {
@@ -50,7 +52,9 @@ public class ChainTower : MonoBehaviour, ITower
         orgDamage = damage;
         orgRange = range;
         orgAttackTime = attackTime;
+        chainCountOrg = chainCount;
     }
+
 
     void Start()
     {
@@ -71,6 +75,8 @@ public class ChainTower : MonoBehaviour, ITower
         damage = orgDamage;
         range = orgRange;
         attackTime = orgAttackTime;
+        chainRangeModifier = 0;
+        chainCount = chainCountOrg;
     }
 
     void Update()
@@ -90,6 +96,7 @@ public class ChainTower : MonoBehaviour, ITower
         nextAttackTime = Time.timeSinceLevelLoad + attackTime;
         fistyReloadTime = Time.timeSinceLevelLoad + attackTime / 2;
         Projectile projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
+        projectile.chainRadius *= chainRangeModifier; 
         projectile.Fire(target, damage, chainCount);
         fisty.enabled = false;
     }
@@ -124,4 +131,6 @@ public class ChainTower : MonoBehaviour, ITower
     public void AdjustRange(float percent) => this.range = range * (1 + percent);
     public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
     public void AdjustAttackSpeed(float percent) => this.attackTime = attackTime * (1 - percent);
+    public void AdjustChainCount(int increase) => this.chainCount += increase;
+    public void AdjustChainRange(float percent) => this.chainRangeModifier += (1 + percent);
 }

@@ -63,12 +63,10 @@ public class Hand : MonoBehaviour
             buildMode.MoveATowerCancelled();
         }
 
-
         if (holdCount <= 0)
             OnWaveStartDiscard(cardList);
         else
             cardSelection.StartSelecting();
-        
     }
     public void OnWaveStartDiscard(List<CardDisplay> cardsToDiscard)
     {
