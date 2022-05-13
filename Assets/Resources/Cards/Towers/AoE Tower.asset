@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AoE Tower
   m_EditorClassIdentifier: 
   towerToSpawn: 3
-  <description>k__BackingField: Places a towr that damages all enemies nearby it
+  <description>k__BackingField: Places a tower that damages all enemies nearby it
     periodically.
   <type>k__BackingField: 0
-  <artwork>k__BackingField: {fileID: 0}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 7ac9515fdbfe99e44a8aebdc0b90a8a7, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

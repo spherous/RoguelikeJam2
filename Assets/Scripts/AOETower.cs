@@ -28,6 +28,14 @@ public class AOETower : MonoBehaviour, ITower
 
     bool attacking = false;
 
+    private void Awake()
+    {
+        waveManager = GameObject.FindObjectOfType<WaveManager>();
+        orgDamage = damage;
+        orgRange = range;
+        orgAttackTime = attackTime;
+    }
+
     void Start()
     {
         enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();

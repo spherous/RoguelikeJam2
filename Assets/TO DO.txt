@@ -8,7 +8,7 @@ Towers
     X web tower
     X chain tower
     X aoe burst
-    long range snipe (can't hit nearby)
+    X long range snipe (can't hit nearby)
 
 Web effects
     X slow while in it
@@ -19,8 +19,8 @@ Web effects
     burn dot lasts after exiting
 
 Card effects
-    Place aoe burst tower (instant)
-    place long range snipe tower (instant)
+    X Place aoe burst tower (instant)
+    X place long range snipe tower (instant)
     X Place chain tower (instant)
     X draw 2 (instant)
     X discard hand and draw 3 (instant)
@@ -40,11 +40,11 @@ Card effects
     X refresh a thread (instant)
     X Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
     X Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
-    Slightly increase global chain count
-    Greatly increase 1 tower's chain count
-    Reduce global chain count, but increase global chain damage
-    Slightly increase global chain distance
-    Greatly increase 1 tower's chain distance
+    X Slightly increase global chain count
+    X Greatly increase 1 tower's chain count
+    X Reduce global chain count, but increase global chain damage
+    X Slightly increase global chain distance
+    X Greatly increase 1 tower's chain distance
     
     Spare time:
         Next wave pauses between steps (1 wave)
@@ -89,7 +89,6 @@ Enemies
     On Death
 
 Bugs
-    attack speed ???
 
 X Camera panning
     x wasd
