@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
   m_Name: Chain Tower
   m_EditorClassIdentifier: 
-  towerToSpawn: {fileID: 1409404219263627854, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
+  towerToSpawn: 0
   <description>k__BackingField: Places a chain tower
   <type>k__BackingField: 0
   <artwork>k__BackingField: {fileID: 21300000, guid: 7ac9515fdbfe99e44a8aebdc0b90a8a7, type: 3}

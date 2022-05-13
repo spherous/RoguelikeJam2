@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: Slightly increases the number of times all projectiles
     fired by Chain Towrs may chain
   <type>k__BackingField: 2
-  <artwork>k__BackingField: {fileID: 21300000, guid: da0972754e6f04d419f1df217c7752e9, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: e7112c32820c0204eb25facd832223fb, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1
