@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Linq;
 
 public class CardDisplay : SerializedMonoBehaviour
 {
@@ -95,11 +96,20 @@ public class CardDisplay : SerializedMonoBehaviour
                 buildMode.Open(this, BuildModeState.PlayOnTower);
                 return;
             }
-            else if(card is EnviornmentCard enviornmentCard && enviornmentCard.playOnTower)
+            else if(card is EnviornmentCard enviornmentCard)
             {
-                transform.localScale = Vector3.zero;
-                buildMode.Open(this, BuildModeState.PlayOnTower);
-                return;
+                if(enviornmentCard.playOnTower)
+                {
+                    transform.localScale = Vector3.zero;
+                    buildMode.Open(this, BuildModeState.PlayOnTower);
+                    return;
+                }
+                else if(enviornmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile || type == EnvironmentType.RemoveBuildableTile))
+                {
+                    transform.localScale = Vector3.zero;
+                    buildMode.Open(this, BuildModeState.PlayOnTile);
+                    return;
+                }
             }
         }
         

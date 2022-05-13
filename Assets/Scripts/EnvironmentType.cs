@@ -1,4 +1,6 @@
 using System;
+using Pathfinding;
+using UnityEngine;
 
 public enum EnvironmentType {
     None = 0,
@@ -36,12 +38,16 @@ public static class EnvironmentTypeExtensions
 
     private static void RemoveBuildable(Tile tile)
     {
-        
+        // Make sure this is valid before calling this
+        ProcGen procGen = GameObject.FindObjectOfType<ProcGen>();
+        procGen.RemoveBuildable(tile);
     }
 
     private static void CreateBuildable(Tile tile)
     {
-        
+        // Make sure this is valid before calling this
+        ProcGen procGen = GameObject.FindObjectOfType<ProcGen>();
+        procGen.CreateBuildableTile(tile);
     }
 
     public static void GrantWebEffect(ITower tower, WebEffect webEffect)

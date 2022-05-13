@@ -4,14 +4,16 @@ using UnityEngine;
 using static UnityEngine.InputSystem.InputAction;
 using UnityEngine.InputSystem;
 using System;
+using System.Linq;
 
-public enum BuildModeState {None = 0, Build = 1, Relocate = 2, PlayOnTower = 3};
+public enum BuildModeState {None = 0, Build = 1, Relocate = 2, PlayOnTower = 3, PlayOnTile = 4};
 public static class BuildModeStateExtensions
 {
     public static string GetMessage(this BuildModeState state) => state switch{
         BuildModeState.Build => "Click to build a tower",
         BuildModeState.Relocate => "Move a tower",
         BuildModeState.PlayOnTower => "Click on a tower",
+        BuildModeState.PlayOnTile => "Click on a tile",
         _ => "",
     };
 }
@@ -25,16 +27,21 @@ public class BuildMode : MonoBehaviour
     public bool canBuild;
     private MouseData mouseData;
     [SerializeField] BuildModeOutline buildModeOutline;
+    ProcGen procGen;
+    GridGenerator gridGenerator;
     public CardDisplay cardDisplay;
     private GameObject towerToMove;
     public GameObject movingOutlinePrefab;
     private GameObject movingOutline;
     bool overTower = false;
+    bool modificationValidOverTile = false;
     void Awake() 
     {
         mouseData = FindObjectOfType<MouseData>();
         if(mouseData == null)
             Debug.LogError("No MouseData found in scene");
+        procGen = FindObjectOfType<ProcGen>();
+        gridGenerator = FindObjectOfType<GridGenerator>();
     }
     void Update()
     {
@@ -42,7 +49,7 @@ public class BuildMode : MonoBehaviour
         {
             if(mouseData.hoveredTile != null)
             {
-                if(mouseData.hoveredTile.tower != null)
+                if(mouseData.hoveredTile.tower != null && state == BuildModeState.Build || state == BuildModeState.Relocate || state == BuildModeState.PlayOnTower)
                 {
                     buildModeOutline.Move(mouseData.hoveredTile.transform);
                     overTower = true;
@@ -51,6 +58,30 @@ public class BuildMode : MonoBehaviour
                 else
                 {
                     overTower = false;
+                    if(state == BuildModeState.PlayOnTile && cardDisplay.card is EnviornmentCard enviornmentCard)
+                    {
+                        // check if valid add/remove of buildable tile
+                        if(enviornmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile) && procGen.ChangeToBuildableIsValid(mouseData.hoveredTile))
+                        {
+                            // valid
+                            modificationValidOverTile = true;
+                            buildModeOutline.Move(mouseData.hoveredTile.transform);
+                            return;
+                        }
+                        else if(enviornmentCard.enviroTypes.Any(type => type == EnvironmentType.RemoveBuildableTile) && procGen.ChangeToPathIsValid(mouseData.hoveredTile))
+                        {
+                            // valid
+                            modificationValidOverTile = true;
+                            buildModeOutline.Move(mouseData.hoveredTile.transform);
+                            return;
+                        }
+
+                        // invalid
+                        modificationValidOverTile = false;
+                        buildModeOutline.Remove();
+                        return;
+                    }
+                    modificationValidOverTile = false;
 
                     if(!mouseData.hoveredTile.isBuildable && state != BuildModeState.Relocate || mouseData.hoveredTile.type != TileType.Buildable)
                     {
@@ -68,6 +99,7 @@ public class BuildMode : MonoBehaviour
                 buildModeOutline.Remove();
                 canBuild = false;
                 overTower = false;
+                modificationValidOverTile = false;
             }
         }
     }
@@ -88,12 +120,26 @@ public class BuildMode : MonoBehaviour
         BuildModeState.Build => Build,
         BuildModeState.Relocate => Relocate,
         BuildModeState.PlayOnTower => PlayOnTower,
+        BuildModeState.PlayOnTile => PlayOnTile,
         _ => null
     };
 
     void Build()
     {
         if(canBuild)
+        {
+            if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
+            {
+                Complete();
+                return;
+            }
+            Cancelled();
+        }
+    }
+
+    void PlayOnTile()
+    {
+        if(modificationValidOverTile)
         {
             if(cardDisplay.card.TryPlay(mouseData.hoveredTile))
             {
@@ -173,6 +219,7 @@ public class BuildMode : MonoBehaviour
     {
         canBuild = false;
         overTower = false;
+        modificationValidOverTile = false;
         buildModeOutline.Remove();
         StateChange(BuildModeState.None);
     }

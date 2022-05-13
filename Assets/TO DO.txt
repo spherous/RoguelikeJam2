@@ -7,7 +7,7 @@ X Deck & RecycleBin
 Towers
     X web tower
     X chain tower
-    aoe burst
+    X aoe burst
     long range snipe (can't hit nearby)
 
 Web effects
@@ -36,13 +36,15 @@ Card effects
     X Greatly increase 1 tower attack speed (1 wave)
     X Relocate a tower (instant)
     X Heal (instant)
-    gain a thread (takes time to play, once per level per card)
-    Increase chain count (sustained for a few waves)
-    Reduce chain count but increase damage (sustained for a few waves)
-    Increase chain range (sustained for a few waves)
-    Reduce chain range but increase damage (sustained for a few waves)
-    Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
-    Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
+    X gain a thread (takes time to play, once per level per card)
+    X refresh a thread (instant)
+    X Create a buildable tile at a valid location, possibly rerouting the enemies (instant)
+    X Removes a buildable tile turning it into a path, possibly rerouting the enemies (instant)
+    Slightly increase global chain count
+    Greatly increase 1 tower's chain count
+    Reduce global chain count, but increase global chain damage
+    Slightly increase global chain distance
+    Greatly increase 1 tower's chain distance
     
     Spare time:
         Next wave pauses between steps (1 wave)

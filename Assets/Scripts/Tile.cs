@@ -61,6 +61,7 @@ public class Tile : MonoBehaviour
 
     public void UpdateSprite()
     {
+        transform.rotation = Quaternion.Euler(0,0,0);
         var adjacentTiles = gridGenerator.GetAdjacentTiles(this);
         int buildableCount = adjacentTiles.Count(t => t != null && t.type == TileType.Buildable);
         if(buildableCount == 0)

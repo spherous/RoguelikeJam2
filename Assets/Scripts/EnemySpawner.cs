@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -40,4 +41,6 @@ public class EnemySpawner : MonoBehaviour
         if(enemyList.Contains(enemy))
             enemyList.Remove(enemy);
     }
+    public bool CheckIfEnemiesWithinDistanceOfLocation(Vector3 location, float range) =>
+        enemyList.Count(enemy => enemy != null && (enemy.transform.position - location).sqrMagnitude <= range * range) > 0;
 }

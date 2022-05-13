@@ -7,10 +7,10 @@ using UnityEngine;
 public class ChainTower : MonoBehaviour, ITower
 {
     EnemySpawner enemySpawner;
+    WaveManager waveManager;
     [SerializeField] FollowTargetRotate followTargetRotate;
     [SerializeField] Transform firePoint;
     [SerializeField] SpriteRenderer fisty;
-    WaveManager waveManager;
     private float orgAttackTime;
     public float attackTime;
     private float nextAttackTime;

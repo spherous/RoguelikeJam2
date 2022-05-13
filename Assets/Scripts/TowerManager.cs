@@ -7,6 +7,7 @@ public class TowerManager : MonoBehaviour
 {
     [SerializeField] private ChainTower chainTowerPrefab;
     [SerializeField] private WebTower webTowerPrefab;
+    [SerializeField] private AOETower aoeTowerPrefab;
     WaveManager waveManager;
     public List<ITower> towers {get; private set;} = new List<ITower>();
     public float rangeAdjustment;
@@ -44,6 +45,7 @@ public class TowerManager : MonoBehaviour
     public ITower GetTowerPrefab(TowerType type) => type switch {
         TowerType.Chain => chainTowerPrefab,
         TowerType.Web => webTowerPrefab,
+        TowerType.AOE => aoeTowerPrefab,
         _ => null
     };
 

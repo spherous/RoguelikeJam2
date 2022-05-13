@@ -51,7 +51,7 @@ public class ProcGen : MonoBehaviour
         }
     }
 
-    private void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoint.index, homeTile.index));
+    public void CachePath() => path = SelectPath(gridGenerator.GetPath(spawnPoint.index, homeTile.index));
 
     private List<Tile> SelectPath(Path p) => p.path.Select(node =>
     {
@@ -204,7 +204,7 @@ public class ProcGen : MonoBehaviour
         }
     }
 
-    private Path UpdateTileAlongPath(Tile tile, TileType type)
+    public Path UpdateTileAlongPath(Tile tile, TileType type)
     {
         Path path;
         tile.SetType(type);
@@ -244,4 +244,51 @@ public class ProcGen : MonoBehaviour
 
         graph.Scan();
     }
+
+    public void CreateBuildableTile(Tile tile)
+    {
+        Path path = UpdateTileAlongPath(tile, TileType.Buildable);
+        CachePath();       
+        tile.UpdateSprite();
+        foreach(Tile t in gridGenerator.GetAdjacentTiles(tile))
+        {
+            if(t.type == TileType.Buildable)
+                t.UpdateSprite();
+        }
+    }
+
+    public void RemoveBuildable(Tile tile)
+    {
+        Path path = UpdateTileAlongPath(tile, TileType.Path);
+        CachePath();
+        foreach(Tile t in gridGenerator.GetAdjacentTiles(tile))
+        {
+            if(t.type == TileType.Buildable)
+                t.UpdateSprite();
+        }
+    }
+
+    public bool ChangeToBuildableIsValid(Tile tile)
+    {
+        if(tile.type != TileType.Path) // Only paths may become buildable
+            return false;
+
+        TileType org = tile.type;
+        Path currentPath = gridGenerator.GetPath(spawnPoint, homeTile);
+        Path path = UpdateTileAlongPath(tile, TileType.Buildable);
+        
+        if(path.path.Count < currentPath.path.Count)
+        {
+            // shrinking the path is never valid when placing a build tile.
+            path = UpdateTileAlongPath(tile, org);
+            return false;
+        }
+
+        // valid location, revert tile
+        path = UpdateTileAlongPath(tile, org);
+        return true;
+    }
+
+    // changing to a path can NEVER obstruct the path, so we don't need to check for obstructions to validate, only the tile type
+    public bool ChangeToPathIsValid(Tile tile) => tile.type == TileType.Buildable;
 }
