@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BlackKnight : Enemy
 {
+    [SerializeField] private AudioSource audioSource;
+    public AudioClip spawnClip;
+
     WaveManager waveManager;
     private float ddosBugSpawnAtTime = 0;
     public float delayBetweenDDoSBugs = 0.666f;
@@ -18,6 +21,7 @@ public class BlackKnight : Enemy
     {
         onHealthChanged += SpawnTrojanHorseOnHit;
         base.Start();
+        audioSource.PlayOneShot(spawnClip);
     }
 
     public void SpawnTrojanHorseOnHit(IHealth changed, float oldHP, float newHP, float percent)

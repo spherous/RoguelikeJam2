@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hand : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private Deck deck;
@@ -46,6 +47,12 @@ public class Hand : MonoBehaviour
             Destroy(cardList[i].gameObject);
         }
         cardList.Clear();
+    }
+
+    public void PlayCardAudio(ICard card)
+    {
+        if(card.audioClips != null && card.audioClips.Count > 0)
+            audioSource.PlayOneShot(card.audioClips.ChooseRandom());
     }
 
     private void OnDestroy()

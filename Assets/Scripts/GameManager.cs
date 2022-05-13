@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour, IHealth
 {
+    [SerializeField] AudioSource audioSource;
+    public List<AudioClip> damageClips = new List<AudioClip>();
+    public AudioClip gameOverClip;
     [SerializeField] private SceneTransition sceneTransitionPrefab;
     [SerializeField] private Transform screen;
     [SerializeField] private ThreadPool threadPoolPrefab;
@@ -51,11 +54,17 @@ public class GameManager : MonoBehaviour, IHealth
 
     public void TakeDamage(float damage)
     {
+        if(gameOver)
+            return;
+
         float startHP = currentHP;
         currentHP = currentHP - damage > 0 ? currentHP - damage : 0;
 
         if(currentHP != startHP)
+        {
+            audioSource.PlayOneShot(damageClips.ChooseRandom());
             onHealthChanged?.Invoke(this, startHP, currentHP, currentHP / maxHP);
+        }
         
         if(currentHP == 0)
             Die();
@@ -72,18 +81,7 @@ public class GameManager : MonoBehaviour, IHealth
     public void Die()
     {
         gameOver = true;
-        // procGen.kingdom.GameOver();
-        // string currentSceneName = SceneManager.GetActiveScene().name;
-        // SceneTransition transition = FindObjectOfType<SceneTransition>();
-        // if(transition)
-        //     transition.Transition(currentSceneName);
-        // else if(sceneTransitionPrefab != null)
-        // {
-        //     transition = Instantiate(sceneTransitionPrefab, screen);
-        //     transition.Transition(currentSceneName);
-        // }
-        // else
-        //     SceneManager.LoadScene(currentSceneName, LoadSceneMode.Single);
+        audioSource.PlayOneShot(gameOverClip);
     }
 
     public void AddToScore(int amount)

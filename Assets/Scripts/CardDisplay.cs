@@ -72,6 +72,7 @@ public class CardDisplay : SerializedMonoBehaviour
             if(card is TowerCard towerCard && !buildMode.buildModeOn)
             {
                 transform.localScale = Vector3.zero;
+                hand.PlayCardAudio(card);
                 buildMode.Open(this, BuildModeState.Build);
                 return;
             }
@@ -80,12 +81,14 @@ public class CardDisplay : SerializedMonoBehaviour
                 if(techCard.techCardTypes.Contains(TechCardType.MoveATower))
                 {
                     transform.localScale = Vector3.zero;
+                    hand.PlayCardAudio(card);
                     buildMode.Open(this, BuildModeState.Relocate);
                     return;
                 }
                 else if(techCard.playOnTower)
                 {
                     transform.localScale = Vector3.zero;
+                    hand.PlayCardAudio(card);
                     buildMode.Open(this, BuildModeState.PlayOnTower);
                     return;
                 }
@@ -93,6 +96,7 @@ public class CardDisplay : SerializedMonoBehaviour
             else if(card is BuffCard buffCard && buffCard.playOnTower)
             {
                 transform.localScale = Vector3.zero;
+                hand.PlayCardAudio(card);
                 buildMode.Open(this, BuildModeState.PlayOnTower);
                 return;
             }
@@ -101,12 +105,14 @@ public class CardDisplay : SerializedMonoBehaviour
                 if(environmentCard.playOnTower)
                 {
                     transform.localScale = Vector3.zero;
+                    hand.PlayCardAudio(card);
                     buildMode.Open(this, BuildModeState.PlayOnTower);
                     return;
                 }
                 else if(environmentCard.enviroTypes.Any(type => type == EnvironmentType.CreateBuildableTile || type == EnvironmentType.RemoveBuildableTile))
                 {
                     transform.localScale = Vector3.zero;
+                    hand.PlayCardAudio(card);
                     buildMode.Open(this, BuildModeState.PlayOnTile);
                     return;
                 }
@@ -115,6 +121,7 @@ public class CardDisplay : SerializedMonoBehaviour
         
         if(card != null && mouseData != null && mouseData.hoveredTile != null && card.TryPlay(mouseData.hoveredTile))
         {
+            hand.PlayCardAudio(card);
             RemoveFromHand();
             return;
         }

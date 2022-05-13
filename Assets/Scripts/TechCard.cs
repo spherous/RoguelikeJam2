@@ -16,7 +16,8 @@ public class TechCard : ScriptableObject, ICard
     [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
     [field:SerializeField] public int threadUseDuration {get; set;}
     [field:SerializeField] public bool playOnTower {get; set;} = false;
-
+    [field:SerializeField] public List<AudioClip> audioClips {get; set;}
+    
     public bool TryPlay(Tile tile)
     {
         ThreadPool threadPool = GameObject.FindObjectOfType<ThreadPool>();

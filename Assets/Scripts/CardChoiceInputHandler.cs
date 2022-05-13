@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 
 public class CardChoiceInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    [SerializeField] private AudioSource audioSource;
+    public List<AudioClip> confirmClips = new List<AudioClip>();
     [SerializeField] private CardDisplay cardDisplay;
     public Action clickAction;
     
     public void OnPointerClick(PointerEventData eventData)
     {
+        audioSource.PlayOneShot(confirmClips.ChooseRandom());
         clickAction?.Invoke();
     }
 

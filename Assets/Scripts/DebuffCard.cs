@@ -13,6 +13,7 @@ public class DebuffCard : ScriptableObject, ICard
     [field:SerializeField] public ThreadReserveType threadReserveType {get; set;} = ThreadReserveType.None;
     [field:SerializeField] public ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;} = ThreadEffectTriggerCondition.OnComplete;
     [field:SerializeField] public int threadUseDuration {get; set;}
+    [field:SerializeField] public List<AudioClip> audioClips {get; set;}
 
     public bool TryPlay(Tile tile)
     {

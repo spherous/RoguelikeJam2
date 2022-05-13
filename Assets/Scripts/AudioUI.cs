@@ -11,13 +11,13 @@ public class AudioUI : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     public List<AudioClip> clickClips = new List<AudioClip>();
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(canPlay)
+        if(canPlay && hoverClips.Count > 0)
             source.PlayOneShot(hoverClips.ChooseRandom());
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if(canPlay)
+        if(canPlay && clickClips.Count > 0)
             source.PlayOneShot(clickClips.ChooseRandom());
     }
 }

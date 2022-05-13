@@ -13,5 +13,6 @@ public interface ICard
     ThreadReserveType threadReserveType {get; set;}
     ThreadEffectTriggerCondition threadEffectTriggerCondition {get; set;}
     bool singleUse {get; set;}
+    List<AudioClip> audioClips {get; set;}
     bool TryPlay(Tile tile);   
 }

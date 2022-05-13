@@ -66,6 +66,11 @@ Audio
         - different types (enter web, chain, burn, aoe, etc)
     volume controls
 
+Path generation
+End game
+beginning gate
+Chain turrets need to forget targets out of their distance
+
 Main menu
 Loading scene
 Credits

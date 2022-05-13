@@ -6,6 +6,9 @@ using UnityEngine.Playables;
 
 public class AOETower : MonoBehaviour, ITower
 {
+    [SerializeField] private AudioSource audioSource;
+    public List<AudioClip> attackClips = new List<AudioClip>();
+
     [SerializeField] private PlayableDirector director;
     EnemySpawner enemySpawner;
     WaveManager waveManager;
@@ -62,6 +65,7 @@ public class AOETower : MonoBehaviour, ITower
         {
             attacking = true;
             director.Play();
+            audioSource.PlayOneShot(attackClips.ChooseRandom());
         }
     }
 

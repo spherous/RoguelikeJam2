@@ -118,6 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ebe03b5a42bd1149897965187508b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &454696484857173920 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3543213654505138135, guid: 89d01679aeaad784288304dab7ce5f9c, type: 3}
+  m_PrefabInstance: {fileID: 3991154645162553463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5717733737375881789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,4 +135,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e039076b47eb744ac5c0fa38f3163a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 454696484857173920}
+  confirmClips:
+  - {fileID: 8300000, guid: 9e2835ae6d9985044bf8f8c81f919203, type: 3}
+  - {fileID: 8300000, guid: ebec0dc8aa3f4bb408ec6a761e7f583c, type: 3}
+  - {fileID: 8300000, guid: bca71e647d5adfc4ebfc091c0a979514, type: 3}
   cardDisplay: {fileID: 4595043306962243535}
