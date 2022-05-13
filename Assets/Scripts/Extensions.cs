@@ -5,10 +5,13 @@ using UnityEngine;
 public static class Extensions
 {
     public static int Floor(this float f) => Mathf.FloorToInt(f);
+    public static int Ceil(this float val) => Mathf.CeilToInt(val);
     public static int Mod(this int a, int b) => (a % b + b) % b;
     public static float Mod(this float a, float b) => (a % b + b) % b;
     public static bool IsEven(this int number) => number % 2 == 0;
     public static bool IsEven(this float number) => number % 2 == 0;
+    public static int BoolToInt(this bool val) => val ? 1 : 0;
+        public static bool IntToBool(this int val) => val == 0 ? false : true;
     public static List<T> Shuffle<T>(this List<T> set)
     {
         int n = set.Count;
