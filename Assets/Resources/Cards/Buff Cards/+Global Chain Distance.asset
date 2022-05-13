@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64b2972c5603fd04086574943c204869, type: 3}
-  m_Name: Hold
+  m_Script: {fileID: 11500000, guid: 6b36c87affa854e42a8baffdb5cc02d7, type: 3}
+  m_Name: +Global Chain Distance
   m_EditorClassIdentifier: 
-  techCardTypes: 0100000002000000
-  <description>k__BackingField: Keep 2 cards between waves, but draw 1 less each
-    wave.
-  <type>k__BackingField: 1
-  <artwork>k__BackingField: {fileID: 21300000, guid: cd651fb45cee5a74997394a7f76cafcd, type: 3}
+  buffTypes: 0a000000
+  <description>k__BackingField: e
+  <type>k__BackingField: 2
+  <artwork>k__BackingField: {fileID: 21300000, guid: a9cbb7c0a63e6274fb7b8d18fcdb5d8b, type: 3}
   <threadCost>k__BackingField: 1
-  <singleUse>k__BackingField: 1
+  <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1
-  <threadEffectTriggerCondition>k__BackingField: 1
+  <threadEffectTriggerCondition>k__BackingField: 0
   <threadUseDuration>k__BackingField: 2
   <playOnTower>k__BackingField: 0

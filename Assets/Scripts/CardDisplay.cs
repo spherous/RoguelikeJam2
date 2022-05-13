@@ -95,7 +95,7 @@ public class CardDisplay : SerializedMonoBehaviour
                 buildMode.Open(this, BuildModeState.PlayOnTower);
                 return;
             }
-            else if(card is EnviornmentCard enviornmentCard && enviornmentCard.playOnTower)
+            else if(card is EnvironmentCard environmentCard && environmentCard.playOnTower)
             {
                 transform.localScale = Vector3.zero;
                 buildMode.Open(this, BuildModeState.PlayOnTower);

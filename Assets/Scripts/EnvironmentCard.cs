@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Environment Card", menuName = "Environment Card")]
-public class EnviornmentCard : ScriptableObject, ICard
+public class EnvironmentCard : ScriptableObject, ICard
 {
     public List<EnvironmentType> enviroTypes = new List<EnvironmentType>();
     [field:SerializeField] public string description {get; set;}
