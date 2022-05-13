@@ -8,7 +8,7 @@ Towers
     X web tower
     X chain tower
     X aoe burst
-    long range snipe (can't hit nearby)
+    X long range snipe (can't hit nearby)
 
 Web effects
     X slow while in it
@@ -19,8 +19,8 @@ Web effects
     burn dot lasts after exiting
 
 Card effects
-    Place aoe burst tower (instant)
-    place long range snipe tower (instant)
+    X Place aoe burst tower (instant)
+    X place long range snipe tower (instant)
     X Place chain tower (instant)
     X draw 2 (instant)
     X discard hand and draw 3 (instant)

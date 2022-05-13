@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3d5c2ea5fc6a1d4fb810f30f9623027, type: 3}
-  m_Name: Chain Tower
+  m_Name: Cannon Tower
   m_EditorClassIdentifier: 
-  towerToSpawn: 0
-  <description>k__BackingField: Places a chain tower
+  towerToSpawn: 2
+  <description>k__BackingField: Places a long range Cannon Tower
   <type>k__BackingField: 0
-  <artwork>k__BackingField: {fileID: 21300000, guid: e4fa188492ea5e144a54f04922e05499, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: ea3c7cd838724764dbc4835f67ab487c, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

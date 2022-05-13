@@ -3228,6 +3228,7 @@ MonoBehaviour:
   chainTowerPrefab: {fileID: 1409404219263627827, guid: 2e3831a094127df42b8b5059338712e2, type: 3}
   webTowerPrefab: {fileID: -7188768419573803154, guid: 76b4b535dc8f0be4fb6aa538a75640f5, type: 3}
   aoeTowerPrefab: {fileID: 6511455550404542331, guid: 29b69a577a6765f4997dc846db4f4556, type: 3}
+  longRangeCannonTowerPrefab: {fileID: 1578238591599190579, guid: e6173e807edf6654eb0ee925ba5ba4fd, type: 3}
   rangeAdjustment: 0
   damageAdjustment: 0
   attackSpeedAdjustment: 0
@@ -3750,12 +3751,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: ccd3f21b94cd795409160db5a60d0ced, type: 2}
-    - {fileID: 11400000, guid: 0af80ceb2d35a03419f383d4fe4c7673, type: 2}
-    - {fileID: 11400000, guid: 8ba5d94059fd75f42a5207ab41c26c1d, type: 2}
-    - {fileID: 11400000, guid: 917dd1f8ee183e94596b7d542df78de7, type: 2}
-    - {fileID: 11400000, guid: bbc0499851572224f8427b4790d2deeb, type: 2}
-    - {fileID: 11400000, guid: 4defa1898c568e849be19ce87464acc1, type: 2}
+    - {fileID: 11400000, guid: ff9e5b86e7f02f14c9d3c54779bad829, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -3802,31 +3798,19 @@ MonoBehaviour:
       Data: 3|System.Collections.Generic.List`1[[ICard, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 8
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 10
-      Data: 3
-    - Name: 
-      Entry: 10
       Data: 4
     - Name: 
       Entry: 10
-      Data: 5
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
