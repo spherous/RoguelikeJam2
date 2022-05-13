@@ -545,7 +545,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5803922, g: 0.85098046, b: 0.9960785, a: 1}
+    m_NormalColor: {r: 0.5235849, g: 0.88303757, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9803922, g: 0.882353, b: 0.5019608, a: 1}
     m_PressedColor: {r: 0.80392164, g: 0.6627451, b: 0.12941177, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -681,7 +681,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5803922, g: 0.85098046, b: 0.9960785, a: 1}
+    m_NormalColor: {r: 0.5235849, g: 0.88303757, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9803922, g: 0.882353, b: 0.5019608, a: 1}
     m_PressedColor: {r: 0.80392164, g: 0.6627451, b: 0.12941177, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -964,7 +964,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.5803922, g: 0.85098046, b: 0.9960785, a: 1}
+    m_NormalColor: {r: 0.5235849, g: 0.88303757, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9803922, g: 0.882353, b: 0.5019608, a: 1}
     m_PressedColor: {r: 0.80392164, g: 0.6627451, b: 0.12941177, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1542,10 +1542,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME TITLE
+  m_text: 'SERVER
+
+    KNIGHTS'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 398ebcf344e2ac74b8d73486cb44e791, type: 2}
+  m_sharedMaterial: {fileID: 4301476029852633672, guid: 398ebcf344e2ac74b8d73486cb44e791, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1807,7 +1809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6500107626124805718, guid: 2112013a623b7e9488e3c702e56c1463, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2112013a623b7e9488e3c702e56c1463, type: 3}
