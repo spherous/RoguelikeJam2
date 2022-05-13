@@ -101,7 +101,8 @@ MonoBehaviour:
   rb: {fileID: 7276265943621871833}
   col: {fileID: 7276265943621871846}
   <speed>k__BackingField: 2.5
-  <maxHP>k__BackingField: 180
+  <maxHP>k__BackingField: 160
+  damage: 0
   scoreValue: 4
   spriteRenderer: {fileID: 7276265943621871835}
   stage1Walk:
@@ -117,6 +118,9 @@ MonoBehaviour:
   - {fileID: -4709829382115978668, guid: 74698d533e00cd6429c18c5d0b6ec4aa, type: 3}
   - {fileID: 8443599786348301444, guid: 74698d533e00cd6429c18c5d0b6ec4aa, type: 3}
   framesBetweenSteps: 32
+  shrinkThresholds:
+  - 0.5
+  - 0.25
 --- !u!50 &7276265943621871833
 Rigidbody2D:
   serializedVersion: 4

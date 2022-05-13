@@ -14,7 +14,6 @@ public class CameraPanOnLoss : MonoBehaviour
     {
         gameManager = GameObject.FindObjectOfType<GameManager>();
         gameManager.onHealthChanged += OnHealthChanged;
-        moveToTransform = GameObject.FindObjectOfType<Kingdom>().transform;
     }
     private void OnHealthChanged(IHealth changed, float oldHP, float newHP, float percent)
     {
@@ -22,6 +21,7 @@ public class CameraPanOnLoss : MonoBehaviour
         {
             cameraMovementController.enabled = false;
             cameraFollow.followSpeed = 1;
+            moveToTransform = GameObject.FindObjectOfType<Kingdom>().transform;
             gameObject.transform.position = moveToTransform.position;
             return;
         }

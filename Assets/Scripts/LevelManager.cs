@@ -12,12 +12,20 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private PickNewCard pickNewCard;
     [SerializeField] private WinScreen winScreen;
     [SerializeField] private GameManager gameManager;
+    SceneTransition sceneTransition;
+    [SerializeField] private SceneTransition sceneTransitionPrefab;
+    ProcGen procGen;
     public List<Level> levels = new List<Level>();
     public int currentLevelIndex {get; private set;} = 0;
     public Level currentLevel {get; private set;}
     public bool awaitingPlayerChoice {get; private set;} = false;
 
-    private void Start() => LoadLevel(currentLevelIndex);
+    private void Start()
+    {
+        procGen = GameObject.FindObjectOfType<ProcGen>();
+        sceneTransition = GameObject.FindObjectOfType<SceneTransition>();
+        LoadLevel(currentLevelIndex);
+    } 
 
     public void LoadLevel(int levelIndex)
     {
@@ -35,6 +43,8 @@ public class LevelManager : MonoBehaviour
 
         currentLevelIndex = levelIndex;
         currentLevel = levels[currentLevelIndex];
+
+        procGen.Generate(currentLevel.rows, currentLevel.cols);
 
         waveManager.LoadWaves(currentLevel);
         onLevelStart?.Invoke(currentLevel);
@@ -56,7 +66,9 @@ public class LevelManager : MonoBehaviour
         currentLevelIndex = lastLevel + 1;
         pickNewCard.OfferChoice(() => {
             awaitingPlayerChoice = false;
-            LoadLevel(currentLevelIndex);
+            if(sceneTransition == null)
+                sceneTransition = Instantiate(sceneTransitionPrefab);
+            sceneTransition.LoadingScreen(() => LoadLevel(currentLevelIndex));
         });
     }
 

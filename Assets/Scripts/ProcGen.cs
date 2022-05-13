@@ -21,13 +21,13 @@ public class ProcGen : MonoBehaviour
     [ShowInInspector, ReadOnly] public List<Tile> path {get; private set;} = new List<Tile>();
 
     private void Awake() {
-        Generate();
+        // Generate(13, 22);
     }
 
     [Button]
-    public void Generate()
+    public void Generate(int row, int col)
     {
-        gridGenerator.GenerateGrid(13, 22);
+        gridGenerator.GenerateGrid(row, col);
 
         PlaceHome();
         PlaceSpawnPoints(1);

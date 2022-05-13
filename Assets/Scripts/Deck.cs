@@ -47,7 +47,7 @@ public class Deck : SerializedMonoBehaviour
         for(int i = 0; i < startingTowerCards; i++)
             cardsInDeck.Add(startingTowrCard);
 
-        if(initialTowerType == TowerType.Web)
+        if(initialTowerType == TowerType.Web && allWebMods.Any())
         {
             int startingWebMods = startingDeckSize - startingTowerCards;
             for(int i = 0; i < startingWebMods; i++)

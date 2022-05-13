@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour, IHealth
     private void Awake()
     {
         threadPool = Instantiate(threadPoolPrefab, screen);
-        threadPool.IncreaseThreadCount(3);
+        threadPool.IncreaseThreadCount(4);
 
         healthBar = Instantiate(healthBarPrefab, screen);
         HealToFull();

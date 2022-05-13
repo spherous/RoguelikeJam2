@@ -3747,29 +3747,54 @@ MonoBehaviour:
   pickNewCard: {fileID: 1046050397}
   winScreen: {fileID: 354587512}
   gameManager: {fileID: 1304724712}
+  sceneTransitionPrefab: {fileID: 6500107626124805724, guid: 2112013a623b7e9488e3c702e56c1463, type: 3}
   levels:
   - waves:
     - enemyGroup:
         type: 1
-        count: 2
-      spawnInterval: 0.5
+        count: 1
+      spawnInterval: 1
       addsThread: 0
     - enemyGroup:
         type: 1
-        count: 3
-      spawnInterval: 0.33
+        count: 2
+      spawnInterval: 1
       addsThread: 0
-  - waves:
     - enemyGroup:
-        type: 2
-        count: 6
-      spawnInterval: 0.2
-      addsThread: 0
+        type: 1
+        count: 4
+      spawnInterval: 0.5
+      addsThread: 1
     - enemyGroup:
         type: 3
-        count: 10
-      spawnInterval: 0.33
+        count: 1
+      spawnInterval: 1
       addsThread: 0
+    rows: 8
+    cols: 12
+  - waves:
+    - enemyGroup:
+        type: 1
+        count: 2
+      spawnInterval: 1
+      addsThread: 0
+    - enemyGroup:
+        type: 1
+        count: 4
+      spawnInterval: 1
+      addsThread: 0
+    - enemyGroup:
+        type: 1
+        count: 8
+      spawnInterval: 0.66
+      addsThread: 1
+    - enemyGroup:
+        type: 2
+        count: 1
+      spawnInterval: 1
+      addsThread: 0
+    rows: 8
+    cols: 12
 --- !u!1 &1332929663
 GameObject:
   m_ObjectHideFlags: 0
@@ -4445,7 +4470,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+  startingDeckSize: 5
   levelManager: {fileID: 1304724716}
+  useDebugDeck: 0
 --- !u!114 &1507675872
 MonoBehaviour:
   m_ObjectHideFlags: 0
