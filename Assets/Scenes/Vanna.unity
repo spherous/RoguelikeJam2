@@ -1471,6 +1471,14 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4595043306962243535, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.1598015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6239929
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
 --- !u!114 &480477844 stripped
@@ -2516,6 +2524,14 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 4595043306962243535, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.1598015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6239929
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
 --- !u!224 &967331725 stripped
@@ -3959,6 +3975,14 @@ PrefabInstance:
     - target: {fileID: 4595043307016304124, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.1598015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329492891995970734, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.6239929
       objectReference: {fileID: 0}
     - target: {fileID: 8423946852919143902, guid: ecb163df5b37c9944a2b2f02c4a6dd9d, type: 3}
       propertyPath: m_IsActive

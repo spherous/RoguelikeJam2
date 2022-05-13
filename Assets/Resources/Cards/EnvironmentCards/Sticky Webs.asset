@@ -15,7 +15,7 @@ MonoBehaviour:
   enviroTypes: 08000000
   <description>k__BackingField: All webs attached to selected tower slow enemies
   <type>k__BackingField: 4
-  <artwork>k__BackingField: {fileID: -2617272381154880971, guid: 7cd1cd8b50adcb4458e1978b6d7a02c2, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 71779c165dbb11049b64d1fd4cf7fc66, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

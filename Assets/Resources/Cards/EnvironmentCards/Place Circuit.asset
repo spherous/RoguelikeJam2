@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: Change a valid path tile into a circuit that tower's
     can be built upon, possibly altering the enemy path
   <type>k__BackingField: 4
-  <artwork>k__BackingField: {fileID: 21300000, guid: bc49575db942e7640995e9235bc356c3, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: b76127a38f1a68f41b06dfe3e030ddd4, type: 3}
   <threadCost>k__BackingField: 2
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
