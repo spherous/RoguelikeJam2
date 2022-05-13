@@ -89,13 +89,13 @@ public class CardInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             selected = true;
             cardSelection.SelectCard(cardDisplay);
-            cardDisplay.Outline(Color.blue);
+            cardDisplay.Outline(3);
         }
             
         else
         {
             selected = false;
-            cardDisplay.Outline(Color.clear);
+            cardDisplay.Outline(0);
             cardSelection.DeselectCard(cardDisplay);
         }
 

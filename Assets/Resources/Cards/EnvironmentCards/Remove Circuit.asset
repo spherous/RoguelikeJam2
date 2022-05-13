@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: Removes a valid circuit, turning it into a path,
     possibly rerouting the enemies.
   <type>k__BackingField: 4
-  <artwork>k__BackingField: {fileID: 21300000, guid: 5d07b644e56e4ca41b6303168ac752d3, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 2eaa4ede7388a674d8cd2a070256af35, type: 3}
   <threadCost>k__BackingField: 2
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

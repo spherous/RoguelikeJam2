@@ -15,7 +15,7 @@ MonoBehaviour:
   enviroTypes: 09000000
   <description>k__BackingField: All webs attached to selected tower stun enemies
   <type>k__BackingField: 4
-  <artwork>k__BackingField: {fileID: 0}
+  <artwork>k__BackingField: {fileID: 21300000, guid: dba284b2aa149af4a9f95e570ed94217, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0

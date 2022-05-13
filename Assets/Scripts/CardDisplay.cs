@@ -24,6 +24,7 @@ public class CardDisplay : SerializedMonoBehaviour
     [SerializeField] private Image frame;
     [SerializeField] private Image outline;
     [SerializeField] private float playDistance;
+    public Sprite[] outlineSprites;
     public Vector3 scale;
     
     public bool isDragging;
@@ -39,8 +40,8 @@ public class CardDisplay : SerializedMonoBehaviour
         mouseData = GameObject.FindObjectOfType<MouseData>();
         hand = GameObject.FindObjectOfType<Hand>();
         cardPosition = GameObject.Find("Card Position");
-        outline.color = Color.clear;
         playDistance = playDistance*playDistance;
+        outline.enabled = false;
         scale = transform.localScale;
     }
 
@@ -148,7 +149,16 @@ public class CardDisplay : SerializedMonoBehaviour
         hand.FanCards();
     }
 
-    public void Outline(Color color) => outline.color = color;
+    public void Outline(int Sprite)
+    {
+        if (Sprite == 0)
+        {
+            outline.enabled = false;
+            return;
+        }
+        outline.enabled = true;
+        outline.sprite = outlineSprites[Sprite];
+    }
 
     void Update() 
     {
@@ -160,12 +170,12 @@ public class CardDisplay : SerializedMonoBehaviour
         if(isDragging)
         {
             if(sqrLen > playDistance && isDragging)
-                Outline(Color.green);
+                Outline(2);
             else if(sqrLen < playDistance && isDragging)
-                Outline(Color.white);
+                Outline(1);
             return;
         }
         if(!isDragging && !GameObject.FindObjectOfType<CardSelection>().selecting)
-            Outline(Color.clear);
+            Outline(0);
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: All webs attached to selected tower cause enemies
     to take more damage
   <type>k__BackingField: 4
-  <artwork>k__BackingField: {fileID: 0}
+  <artwork>k__BackingField: {fileID: 21300000, guid: afc55a16c7027694791fe8fe065538aa, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 0
