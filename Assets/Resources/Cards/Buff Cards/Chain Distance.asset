@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: Slightly increases the distance that projectiles
     fired by Chain Towres may chain to
   <type>k__BackingField: 2
-  <artwork>k__BackingField: {fileID: 21300000, guid: a9cbb7c0a63e6274fb7b8d18fcdb5d8b, type: 3}
+  <artwork>k__BackingField: {fileID: 21300000, guid: 7ae2a179ff8e36e4da4404bf0aae275c, type: 3}
   <threadCost>k__BackingField: 1
   <singleUse>k__BackingField: 0
   <threadReserveType>k__BackingField: 1
