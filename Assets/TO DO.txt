@@ -122,5 +122,15 @@ Post jam desired changes:
     Give cannon small splash effect on impact
     Ignite webs
     Ignite debuff card
-    Dot buff cards
+    DoT buff cards
     Indicator of how many waves are left in current level
+    Enemies that are going too fast can get stuck, possibly soft locking the game if the player can't damage them
+    range indicator should include buffs
+    need more interesting generation happening for opening decks, getting rng'd out sucks.
+    Card picks should be weighted and by category for level rewards. Should not be able to generate 2 of the same type of card or even a duplicate.
+    aoe and cannon towers need more interesting things happening
+    Threads need explained better, and there needs to be an indicator for sustained buffs from threads and on completion actions.
+    Indicate when a card gets trashed vs discarded
+    show deck, discard, and trash pile
+    AOE tower needs a vfx
+    
