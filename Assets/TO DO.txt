@@ -82,7 +82,7 @@ levels
     X pick a new card after each level
     X Refresh single use cards
     X Add a thread for the 1st 2 waves of a level
-    generate a new level
+    X generate a new level
 
 Enemies
     X DDoS Bot (Fast, weak, small)
@@ -99,3 +99,28 @@ X Camera panning
     X middle click + drag
     X arrow keys
     X mouse on edge of screen
+
+
+
+Post jam desired changes:
+    Enemy death animation/SFX
+    Object pooling for performance
+    Fully tested levels & balanced levels
+    Buff cannon
+    bugfix with moving web towers should destroy old webs and make new after the moves
+    bugfix with removing a buildable tile using the wrong tile texture
+    Add hijacker
+    Add attack animation to black knight when he hits the kingdom
+    Add animation to spawn point and kingdom gate (home point)
+    Enemy take damage noise
+    Audio pooling so we stop overlapping so many different sounds
+    Turn cards gray or red when the player doesn't have enough threads to play it, prevent them from dragging it off hand.
+    Turn web mod cards gray or red when the player doesn't have any web towers to play them on
+    Turn chain mods gray or red when the player doesn't have any chain towers to play them on
+    Don't allow player to play web mods on non-web towers
+    don't allow players to play chain mods on non-chaining towers
+    Give cannon small splash effect on impact
+    Ignite webs
+    Ignite debuff card
+    Dot buff cards
+    Indicator of how many waves are left in current level

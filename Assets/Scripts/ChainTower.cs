@@ -110,7 +110,7 @@ public class ChainTower : MonoBehaviour, ITower
         nextAttackTime = Time.timeSinceLevelLoad + attackTime;
         fistyReloadTime = Time.timeSinceLevelLoad + attackTime / 2;
         Projectile projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        projectile.chainRadius *= chainRangeModifier; 
+        projectile.chainRadius *= 1 + chainRangeModifier; 
         projectile.Fire(target, damage, chainCount);
         audioSource.PlayOneShot(attackClips.ChooseRandom());
         fisty.enabled = false;
@@ -147,5 +147,5 @@ public class ChainTower : MonoBehaviour, ITower
     public void AdjustDamage(float percent) => this.damage = damage * (1 + percent);
     public void AdjustAttackSpeed(float percent) => this.attackTime = attackTime * (1 - percent);
     public void AdjustChainCount(int increase) => this.chainCount += increase;
-    public void AdjustChainRange(float percent) => this.chainRangeModifier += (1 + percent);
+    public void AdjustChainRange(float percent) => this.chainRangeModifier += percent;
 }
